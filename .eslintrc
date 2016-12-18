@@ -1,13 +1,17 @@
 {
-  "extends": "airbnb",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true
+    "extends": "airbnb",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true
+        }
+    },
+    "rules": {
+        "max-len": ["warn", 120],
+        "indent": ["warn", 4],
+        "react/jsx-indent": ["warn", 4]
+    },
+    "globals": {
+        "window": true,
+        "localStorage": true
     }
-  },
-  "rules": {
-    "max-len": ["warn", 120],
-    "indent": ["warn", 4],
-    "react/jsx-indent": ["warn", 4]
-  }
 }
