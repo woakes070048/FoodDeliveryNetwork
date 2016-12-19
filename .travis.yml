@@ -7,9 +7,9 @@ install:
   - npm install -g firebase-tools
   - npm install -g jslint
   - npm install -g eslint
-  - npm install -g eslint-config-airbnb
 
 script:
+  - npm install
   - npm run test 
 
 after_success:
