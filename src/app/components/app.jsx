@@ -40,7 +40,6 @@ class App extends Component {
         <li key={1}><Link to="/login">Login</Link></li>,
         <li key={2}><Link to="/register">Register</Link></li>
       ]
-
   }
 
   render() {
@@ -55,12 +54,12 @@ class App extends Component {
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
-              <Link to="/" className="navbar-brand">Firebase & Redux boilerplate</Link>
+              <Link to="/" className="navbar-brand">Food Delivery Network</Link>
 
             </div>
             <nav className="collapse navbar-collapse bs-navbar-collapse" role="navigation">
               <ul className="nav navbar-nav">
-                <li><Link to="/"> Home</Link></li>
+                <li><Link to="/">Home</Link></li>
                 ,
               </ul>
               <ul className="nav navbar-nav navbar-right">
@@ -86,6 +85,5 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return { currentUser: state.currentUser };
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,13 +1,10 @@
 module.exports = {
-
-    // Change this to your firebase configuration! (Add Firebase to your web app)
     FIREBASE_CONFIG: {
-
-        apiKey: 'AIzaSyCLRHScHqDCIdwGNR2mSHQMUuNqS0qmHlo',
-        authDomain: 'food-delivery-network.firebaseapp.com',
-        databaseURL: 'https://food-delivery-network.firebaseio.com',
-        storageBucket: 'food-delivery-network.appspot.com',
-        messagingSenderId: '1038809732852',
+        apiKey: 'AIzaSyC4jB8109w4XltS0vkqvO1m-M9QASLSR_A',
+        authDomain: 'food-delivery-network-f1d08.firebaseapp.com',
+        databaseURL: 'https://food-delivery-network-f1d08.firebaseio.com',
+        storageBucket: 'food-delivery-network-f1d08.appspot.com',
+        messagingSenderId: '761613486964',
 
     },
 };
