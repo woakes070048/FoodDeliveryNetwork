@@ -21,7 +21,8 @@
     "license": "GPL-3.0",
     "keywords": [
         "Food",
-        "Delivery"
+        "Delivery",
+        "Network"
     ],
     "devDependencies": {
         "babel-core": "^6.2.1",
@@ -31,6 +32,7 @@
         "babel-preset-stage-1": "^6.5.0",
         "chai": "^3.5.0",
         "chai-jquery": "^2.0.0",
+        "clean-webpack-plugin": "^0.1.14",
         "css-loader": "^0.23.1",
         "eslint": "^3.6.1",
         "eslint-config-airbnb": "^12.0.0",
