@@ -2,6 +2,7 @@ const Path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = (options) => {
     const ExtractSASS = new ExtractTextPlugin(`/styles/${options.cssFileName}`);
@@ -54,6 +55,10 @@ module.exports = (options) => {
             }),
             new HtmlWebpackPlugin({
                 template: Path.join(__dirname, '../src/index.html'),
+            }),
+            new CleanWebpackPlugin(['public'], {
+                verbose: true,
+                dry: false
             }),
         ],
     };
