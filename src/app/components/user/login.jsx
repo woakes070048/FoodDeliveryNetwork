@@ -130,7 +130,6 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return { currentUser: state.currentUser };
-
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserLogin);

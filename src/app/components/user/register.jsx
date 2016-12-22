@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { registerUser } from '../../actions/firebase_actions';
 
 class UserRegister extends Component {
-    constructor(props) {
+  constructor(props) {
       super(props);
       this.onFormSubmit = this.onFormSubmit.bind(this);
       this.state = {
@@ -13,7 +13,7 @@ class UserRegister extends Component {
       };
   }
 
-    onFormSubmit(event) {
+  onFormSubmit(event) {
       event.preventDefault();
 
       const email = this.refs.email.value;
@@ -27,7 +27,7 @@ class UserRegister extends Component {
     );
   }
 
-    render() {
+  render() {
         return (
       <div className="col-md-4">
         <form id="frmRegister" role="form" onSubmit={this.onFormSubmit}>
@@ -48,25 +48,39 @@ class UserRegister extends Component {
           <button type="submit" className="btn btn-default">Register</button>
           <br /> <br />
 
-           <a href="#" className="btn btn-block btn-social btn-facebook" onClick={() => {
-               this.loginWithProvider('facebook');
-           }} data-provider="facebook"
-           >Facebook</a>
+                 <div className="social-buttons">
+              <a href="#"
+                 className="btn btn-block btn-social btn-facebook"
+                 onClick={() => this.loginWithProvider("facebook")}
+                 data-provider="facebook">
+                  <span className="fa fa-facebook" />
+                  Sign in with Facebook
+              </a>
 
-          <a href="#" className="btn btn-block btn-social btn-twitter" onClick={() => {
-              this.loginWithProvider('twitter');
-          }} data-provider="twitter"
-          >Twitter</a>
+              <a href="#"
+                 className="btn btn-block btn-social btn-twitter"
+                 onClick={() => this.loginWithProvider("twitter")}
+                 data-provider="twitter">
+                  <span className="fa fa-twitter" />
+                  Sign in with Twitter
+              </a>
 
-          <a href="#" className="btn btn-block btn-social btn-google" onClick={() => {
-              this.loginWithProvider('google');
-          }} data-provider="twitter"
-          >Google</a>
+              <a href="#"
+                 className="btn btn-block btn-social btn-google"
+                 onClick={() => this.loginWithProvider("google")}
+                 data-provider="twitter">
+                  <span className="fa fa-google" />
+                  Sign in with Google
+              </a>
 
-           <a href="#" className="btn btn-block btn-social btn-github" onClick={() => {
-               this.loginWithProvider('github');
-           }} data-provider="twitter"
-           >Github</a>
+              <a href="#"
+                 className="btn btn-block btn-social btn-github"
+                 onClick={() => this.loginWithProvider("github")}
+                 data-provider="twitter">
+                  <span className="fa fa-github" />
+                  Sign in with Github
+              </a>
+          </div>
 
         </form>
       </div>
