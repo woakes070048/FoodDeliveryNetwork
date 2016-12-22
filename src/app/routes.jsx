@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import App from './components/app';
-
 import HomeIndex from './components/index_home';
 import UserLogin from './components/user/login';
 import UserLogout from './components/user/logout';

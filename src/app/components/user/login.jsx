@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { loginUser, fetchUser, loginWithProvider } from '../../actions/firebase_actions';
 
-
 class UserLogin extends Component {
 
   constructor(props) {
@@ -23,7 +22,6 @@ class UserLogin extends Component {
       else
         browserHistory.push('/profile');
     });
-    // alert("login with provider");
   }
 
   onFormSubmit(event) {
@@ -37,10 +35,7 @@ class UserLogin extends Component {
         this.setState({ message: data.payload.errorMessage })
       else
         browserHistory.push('/profile');
-
-    }
-    )
-
+    })
   }
 
   render() {
@@ -63,31 +58,46 @@ class UserLogin extends Component {
           </div>
           <button type="submit" className="btn btn-default btn-block">Login</button>
           <br/>
-          <h5><Link to="/reset">Forgot password?</Link></h5>
+          <h5>
+              <Link to="/reset">
+                  Forgot password?
+              </Link>
+          </h5>
 
           <h4>Login with</h4>
-          <a href="#" className="btn btn-block btn-social btn-facebook" onClick={() => {
-            this.loginWithProvider("facebook")
-          } } data-provider="facebook">Facebook</a>
+          <div className="social-buttons">
+              <a href="#" className="btn btn-block btn-social btn-facebook" onClick={() => {
+                      this.loginWithProvider("facebook")
+                  }} data-provider="facebook">
+                  <span className="fa fa-facebook" />
+                  Sign in with Facebook
+              </a>
 
-          <a href="#" className="btn btn-block btn-social btn-twitter" onClick={() => {
-            this.loginWithProvider("twitter")
-          } } data-provider="twitter">Twitter</a>
+              <a href="#" className="btn btn-block btn-social btn-twitter" onClick={() => {
+                      this.loginWithProvider("twitter")
+                  }} data-provider="twitter">
+                  <span className="fa fa-twitter" />
+                  Sign in with Twitter
+              </a>
 
-          <a href="#" className="btn btn-block btn-social btn-google" onClick={() => {
-            this.loginWithProvider("google")
-          } } data-provider="twitter">Google</a>
+              <a href="#" className="btn btn-block btn-social btn-google" onClick={() => {
+                      this.loginWithProvider("google")
+                  }} data-provider="twitter">
+                  <span className="fa fa-google" />
+                  Sign in with Google
+              </a>
 
-           <a href="#" className="btn btn-block btn-social btn-github" onClick={() => {
-            this.loginWithProvider("github")
-          } } data-provider="twitter">Github</a>
-
+              <a href="#" className="btn btn-block btn-social btn-github" onClick={() => {
+                      this.loginWithProvider("github")
+                  }} data-provider="twitter">
+                  <span className="fa fa-github" />
+                  Sign in with Github
+              </a>
+          </div>
         </form>
       </div>
-
     )
   }
-
 }
 
 function mapDispatchToProps(dispatch) {
