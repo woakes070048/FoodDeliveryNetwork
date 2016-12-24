@@ -1,17 +1,17 @@
 {
-    "extends": "airbnb",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "experimentalObjectRestSpread": true
-        }
-    },
-    "rules": {
-        "max-len": ["warn", 120],
-        "indent": ["warn", 2],
-        "react/jsx-indent": ["warn", 2]
-    },
-    "globals": {
-        "window": true,
-        "localStorage": true
+  "extends": "airbnb",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
     }
+  },
+  "rules": {
+    "max-len": ["warn", 120],
+    "indent": ["warn", 2],
+    "react/jsx-indent": ["warn", 2]
+  },
+  "globals": {
+    "window": true,
+    "localStorage": true
+  }
 }
