@@ -1,8 +1,21 @@
-import React, { Component } from 'react';
-import { browserHistory, Link } from 'react-router';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { loginUser, fetchUser, loginWithProvider } from '../../actions/firebase_actions';
+import React, {
+  Component
+} from 'react';
+import {
+  browserHistory,
+  Link
+} from 'react-router';
+import {
+  connect
+} from 'react-redux';
+import {
+  bindActionCreators
+} from 'redux';
+import {
+  loginUser,
+  fetchUser,
+  loginWithProvider
+} from '../../actions/firebase_actions';
 
 class UserLogin extends Component {
   constructor(props) {
@@ -15,12 +28,15 @@ class UserLogin extends Component {
   }
 
   loginWithProvider(provider) {
-    this.props.loginWithProvider(provider).then(data => {
-      if (data.payload.errorCode)
-        this.setState({ message: data.payload.errorMessage })
-      else
-        browserHistory.push('/profile');
-    });
+    this.props.loginWithProvider(provider)
+      .then(data => {
+        if (data.payload.errorCode)
+          this.setState({
+            message: data.payload.errorMessage
+          })
+        else
+          browserHistory.push('/profile');
+      });
   }
 
   onFormSubmit(event) {
@@ -28,13 +44,19 @@ class UserLogin extends Component {
 
     var email = this.refs.email.value;
     var password = this.refs.password.value;
-    this.props.loginUser({ email: email, password: password }).then(data => {
+    this.props.loginUser({
+        email: email,
+        password: password
+      })
+      .then(data => {
 
-      if (data.payload.errorCode)
-        this.setState({ message: data.payload.errorMessage })
-      else
-        browserHistory.push('/profile');
-    })
+        if (data.payload.errorCode)
+          this.setState({
+            message: data.payload.errorMessage
+          })
+        else
+          browserHistory.push('/profile');
+      })
   }
 
   render() {
@@ -129,7 +151,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  return { currentUser: state.currentUser };
+  return {
+    currentUser: state.currentUser
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserLogin);
