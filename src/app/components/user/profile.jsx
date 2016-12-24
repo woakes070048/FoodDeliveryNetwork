@@ -1,16 +1,15 @@
 import React, {
-  Component
+  Component,
 } from 'react';
-import firebase from '../../utils/firebase';
 import {
-  connect
+  connect,
 } from 'react-redux';
 import {
-  bindActionCreators
+  bindActionCreators,
 } from 'redux';
 import {
   fetchUser,
-  updateUser
+  updateUser,
 } from '../../actions/firebaseActions';
 import Loading from '../helpers/loading';
 import ChangePassword from './changePassword';
@@ -21,7 +20,7 @@ class UserProfile extends Component {
     super(props);
     this.props.fetchUser();
     this.state = {
-      message: ''
+      message: '',
     }
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
@@ -32,17 +31,17 @@ class UserProfile extends Component {
     var displayName = this.refs.displayName.value;
     this.props.updateUser({
         email: email,
-        displayName: displayName
+        displayName: displayName,
       })
       .then(data => {
 
         if (data.payload.errorCode)
           this.setState({
-            message: data.payload.errorMessage
+            message: data.payload.errorMessage,
           })
         else
           this.setState({
-            message: "Updated successfuly!"
+            message: "Updated successfuly!",
           })
 
       })
@@ -76,19 +75,18 @@ class UserProfile extends Component {
       </div>
     )
   }
-
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     fetchUser,
-    updateUser
+    updateUser,
   }, dispatch);
 }
 
 function mapStateToProps(state) {
   return {
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
   };
 }
 

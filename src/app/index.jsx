@@ -1,27 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
-  Provider
+  Provider,
 } from 'react-redux';
 import {
   createStore,
-  applyMiddleware
+  applyMiddleware,
 } from 'redux';
 import {
   Router,
-  browserHistory
+  browserHistory,
 } from 'react-router';
 import ReduxPromise from 'redux-promise';
+import 'bootstrap-social';
 import reducers from './reducers';
 import routes from './routes';
-import 'bootstrap-social';
-// for bundling your styles
+// for bundling styles
 import './bundle.scss';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
-        <Router history={browserHistory} routes={routes} />
-    </Provider>,
+    <Router history={browserHistory} routes={routes} />
+  </Provider>,
   document.querySelector('.root-view'));

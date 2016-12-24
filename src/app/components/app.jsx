@@ -1,18 +1,18 @@
 import React, {
-  Component
+  Component,
 } from 'react';
 import {
-  Link
+  Link,
 } from 'react-router';
 import {
-  connect
+  connect,
 } from 'react-redux';
 import {
-  bindActionCreators
+  bindActionCreators,
 } from 'redux';
 import {
   fetchUser,
-  logoutUser
+  logoutUser,
 } from '../actions/firebaseActions';
 
 class App extends Component {
@@ -39,7 +39,7 @@ class App extends Component {
         <li className="dropdown">
           <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button"
              aria-haspopup="true" aria-expanded="false">
-            {currentUser.email} <span className="caret"></span></a>
+            {currentUser.displayName} <span className="caret"></span></a>
           <ul className="dropdown-menu">
             <li><Link to="/profile">Profile</Link></li>
             <li role="separator" className="divider"></li>
