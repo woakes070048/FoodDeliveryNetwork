@@ -1,8 +1,19 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { fetchUser, logoutUser } from '../actions/firebase_actions';
+import React, {
+  Component
+} from 'react';
+import {
+  Link
+} from 'react-router';
+import {
+  connect
+} from 'react-redux';
+import {
+  bindActionCreators
+} from 'redux';
+import {
+  fetchUser,
+  logoutUser
+} from '../actions/firebase_actions';
 
 class App extends Component {
 
@@ -14,10 +25,11 @@ class App extends Component {
   }
 
   logOut() {
-    this.props.logoutUser().then(data=> {
-      // reload props from reducer
-      this.props.fetchUser();
-    });
+    this.props.logoutUser()
+      .then(data => {
+        // reload props from reducer
+        this.props.fetchUser();
+      });
   }
 
   renderUserMenu(currentUser) {
@@ -78,12 +90,16 @@ class App extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchUser, logoutUser }, dispatch);
+  return bindActionCreators({
+    fetchUser,
+    logoutUser
+  }, dispatch);
 }
 
-
 function mapStateToProps(state) {
-  return { currentUser: state.currentUser };
+  return {
+    currentUser: state.currentUser
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

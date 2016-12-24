@@ -1,5 +1,8 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import {
+  Route,
+  IndexRoute
+} from 'react-router';
 import App from './components/app';
 import HomeIndex from './components/index_home';
 import UserLogin from './components/user/login';
@@ -10,7 +13,7 @@ import ResetPassword from './components/user/reset_password';
 import requireAuth from './utils/authenticated';
 
 export default (
-    <Route path="/" component={App}>
+  <Route path="/" component={App}>
         <IndexRoute component={HomeIndex} />
         <Route path="/login" component={UserLogin} />
         <Route path="/logout" component={UserLogout} />

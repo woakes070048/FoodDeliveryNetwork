@@ -1,38 +1,51 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { changePassword } from '../../actions/firebase_actions';
+import React, {
+  Component
+} from 'react';
+import {
+  connect
+} from 'react-redux';
+import {
+  bindActionCreators
+} from 'redux';
+import {
+  changePassword
+} from '../../actions/firebase_actions';
 
 class ChangePassword extends Component {
 
   constructor(props) {
-      super(props);
-      this.onFormSubmit = this.onFormSubmit.bind(this);
-      this.state = {
-        message: '',
+    super(props);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.state = {
+      message: '',
     };
   }
 
   onFormSubmit(event) {
-      event.preventDefault();
-      let password = this.refs.password.value;
-      let repeatPassword = this.refs.repeatPassword.value;
-      if (password !== repeatPassword) {
-        this.setState({
-          message: 'Please password must match!',
+    event.preventDefault();
+    let password = this.refs.password.value;
+    let repeatPassword = this.refs.repeatPassword.value;
+    if (password !== repeatPassword) {
+      this.setState({
+        message: 'Please password must match!',
       });
     } else {
-        this.props.changePassword(password).then((data) => {
+      this.props.changePassword(password)
+        .then((data) => {
           if (data.payload.errorCode)
-            this.setState({ message: data.payload.errorMessage });
+            this.setState({
+              message: data.payload.errorMessage
+            });
           else
-          this.setState({ message: 'Password was changed!' });
-      });
+            this.setState({
+              message: 'Password was changed!'
+            });
+        });
     }
   }
 
-    render() {
-      return (
+  render() {
+    return (
       <form id="ChangePassword" role="form" onSubmit={this.onFormSubmit}>
         <h4> Change Password </h4>
         <h5> {this.state.message} </h5>
@@ -56,13 +69,16 @@ class ChangePassword extends Component {
 
 }
 
-
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ changePassword }, dispatch);
+  return bindActionCreators({
+    changePassword
+  }, dispatch);
 }
 
 function mapStateToProps(state) {
-    return { currentUser: state.currentUser };
+  return {
+    currentUser: state.currentUser
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChangePassword);

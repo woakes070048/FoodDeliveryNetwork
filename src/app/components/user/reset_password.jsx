@@ -1,7 +1,15 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {resetPasswordEmail} from '../../actions/firebase_actions';
+import React, {
+  Component
+} from 'react';
+import {
+  connect
+} from 'react-redux';
+import {
+  bindActionCreators
+} from 'redux';
+import {
+  resetPasswordEmail
+} from '../../actions/firebase_actions';
 
 class ResetPassword extends Component {
   constructor(props) {
@@ -10,22 +18,24 @@ class ResetPassword extends Component {
       message: ''
     }
     this.onFormSubmit = this.onFormSubmit.bind(this);
-
   }
 
   onFormSubmit(event) {
     event.preventDefault();
     var email = this.refs.email.value;
-    this.props.resetPasswordEmail(email).then(data => {
+    this.props.resetPasswordEmail(email)
+      .then(data => {
 
-      if (data.payload.errorCode)
-        this.setState({message: data.payload.errorMessage})
-      else
-        this.setState({message: "Please see your email!"})
+        if (data.payload.errorCode)
+          this.setState({
+            message: data.payload.errorMessage
+          })
+        else
+          this.setState({
+            message: "Please see your email!"
+          })
 
-
-    });
-
+      });
   }
 
   render() {
@@ -42,7 +52,6 @@ class ResetPassword extends Component {
           <button type="submit" className="btn btn-default btn-block">Reset Password</button>
         </form>
       </div>
-
     )
   }
 }
