@@ -1,4 +1,7 @@
-import {renderComponent, expect} from '../test_helper';
+import {
+  renderComponent,
+  expect
+} from '../testHelper';
 import App from '../../src/app/components/app';
 
 describe('App', () => {
@@ -9,6 +12,7 @@ describe('App', () => {
   });
 
   it('renders something', () => {
-    expect(component).to.exist;
+    expect(component)
+      .to.exist;
   });
 });

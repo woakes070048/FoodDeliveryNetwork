@@ -11,9 +11,9 @@ import {
 import {
   fetchUser,
   updateUser
-} from '../../actions/firebase_actions';
+} from '../../actions/firebaseActions';
 import Loading from '../helpers/loading';
-import ChangePassword from './change_password';
+import ChangePassword from './changePassword';
 
 class UserProfile extends Component {
 

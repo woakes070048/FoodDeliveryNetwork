@@ -12,7 +12,7 @@ import {
 } from 'redux';
 import {
   registerUser
-} from '../../actions/firebase_actions';
+} from '../../actions/firebaseActions';
 
 class UserRegister extends Component {
   constructor(props) {

@@ -13,7 +13,7 @@ import {
 import {
   fetchUser,
   logoutUser
-} from '../actions/firebase_actions';
+} from '../actions/firebaseActions';
 
 class App extends Component {
 

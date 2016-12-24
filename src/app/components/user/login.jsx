@@ -15,7 +15,7 @@ import {
   loginUser,
   fetchUser,
   loginWithProvider
-} from '../../actions/firebase_actions';
+} from '../../actions/firebaseActions';
 
 class UserLogin extends Component {
   constructor(props) {

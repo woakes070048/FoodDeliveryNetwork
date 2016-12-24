@@ -1,7 +1,7 @@
 import {
   combineReducers,
 } from 'redux';
-import FireBaseUserReducer from './firebase_user_reducer';
+import FireBaseUserReducer from './firebaseUserReducer';
 
 const rootReducer = combineReducers({
   currentUser: FireBaseUserReducer,

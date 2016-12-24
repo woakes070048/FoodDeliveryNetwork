@@ -4,12 +4,12 @@ import {
   IndexRoute
 } from 'react-router';
 import App from './components/app';
-import HomeIndex from './components/index_home';
+import HomeIndex from './components/indexHome';
 import UserLogin from './components/user/login';
 import UserLogout from './components/user/logout';
 import UserRegister from './components/user/register';
 import UserProfile from './components/user/profile';
-import ResetPassword from './components/user/reset_password';
+import ResetPassword from './components/user/resetPassword';
 import requireAuth from './utils/authenticated';
 
 export default (

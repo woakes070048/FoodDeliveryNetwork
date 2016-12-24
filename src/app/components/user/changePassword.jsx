@@ -9,7 +9,7 @@ import {
 } from 'redux';
 import {
   changePassword
-} from '../../actions/firebase_actions';
+} from '../../actions/firebaseActions';
 
 class ChangePassword extends Component {
 
