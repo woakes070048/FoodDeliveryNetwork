@@ -1,20 +1,21 @@
+
 import React, {
-  Component
+  Component,
 } from 'react';
 import {
   browserHistory,
-  Link
+  Link,
 } from 'react-router';
 import {
-  connect
+  connect,
 } from 'react-redux';
 import {
-  bindActionCreators
+  bindActionCreators,
 } from 'redux';
 import {
   loginUser,
   fetchUser,
-  loginWithProvider
+  loginWithProvider,
 } from '../../actions/firebaseActions';
 
 class UserLogin extends Component {
@@ -44,6 +45,7 @@ class UserLogin extends Component {
 
     var email = this.refs.email.value;
     var password = this.refs.password.value;
+
     this.props.loginUser({
         email: email,
         password: password
@@ -146,13 +148,13 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     loginUser,
     fetchUser,
-    loginWithProvider
+    loginWithProvider,
   }, dispatch);
 }
 
 function mapStateToProps(state) {
   return {
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
   };
 }
 
