@@ -1,3 +1,4 @@
+
 import React, {
   Component,
 } from 'react';
@@ -37,13 +38,26 @@ class App extends Component {
     if (currentUser && currentUser.uid)
       return (
         <li className="dropdown">
-          <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button"
-             aria-haspopup="true" aria-expanded="false">
-            {currentUser.displayName} <span className="caret"></span></a>
+            <a href="#"
+               className="dropdown-toggle"
+               data-toggle="dropdown"
+               role="button"
+               aria-haspopup="true"
+               aria-expanded="false">
+                {currentUser.displayName}
+                <span className="caret" />
+            </a>
+
           <ul className="dropdown-menu">
-            <li><Link to="/profile">Profile</Link></li>
-            <li role="separator" className="divider"></li>
-            <li><Link to="/logout" onClick={this.logOut}>Logout</Link></li>
+              <li>
+                  <Link to="/profile">Profile</Link>
+              </li>
+            <li role="separator" className="divider" />
+            <li>
+                <Link to="/logout" onClick={this.logOut}>
+                    Logout
+                </Link>
+            </li>
           </ul>
         </li>
       )
@@ -57,21 +71,30 @@ class App extends Component {
   render() {
     return (
       <div>
-        <header className="navbar navbar-static-top navbar-inverse" id="top" role="banner">
+          <header className="navbar navbar-static-top navbar-inverse"
+                  id="top"
+                  role="banner">
           <div className="container">
             <div className="navbar-header">
-              <button className="navbar-toggle collapsed" type="button" data-toggle="collapse"
-                      data-target=".bs-navbar-collapse"><span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
+                <button className="navbar-toggle collapsed"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target=".bs-navbar-collapse">
+                    <span className="sr-only">Toggle navigation</span>
+                    <span className="icon-bar" />
+                    <span className="icon-bar" />
+                    <span className="icon-bar" />
               </button>
               <Link to="/" className="navbar-brand">Food Delivery Network</Link>
-
             </div>
-            <nav className="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+            <nav className="collapse navbar-collapse bs-navbar-collapse"
+                 role="navigation">
               <ul className="nav navbar-nav">
-                <li><Link to="/">Home</Link></li>
+                  <li>
+                      <Link to="/">
+                          Home
+                      </Link>
+                  </li>
                 ,
               </ul>
               <ul className="nav navbar-nav navbar-right">
@@ -92,13 +115,13 @@ class App extends Component {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     fetchUser,
-    logoutUser
+    logoutUser,
   }, dispatch);
 }
 
 function mapStateToProps(state) {
   return {
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
   };
 }
 
