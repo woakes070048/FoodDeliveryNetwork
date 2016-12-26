@@ -4,9 +4,9 @@ import React, {
 import AppPresentation from './app-presentation';
 
 const AppContainer = props =>
-  <AppPresentation >
-            {props.children}
-        </AppPresentation>;
+    <AppPresentation >
+        {props.children}
+    </AppPresentation>;
 
 AppContainer.propTypes = {
   children: PropTypes.object.isRequired,
