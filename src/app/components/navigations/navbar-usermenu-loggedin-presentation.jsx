@@ -6,12 +6,12 @@ import {
 } from 'react-bootstrap';
 
 const NavbarUserMenuLoggedOutPresentation = () =>
-  <Nav pullRight>
-    <NavDropdown title="Morteza Alizadeh">
-      <MenuItem>
-        Logout
-      </MenuItem>
-    </NavDropdown>
-  </Nav>;
+    <Nav pullRight>
+        <NavDropdown title="Morteza Alizadeh">
+            <MenuItem>
+                Logout
+            </MenuItem>
+        </NavDropdown>
+    </Nav>;
 
 export default NavbarUserMenuLoggedOutPresentation;

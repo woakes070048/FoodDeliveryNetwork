@@ -2,6 +2,6 @@ import React from 'react';
 import NavbarUserMenuLoggedOutPresentation from './navbar-usermenu-loggedout-presentation';
 
 const NavbarUserMenuPresentation = () =>
-  <NavbarUserMenuLoggedOutPresentation />;
+    <NavbarUserMenuLoggedOutPresentation />;
 
 export default NavbarUserMenuPresentation;
