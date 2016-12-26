@@ -1,7 +1,14 @@
-import React from 'react';
-import UserLoginPresentation from './user-login-presentation';
+ import React, {
+   Component,
+ } from 'react';
+ import UserLoginPresentation from './user-login-presentation';
 
-const UserLoginContainer = () =>
-    <UserLoginPresentation />;
+ class UserLoginContainer extends Component {
+   render() {
+     return (
+       <UserLoginPresentation />
+     );
+   }
+ }
 
-export default UserLoginContainer;
+ export default UserLoginContainer;
