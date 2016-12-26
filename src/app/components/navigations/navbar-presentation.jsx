@@ -17,7 +17,7 @@ const NavbarPresentation = () =>
                     </a>
                 </IndexLinkContainer>
             </Navbar.Brand>
-            <Navbar.Toggle/>
+            <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
             <NavbarUserMenuPresentation />
