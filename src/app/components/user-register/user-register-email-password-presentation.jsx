@@ -8,14 +8,14 @@ import {
 } from 'react-bootstrap';
 
 const UserRegisterEmailPasswordPresentation = () =>
-    <Col
+  <Col
         xs={12}
         smOffset={1}
         sm={10}
         mdOffset={2}
         md={8}
-        lgOffset={4}
-        lg={4}
+        lgOffset={3}
+        lg={6}
     >
         <Form horizontal>
             <FormGroup>
