@@ -1,35 +1,18 @@
-import React, {
-  Component,
-} from 'react';
-import UserRegisterPresentation from './user-register-presentation';
+ import React, {
+   Component,
+ } from 'react';
+ import UserRegisterEmailPasswordContainer from './user-register-email-password-container';
+ import SocialLoginContainer from '../social-login/social-login-container';
 
-class UserRegisterContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.registerWithFacebook = this.registerWithFacebook.bind(this);
-    this.registerWithTwitter = this.registerWithTwitter.bind(this);
-    this.registerWithGoogle = this.registerWithGoogle.bind(this);
-    this.registerWithGithub = this.registerWithGithub.bind(this);
-  }
+ class UserRegisterContainer extends Component {
+   render() {
+     return (
+         <div>
+             <UserRegisterEmailPasswordContainer />
+             <SocialLoginContainer />
+         </div>
+     );
+   }
+ }
 
-  registerWithFacebook() {}
-
-  registerWithTwitter() {}
-
-  registerWithGoogle() {}
-
-  registerWithGithub() {}
-
-  render() {
-    return (
-        <UserRegisterPresentation
-            onFacebookButtonClicked={() => this.registerWithFacebook()}
-            onTwitterButtonClicked={() => this.registerWithTwitter()}
-            onGoogleButtonClicked={() => this.registerWithGoogle()}
-            onGithubButtonClicked={() => this.registerWithGithub()}
-        />
-    );
-  }
-}
-
-export default UserRegisterContainer;
+ export default UserRegisterContainer;
