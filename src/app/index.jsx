@@ -10,5 +10,5 @@ import routes from './routes';
 import './bundle.scss';
 
 ReactDOM.render(
-    <Router history={browserHistory} routes={routes} />,
+  <Router history={browserHistory} routes={routes} />,
     document.querySelector('.root-view'));

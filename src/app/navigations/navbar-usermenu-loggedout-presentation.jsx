@@ -8,17 +8,17 @@ import {
 } from 'react-router-bootstrap';
 
 const NavbarUserMenuLoggedOutPresentation = () =>
-    <Nav pullRight>
-        <LinkContainer to="/login" >
-            <NavItem>
+  <Nav pullRight>
+    <LinkContainer to="/login" >
+      <NavItem>
                 Login
             </NavItem>
-        </LinkContainer>
-        <LinkContainer to="/register" >
-            <NavItem>
+    </LinkContainer>
+    <LinkContainer to="/register" >
+      <NavItem>
                 Register
             </NavItem>
-        </LinkContainer>
-    </Nav>;
+    </LinkContainer>
+  </Nav>;
 
 export default NavbarUserMenuLoggedOutPresentation;

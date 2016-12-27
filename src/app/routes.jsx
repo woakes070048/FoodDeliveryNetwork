@@ -9,9 +9,9 @@ import UserLoginContainer from './user-login/user-login-container';
 import UserRegisterContainer from './user-register/user-register-container';
 
 export default (
-    <Route path="/" component={AppContainer}>
-        <IndexRoute component={HomeContainer} />
-        <Route path="/login" component={UserLoginContainer} />
-        <Route path="/register" component={UserRegisterContainer} />
-    </Route>
+  <Route path="/" component={AppContainer}>
+    <IndexRoute component={HomeContainer} />
+    <Route path="/login" component={UserLoginContainer} />
+    <Route path="/register" component={UserRegisterContainer} />
+  </Route>
 );

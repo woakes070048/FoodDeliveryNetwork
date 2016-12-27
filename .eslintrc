@@ -12,6 +12,7 @@
   },
   "globals": {
     "window": true,
+    "document": true,
     "localStorage": true
   }
 }

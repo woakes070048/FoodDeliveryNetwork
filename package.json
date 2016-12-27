@@ -10,7 +10,8 @@
     "start": "PORT=8080 pm2 start ./www.js",
     "test": "./node_modules/.bin/mocha --compilers js:babel-core/register --require ./test/testHelper.js --recursive ./test",
     "test:watch": "npm run test -- --watch",
-    "lint": "./node_modules/.bin/eslint --ext .jsx --ext .js src && ./node_modules/.bin/eslint --ext .jsx --ext .js test"
+    "lint": "./node_modules/.bin/eslint --ext .jsx --ext .js src && ./node_modules/.bin/eslint --ext .jsx --ext .js test",
+    "fixlint": "./node_modules/.bin/eslint --fix --ext .jsx --ext .js src && ./node_modules/.bin/eslint --fix --ext .jsx --ext .js test"
   },
   "author": "Micro Business",
   "contributors": [{

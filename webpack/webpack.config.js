@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 const Path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Webpack = require('webpack');
