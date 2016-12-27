@@ -5,7 +5,7 @@ import {
   NavDropdown,
 } from 'react-bootstrap';
 
-const NavbarUserMenuLoggedOutPresentation = () =>
+const NavbarUserMenuLoggedOutPresentational = () =>
   <Nav pullRight>
     <NavDropdown title="Morteza Alizadeh">
       <MenuItem>
@@ -14,4 +14,4 @@ const NavbarUserMenuLoggedOutPresentation = () =>
     </NavDropdown>
   </Nav>;
 
-export default NavbarUserMenuLoggedOutPresentation;
+export default NavbarUserMenuLoggedOutPresentational;

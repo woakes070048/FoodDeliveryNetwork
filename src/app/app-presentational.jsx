@@ -1,20 +1,20 @@
 import React, {
   PropTypes,
 } from 'react';
-import NavbarPresentation from './navigations/navbar-presentation';
+import NavbarPresentational from './navigations/navbar-presentational';
 
-const AppPresentation = ({
+const AppPresentational = ({
     children,
   }) =>
     <div className="container-fluid">
-      <NavbarPresentation />
+      <NavbarPresentational />
       <div>
         {children}
       </div>
     </div>;
 
-AppPresentation.propTypes = {
+AppPresentational.propTypes = {
   children: PropTypes.object.isRequired,
 };
 
-export default AppPresentation;
+export default AppPresentational;

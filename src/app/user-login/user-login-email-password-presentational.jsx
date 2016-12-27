@@ -7,7 +7,7 @@ import {
   FormGroup,
 } from 'react-bootstrap';
 
-const UserLoginEmailPasswordPresentation = () =>
+const UserLoginEmailPasswordPresentational = () =>
   <Col
     xs={12}
     smOffset={1}
@@ -53,4 +53,4 @@ const UserLoginEmailPasswordPresentation = () =>
     </Form>
   </Col>;
 
-export default UserLoginEmailPasswordPresentation;
+export default UserLoginEmailPasswordPresentational;

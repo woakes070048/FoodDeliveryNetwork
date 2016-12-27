@@ -4,13 +4,13 @@ import {
   Grid,
   Row,
 } from 'react-bootstrap';
-import UserLoginEmailPasswordContainer from './user-login-email-password-container';
+import UserRegisterEmailPasswordContainer from './user-register-email-password-container';
 import SocialLoginContainer from '../social-login/social-login-container';
 
-const UserLoginPresentation = () =>
+const UserRegisterPresentational = () =>
   <Grid>
     <Row>
-      <UserLoginEmailPasswordContainer />
+      <UserRegisterEmailPasswordContainer />
     </Row>
     <Row>
       <Col
@@ -32,4 +32,4 @@ const UserLoginPresentation = () =>
     </Row>
   </Grid>;
 
-export default UserLoginPresentation;
+export default UserRegisterPresentational;

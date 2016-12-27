@@ -1,10 +1,10 @@
 import React, {
   PropTypes,
 } from 'react';
-import AppPresentation from './app-presentation';
+import AppPresentational from './app-presentational';
 
 const AppContainer = props =>
-  <AppPresentation children={props.children} />;
+  <AppPresentational children={props.children} />;
 
 AppContainer.propTypes = {
   children: PropTypes.object.isRequired,

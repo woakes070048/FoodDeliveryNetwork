@@ -1,4 +1,4 @@
 import React from 'react';
-import UserRegisterPresentation from './user-register-presentation';
+import UserRegisterPresentational from './user-register-presentational';
 
-export default () => <UserRegisterPresentation />;
+export default () => <UserRegisterPresentational />;

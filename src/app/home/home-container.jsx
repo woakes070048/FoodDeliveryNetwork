@@ -1,7 +1,7 @@
 import React from 'react';
-import HomePresentation from './home-presentation';
+import HomePresentational from './home-presentational';
 
 const HomeContainer = () =>
-  <HomePresentation />;
+  <HomePresentational />;
 
 export default HomeContainer;

@@ -1,4 +1,4 @@
 import React from 'react';
-import UserRegisterEmailPasswordPresentation from './user-register-email-password-presentation';
+import UserRegisterEmailPasswordPresentational from './user-register-email-password-presentational';
 
-export default () => <UserRegisterEmailPasswordPresentation />;
+export default () => <UserRegisterEmailPasswordPresentational />;

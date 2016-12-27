@@ -1,7 +1,7 @@
 import React, {
   Component,
 } from 'react';
-import SocialLoginPresentation from './social-login-presentation';
+import SocialLoginPresentational from './social-login-presentational';
 
 class SocialLoginContainer extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class SocialLoginContainer extends Component {
 
   render() {
     return (
-      <SocialLoginPresentation
+      <SocialLoginPresentational
         onFacebookButtonClicked={() => this.loginWithProvider('facebook')}
         onTwitterButtonClicked={() => this.loginWithProvider('twitter')}
         onGoogleButtonClicked={() => this.loginWithProvider('google')}

@@ -7,7 +7,7 @@ import {
   LinkContainer,
 } from 'react-router-bootstrap';
 
-const NavbarUserMenuLoggedOutPresentation = () =>
+const NavbarUserMenuLoggedOutPresentational = () =>
   <Nav pullRight>
     <LinkContainer to="/login" >
       <NavItem>
@@ -21,4 +21,4 @@ const NavbarUserMenuLoggedOutPresentation = () =>
     </LinkContainer>
   </Nav>;
 
-export default NavbarUserMenuLoggedOutPresentation;
+export default NavbarUserMenuLoggedOutPresentational;

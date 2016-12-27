@@ -8,7 +8,7 @@ import {
 } from 'react-bootstrap';
 import 'bootstrap-social';
 
-const SocialLoginPresentation = ({
+const SocialLoginPresentational = ({
     onFacebookButtonClicked,
     onTwitterButtonClicked,
     onGoogleButtonClicked,
@@ -93,11 +93,11 @@ const SocialLoginPresentation = ({
       </Row>
     </Grid>;
 
-SocialLoginPresentation.propTypes = {
+SocialLoginPresentational.propTypes = {
   onFacebookButtonClicked: PropTypes.func.isRequired,
   onTwitterButtonClicked: PropTypes.func.isRequired,
   onGoogleButtonClicked: PropTypes.func.isRequired,
   onGithubButtonClicked: PropTypes.func.isRequired,
 };
 
-export default SocialLoginPresentation;
+export default SocialLoginPresentational;
