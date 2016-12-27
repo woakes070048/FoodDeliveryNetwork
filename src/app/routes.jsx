@@ -3,10 +3,10 @@ import {
   Route,
   IndexRoute,
 } from 'react-router';
-import AppContainer from './components/app-container';
-import HomeContainer from './components/home/home-container';
-import UserLoginContainer from './components/user-login/user-login-container';
-import UserRegisterContainer from './components/user-register/user-register-container';
+import AppContainer from './app-container';
+import HomeContainer from './home/home-container';
+import UserLoginContainer from './user-login/user-login-container';
+import UserRegisterContainer from './user-register/user-register-container';
 
 export default (
     <Route path="/" component={AppContainer}>
