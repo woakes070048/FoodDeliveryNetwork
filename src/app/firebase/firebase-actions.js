@@ -4,7 +4,7 @@ import {
   FIREBASE_REGISTER_WITH_EMAIL_PASSWORD,
   FIREBASE_LOGIN_WITH_EMAIL_PASSWORD,
   FIREBASE_LOGIN_WITH_PROVIDER,
-} from './action-types';
+} from './firebase-action-types';
 
 export function registerWithEmailPassword(email, password) {
   return {
