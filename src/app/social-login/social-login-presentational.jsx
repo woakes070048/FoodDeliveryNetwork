@@ -6,7 +6,7 @@ import {
   Grid,
   Row,
 } from 'react-bootstrap';
-import '../../../node_modules/bootstrap-social/bootstrap-social.css';
+import 'bootstrap-social/bootstrap-social.css';
 
 const SocialLoginPresentational = ({
     onFacebookButtonClicked,
