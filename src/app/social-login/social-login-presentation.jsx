@@ -6,7 +6,6 @@ import {
   Grid,
   Row,
 } from 'react-bootstrap';
-
 import 'bootstrap-social';
 
 const SocialLoginPresentation = ({
