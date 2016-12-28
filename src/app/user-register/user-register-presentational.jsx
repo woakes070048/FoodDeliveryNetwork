@@ -10,17 +10,29 @@ import SocialLoginContainer from '../social-login/social-login-container';
 const UserRegisterPresentational = () =>
   <Grid>
     <Row>
-      <UserRegisterEmailPasswordContainer />
+      <Col
+        xsOffset={2}
+        xs={8}
+        smOffset={3}
+        sm={6}
+        mdOffset={4}
+        md={4}
+        lgOffset={4}
+        lg={4}
+      >
+        <UserRegisterEmailPasswordContainer />
+      </Col>
     </Row>
     <Row>
       <Col
-        xs={12}
-        sm={10}
-        smOffset={1}
-        md={8}
-        mdOffset={2}
-        lg={6}
-        lgOffset={3}
+        xsOffset={2}
+        xs={7}
+        smOffset={3}
+        sm={6}
+        mdOffset={4}
+        md={4}
+        lgOffset={4}
+        lg={4}
       >
         <h3 className="user-register-divider">
           <span>or</span>
@@ -28,7 +40,18 @@ const UserRegisterPresentational = () =>
       </Col>
     </Row>
     <Row>
-      <SocialLoginContainer />
+      <Col
+        xsOffset={2}
+        xs={8}
+        smOffset={3}
+        sm={6}
+        mdOffset={4}
+        md={4}
+        lgOffset={4}
+        lg={4}
+      >
+        <SocialLoginContainer />
+      </Col>
     </Row>
   </Grid>;
 

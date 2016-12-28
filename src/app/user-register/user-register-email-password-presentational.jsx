@@ -8,60 +8,94 @@ import {
 } from 'react-bootstrap';
 
 const UserRegisterEmailPasswordPresentational = () =>
-  <Col
-    xs={12}
-    smOffset={1}
-    sm={10}
-    mdOffset={2}
-    md={8}
-    lgOffset={3}
-    lg={6}
-  >
-    <Form horizontal>
-      <FormGroup>
-        <Col sm={2}>
-                    Email
-                </Col>
-        <Col sm={10}>
-          <FormControl
-            type="email"
-            placeholder="Email"
-          />
-        </Col>
-      </FormGroup>
-      <FormGroup>
-        <Col sm={2}>
-                    Password
-                </Col>
-        <Col sm={10}>
-          <FormControl
-            type="password"
-            placeholder="Password"
-          />
-        </Col>
-      </FormGroup>
-      <FormGroup>
-        <Col sm={2}>
-                    Re-enter Password
-                </Col>
-        <Col sm={10}>
-          <FormControl
-            type="password"
-            placeholder="Re-enter Password"
-          />
-        </Col>
-      </FormGroup>
-      <FormGroup>
-        <Col smOffset={2} sm={10}>
-          <Button
-            type="submit"
-            bsStyle="primary"
-          >
-                        Register
-                    </Button>
-        </Col>
-      </FormGroup>
-    </Form>
-  </Col>;
+  <Form horizontal>
+    <FormGroup>
+      <Col
+        xs={2}
+        sm={2}
+        md={2}
+        lg={2}
+      >
+          Email
+      </Col>
+      <Col
+        xs={9}
+        smOffset={1}
+        sm={9}
+        mdOffset={1}
+        md={9}
+        lgOffset={1}
+        lg={9}
+      >
+        <FormControl
+          type="email"
+          placeholder="Email"
+        />
+      </Col>
+    </FormGroup>
+    <FormGroup>
+      <Col
+        xs={2}
+        sm={2}
+        md={2}
+        lg={2}
+      >
+          Password
+      </Col>
+      <Col
+        xs={9}
+        smOffset={1}
+        sm={9}
+        mdOffset={1}
+        md={9}
+        lgOffset={1}
+        lg={9}
+      >
+        <FormControl
+          type="password"
+          placeholder="Password"
+        />
+      </Col>
+    </FormGroup>
+    <FormGroup>
+      <Col
+        xs={2}
+        sm={2}
+        md={2}
+        lg={2}
+      >
+          Re-enter Password
+      </Col>
+      <Col
+        xs={9}
+        smOffset={1}
+        sm={9}
+        mdOffset={1}
+        md={9}
+        lgOffset={1}
+        lg={9}
+      >
+        <FormControl
+          type="password"
+          placeholder="Re-enter Password"
+        />
+      </Col>
+    </FormGroup>
+    <FormGroup>
+      <Col
+        xsOffset={2}
+        smOffset={3}
+        mdOffset={3}
+        lgOffset={3}
+      >
+        <Button
+          type="submit"
+          bsStyle="primary"
+        >
+          Login
+        </Button>
+      </Col>
+    </FormGroup>
+  </Form>;
 
 export default UserRegisterEmailPasswordPresentational;

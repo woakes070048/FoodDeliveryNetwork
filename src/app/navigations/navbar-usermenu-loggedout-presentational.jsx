@@ -10,14 +10,10 @@ import {
 const NavbarUserMenuLoggedOutPresentational = () =>
   <Nav pullRight>
     <LinkContainer to="/login" >
-      <NavItem>
-                Login
-            </NavItem>
+      <NavItem> Login </NavItem>
     </LinkContainer>
     <LinkContainer to="/register" >
-      <NavItem>
-                Register
-            </NavItem>
+      <NavItem> Register </NavItem>
     </LinkContainer>
   </Nav>;
 

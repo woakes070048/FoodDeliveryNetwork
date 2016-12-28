@@ -17,13 +17,14 @@ const SocialLoginPresentational = ({
     <Grid>
       <Row>
         <Col
-          xs={12}
-          sm={10}
+          xsOffset={1}
+          xs={8}
           smOffset={1}
-          md={8}
-          mdOffset={2}
-          lg={6}
-          lgOffset={3}
+          sm={4}
+          mdOffset={0}
+          md={3}
+          lgOffset={0}
+          lg={3}
         >
           <a
             className="btn btn-block btn-social btn-facebook social-login-button"
@@ -36,13 +37,14 @@ const SocialLoginPresentational = ({
       </Row>
       <Row>
         <Col
-          xs={12}
-          sm={10}
+          xsOffset={1}
+          xs={8}
           smOffset={1}
-          md={8}
-          mdOffset={2}
-          lg={6}
-          lgOffset={3}
+          sm={4}
+          mdOffset={0}
+          md={3}
+          lgOffset={0}
+          lg={3}
         >
           <a
             className="btn btn-block btn-social btn-twitter social-login-button"
@@ -55,13 +57,14 @@ const SocialLoginPresentational = ({
       </Row>
       <Row>
         <Col
-          xs={12}
-          sm={10}
+          xsOffset={1}
+          xs={8}
           smOffset={1}
-          md={8}
-          mdOffset={2}
-          lg={6}
-          lgOffset={3}
+          sm={4}
+          mdOffset={0}
+          md={3}
+          lgOffset={0}
+          lg={3}
         >
           <a
             className="btn btn-block btn-social btn-google social-login-button"
@@ -74,13 +77,14 @@ const SocialLoginPresentational = ({
       </Row>
       <Row>
         <Col
-          xs={12}
-          sm={10}
+          xsOffset={1}
+          xs={8}
           smOffset={1}
-          md={8}
-          mdOffset={2}
-          lg={6}
-          lgOffset={3}
+          sm={4}
+          mdOffset={0}
+          md={3}
+          lgOffset={0}
+          lg={3}
         >
           <a
             className="btn btn-block btn-social btn-github social-login-button"

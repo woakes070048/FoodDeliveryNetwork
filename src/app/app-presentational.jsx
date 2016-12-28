@@ -6,9 +6,9 @@ import NavbarPresentational from './navigations/navbar-presentational';
 const AppPresentational = ({
     children,
   }) =>
-    <div className="container-fluid">
+    <div>
       <NavbarPresentational />
-      <div>
+      <div className="container-fluid">
         {children}
       </div>
     </div>;

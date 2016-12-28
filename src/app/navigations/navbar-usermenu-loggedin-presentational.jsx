@@ -8,9 +8,7 @@ import {
 const NavbarUserMenuLoggedOutPresentational = () =>
   <Nav pullRight>
     <NavDropdown title="Morteza Alizadeh">
-      <MenuItem>
-                Logout
-            </MenuItem>
+      <MenuItem> Logout </MenuItem>
     </NavDropdown>
   </Nav>;
 
