@@ -2,6 +2,6 @@
 
 export default {
   firebaseContext: {
-    signedin: false,
+    signedInFlag: false,
   },
 };

@@ -1,15 +1,26 @@
 import React, {
-  Component,
+    Component,
+    PropTypes,
 } from 'react';
+import {
+  bindActionCreators,
+} from 'redux';
+import {
+  connect,
+} from 'react-redux';
 import SocialLoginPresentational from './social-login-presentational';
+import * as firebaseActions from '../firebase/firebase-actions';
 
 class SocialLoginContainer extends Component {
   constructor(props) {
     super(props);
+
     this.loginWithProvider = this.loginWithProvider.bind(this);
   }
 
-  loginWithProvider(provider) {}
+  loginWithProvider(provider) {
+    this.props.firebaseActions.loginWithProvider(provider);
+  }
 
   render() {
     return (
@@ -23,4 +34,18 @@ class SocialLoginContainer extends Component {
   }
 }
 
-export default SocialLoginContainer;
+SocialLoginContainer.propTypes = {
+  firebaseActions: PropTypes.object.isRequired,
+};
+
+function mapStateToProps(state) {
+  return state;
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    firebaseActions: bindActionCreators(firebaseActions, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SocialLoginContainer);
