@@ -6,5 +6,5 @@ import {
 import firebaseReducer from './firebase/firebase-reducer';
 
 export default combineReducers({
-  firebaseReducer,
+  firebase: firebaseReducer,
 });
