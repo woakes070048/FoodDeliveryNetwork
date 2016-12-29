@@ -1,19 +1,26 @@
 /* jshint esversion: 6 */
 
+import 'babel-polyfill';
 import {
   createStore,
   applyMiddleware,
 } from 'redux';
-import ReduxPromise from 'redux-promise';
-import ReduxImmutableStateInvariant from 'redux-immutable-state-invariant';
-import RootReducer from '../reducers';
+import createSagaMiddleware from 'redux-saga';
+import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
+import rootReducer from '../reducers';
+import sagas from '../saga/sagas';
 
 export default function configureStore(initialState) {
-  return createStore(
-    RootReducer,
+  const sagaMiddleware = createSagaMiddleware();
+  const store = createStore(
+    rootReducer,
     initialState,
     process.env.NODE_ENV === 'production' ?
     applyMiddleware(
-      ReduxPromise) : applyMiddleware(ReduxPromise,
-      ReduxImmutableStateInvariant()));
+      sagaMiddleware) : applyMiddleware(sagaMiddleware,
+      reduxImmutableStateInvariant()));
+
+  sagaMiddleware.run(sagas);
+
+  return store;
 }

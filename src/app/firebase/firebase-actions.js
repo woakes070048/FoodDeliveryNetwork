@@ -2,6 +2,8 @@
 
 import {
   FIREBASE_FETCH_USER,
+  FIREBASE_FETCH_USER_SUCCEEDED,
+  FIREBASE_FETCH_USER_FAILED,
   FIREBASE_REGISTER_WITH_EMAIL_PASSWORD,
   FIREBASE_LOGIN_WITH_EMAIL_PASSWORD,
   FIREBASE_LOGIN_WITH_PROVIDER,
@@ -10,6 +12,37 @@ import {
 export function fetchUser() {
   return {
     type: FIREBASE_FETCH_USER,
+  };
+}
+
+export function fetchUserSucceeded(response) {
+  const userFetched = response && response.uid;
+
+  if (userFetched) {
+    return {
+      type: FIREBASE_FETCH_USER_SUCCEEDED,
+      response: {
+        userFetched: true,
+        userId: response.uid,
+        displayName: response.displayName,
+      },
+    };
+  } else {
+    return {
+      type: FIREBASE_FETCH_USER_SUCCEEDED,
+      response: {
+        userFetched: false,
+      },
+    };
+  }
+}
+
+export function fetchUserFailed(error) {
+  return {
+    type: FIREBASE_FETCH_USER_FAILED,
+    response: {
+      error,
+    },
   };
 }
 
