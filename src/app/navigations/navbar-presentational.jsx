@@ -5,7 +5,7 @@ import {
 import {
   IndexLinkContainer,
 } from 'react-router-bootstrap';
-import NavbarUserMenuPresentational from './navbar-usermenu-presentational';
+import UserMenuContainer from './usermenu-container';
 
 const NavbarPresentational = () =>
   <Navbar>
@@ -18,7 +18,7 @@ const NavbarPresentational = () =>
       <Navbar.Toggle />
     </Navbar.Header>
     <Navbar.Collapse>
-      <NavbarUserMenuPresentational />
+      <UserMenuContainer />
     </Navbar.Collapse>
   </Navbar>;
 
