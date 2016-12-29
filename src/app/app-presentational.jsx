@@ -1,13 +1,13 @@
 import React, {
   PropTypes,
 } from 'react';
-import NavbarPresentational from './navigations/navbar-presentational';
+import NavbarContainer from './navigations/navbar-container';
 
 const AppPresentational = ({
     children,
   }) =>
     <div>
-      <NavbarPresentational />
+      <NavbarContainer />
       <div className="container-fluid">
         {children}
       </div>
