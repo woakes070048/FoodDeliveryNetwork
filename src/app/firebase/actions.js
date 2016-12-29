@@ -7,7 +7,7 @@ import {
   FIREBASE_REGISTER_WITH_EMAIL_PASSWORD,
   FIREBASE_LOGIN_WITH_EMAIL_PASSWORD,
   FIREBASE_LOGIN_WITH_PROVIDER,
-} from './firebase-action-types';
+} from './action-types';
 
 export function fetchUser() {
   return {

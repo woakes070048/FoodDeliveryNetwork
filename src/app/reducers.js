@@ -3,7 +3,7 @@
 import {
   combineReducers,
 } from 'redux';
-import firebaseReducer from './firebase/firebase-reducer';
+import firebaseReducer from './firebase/reducer';
 
 export default combineReducers({
   firebase: firebaseReducer,

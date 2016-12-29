@@ -9,12 +9,12 @@ import {
   FIREBASE_FETCH_USER,
   FIREBASE_FETCH_USER_SUCCEEDED,
   FIREBASE_FETCH_USER_FAILED,
-} from './firebase-action-types';
+} from '../action-types';
 import {
   fetchUserSucceeded,
   fetchUserFailed,
-} from './firebase-actions.js';
-import helper from './helper';
+} from '../actions.js';
+import helper from '../helper';
 
 function* fetchUserAsync() {
   try {

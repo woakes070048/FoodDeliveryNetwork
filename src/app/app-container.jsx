@@ -9,7 +9,7 @@ import {
   connect,
 } from 'react-redux';
 import AppPresentational from './app-presentational';
-import * as firebaseActions from './firebase/firebase-actions';
+import * as firebaseActions from './firebase/actions';
 
 class AppContainer extends Component {
   constructor(props) {

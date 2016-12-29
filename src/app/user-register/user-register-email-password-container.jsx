@@ -7,7 +7,7 @@ import {
 import {
   connect,
 } from 'react-redux';
-import * as firebaseActions from '../firebase/firebase-actions';
+import * as firebaseActions from '../firebase/actions';
 import UserRegisterEmailPasswordPresentational from './user-register-email-password-presentational';
 
 class UserRegisterEmailPasswordContainer extends Component {

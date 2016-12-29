@@ -9,7 +9,7 @@ import {
   connect,
 } from 'react-redux';
 import SocialLoginPresentational from './social-login-presentational';
-import * as firebaseActions from '../firebase/firebase-actions';
+import * as firebaseActions from '../firebase/actions';
 
 class SocialLoginContainer extends Component {
   constructor(props) {
