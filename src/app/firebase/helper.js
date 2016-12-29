@@ -8,12 +8,6 @@ const firebaseAuth = firebaseApp.auth();
 const firebaseDatabase = firebaseApp.database();
 
 const firebaseHelper = {
-  /**
-   * Return an instance of a firebase auth provider based on the provider string.
-   *
-   * @param provider
-   * @returns {firebase.auth.AuthProvider}
-   */
   getProvider: (provider) => {
     switch (provider) {
     case 'email':
@@ -31,28 +25,12 @@ const firebaseHelper = {
     }
   },
 
-  /**
-   * Login with provider => p is provider "email", "facebook", "github", "google", or "twitter"
-   * Uses Popup therefore provider must be an OAuth provider. EmailAuthProvider will throw an error
-   *
-   * @returns {any|!firebase.Thenable.<*>|firebase.Thenable<any>}
-   */
   loginWithProvider: (providerName) => {
     const provider = firebaseHelper.getProvider(providerName);
+
     return firebaseAuth.signInWithPopup(provider);
-    // return firebaseAuth.signInWithPopup(provider)
-    //   .then(firebaseAuth.currentUser)
-    //   .catch(error => ({
-    //     errorCode: error.code,
-    //     errorMessage: error.message,
-    //   }));
   },
 
-  /**
-   * Retrieve the current user (Promise)
-   *
-   * @returns {Promise}
-   */
   fetchUser: () => new Promise((resolve, reject) => {
     const unsub = firebaseAuth.onAuthStateChanged((user) => {
       unsub();
