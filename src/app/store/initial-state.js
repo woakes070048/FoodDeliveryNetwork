@@ -2,6 +2,9 @@
 
 export default {
   firebaseContext: {
-    signedInFlag: false,
+    userInfo: {
+      userExists: false,
+      error: null,
+    },
   },
 };

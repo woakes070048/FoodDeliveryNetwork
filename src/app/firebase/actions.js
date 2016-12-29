@@ -27,7 +27,9 @@ export function fetchUserSucceeded(response) {
       response: {
         userFetched: true,
         userId: response.uid,
+        email: response.email,
         displayName: response.displayName,
+        photoUrl: response.photoURL,
       },
     };
   } else {
