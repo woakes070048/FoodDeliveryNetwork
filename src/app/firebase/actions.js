@@ -59,6 +59,7 @@ export function registerWithProvider(providerName) {
 export function registerWithProviderSucceeded(response) {
   return {
     type: FIREBASE_REGISTER_WITH_PROVIDER_SUCCEEDED,
+    response,
   };
 }
 
@@ -78,6 +79,7 @@ export function loginWithProvider(providerName) {
 export function loginWithProviderSucceeded(response) {
   return {
     type: FIREBASE_LOGIN_WITH_PROVIDER_SUCCEEDED,
+    response,
   };
 }
 

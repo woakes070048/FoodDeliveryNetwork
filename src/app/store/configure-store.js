@@ -6,19 +6,16 @@ import {
   applyMiddleware,
 } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import rootReducer from '../reducers';
 import sagas from '../saga/sagas';
 
 export default function configureStore(initialState) {
   const sagaMiddleware = createSagaMiddleware();
+  const middleware = applyMiddleware(sagaMiddleware);
   const store = createStore(
     rootReducer,
     initialState,
-    process.env.NODE_ENV === 'production' ?
-    applyMiddleware(
-      sagaMiddleware) : applyMiddleware(sagaMiddleware,
-      reduxImmutableStateInvariant()));
+    middleware);
 
   sagaMiddleware.run(sagas);
 
