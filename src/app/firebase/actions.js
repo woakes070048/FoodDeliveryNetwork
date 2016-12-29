@@ -49,9 +49,10 @@ export function fetchUserFailed(error) {
   };
 }
 
-export function registerWithProvider() {
+export function registerWithProvider(providerName) {
   return {
     type: FIREBASE_REGISTER_WITH_PROVIDER,
+    providerName,
   };
 }
 
@@ -67,9 +68,10 @@ export function registerWithProviderFailed(error) {
   };
 }
 
-export function loginWithProvider() {
+export function loginWithProvider(providerName) {
   return {
     type: FIREBASE_LOGIN_WITH_PROVIDER,
+    providerName,
   };
 }
 

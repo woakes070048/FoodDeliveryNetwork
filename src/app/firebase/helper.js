@@ -39,12 +39,13 @@ const firebaseHelper = {
    */
   loginWithProvider: (providerName) => {
     const provider = firebaseHelper.getProvider(providerName);
-    return firebaseAuth.signInWithPopup(provider)
-      .then(firebaseAuth.currentUser)
-      .catch(error => ({
-        errorCode: error.code,
-        errorMessage: error.message,
-      }));
+    return firebaseAuth.signInWithPopup(provider);
+    // return firebaseAuth.signInWithPopup(provider)
+    //   .then(firebaseAuth.currentUser)
+    //   .catch(error => ({
+    //     errorCode: error.code,
+    //     errorMessage: error.message,
+    //   }));
   },
 
   /**

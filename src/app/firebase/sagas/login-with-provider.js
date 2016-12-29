@@ -14,9 +14,9 @@ import {
 } from '../actions.js';
 import helper from '../helper';
 
-function* loginWithProviderAsync(provider) {
+function* loginWithProviderAsync(action) {
   try {
-    const response = yield call(helper.loginWithProvider, provider);
+    const response = yield call(helper.loginWithProvider, action.providerName);
 
     yield put(loginWithProviderSucceeded(response));
   } catch (exception) {
