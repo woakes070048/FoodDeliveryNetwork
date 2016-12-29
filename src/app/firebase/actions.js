@@ -4,9 +4,12 @@ import {
   FIREBASE_FETCH_USER,
   FIREBASE_FETCH_USER_SUCCEEDED,
   FIREBASE_FETCH_USER_FAILED,
-  FIREBASE_REGISTER_WITH_EMAIL_PASSWORD,
-  FIREBASE_LOGIN_WITH_EMAIL_PASSWORD,
+  FIREBASE_REGISTER_WITH_PROVIDER,
+  FIREBASE_REGISTER_WITH_PROVIDER_SUCCEEDED,
+  FIREBASE_REGISTER_WITH_PROVIDER_FAILED,
   FIREBASE_LOGIN_WITH_PROVIDER,
+  FIREBASE_LOGIN_WITH_PROVIDER_SUCCEEDED,
+  FIREBASE_LOGIN_WITH_PROVIDER_FAILED,
 } from './action-types';
 
 export function fetchUser() {
@@ -46,25 +49,38 @@ export function fetchUserFailed(error) {
   };
 }
 
-export function registerWithEmailPassword(email, password) {
+export function registerWithProvider() {
   return {
-    type: FIREBASE_REGISTER_WITH_EMAIL_PASSWORD,
-    email,
-    password,
+    type: FIREBASE_REGISTER_WITH_PROVIDER,
   };
 }
 
-export function loginWithEmailPassword(email, password) {
+export function registerWithProviderSucceeded(response) {
   return {
-    type: FIREBASE_LOGIN_WITH_EMAIL_PASSWORD,
-    email,
-    password,
+    type: FIREBASE_REGISTER_WITH_PROVIDER_SUCCEEDED,
   };
 }
 
-export function loginWithProvider(provider) {
+export function registerWithProviderFailed(error) {
+  return {
+    type: FIREBASE_REGISTER_WITH_PROVIDER_FAILED,
+  };
+}
+
+export function loginWithProvider() {
   return {
     type: FIREBASE_LOGIN_WITH_PROVIDER,
-    provider,
+  };
+}
+
+export function loginWithProviderSucceeded(response) {
+  return {
+    type: FIREBASE_LOGIN_WITH_PROVIDER_SUCCEEDED,
+  };
+}
+
+export function loginWithProviderFailed(error) {
+  return {
+    type: FIREBASE_LOGIN_WITH_PROVIDER_FAILED,
   };
 }

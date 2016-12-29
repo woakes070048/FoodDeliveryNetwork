@@ -7,8 +7,6 @@ import {
 } from 'redux-saga/effects';
 import {
   FIREBASE_FETCH_USER,
-  FIREBASE_FETCH_USER_SUCCEEDED,
-  FIREBASE_FETCH_USER_FAILED,
 } from '../action-types';
 import {
   fetchUserSucceeded,
