@@ -31,6 +31,10 @@ const firebaseHelper = {
     return firebaseAuth.signInWithPopup(provider);
   },
 
+  logout: () => {
+    return firebaseAuth.signOut();
+  },
+
   fetchUser: () => new Promise((resolve, reject) => {
     const unsub = firebaseAuth.onAuthStateChanged((user) => {
       unsub();

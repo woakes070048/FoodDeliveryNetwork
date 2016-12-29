@@ -10,6 +10,9 @@ import {
   FIREBASE_LOGIN_WITH_PROVIDER,
   FIREBASE_LOGIN_WITH_PROVIDER_SUCCEEDED,
   FIREBASE_LOGIN_WITH_PROVIDER_FAILED,
+  FIREBASE_LOGOUT,
+  FIREBASE_LOGOUT_SUCCEEDED,
+  FIREBASE_LOGOUT_FAILED,
 } from './action-types';
 
 export function fetchUser() {
@@ -68,6 +71,7 @@ export function registerWithProviderSucceeded(response) {
 export function registerWithProviderFailed(error) {
   return {
     type: FIREBASE_REGISTER_WITH_PROVIDER_FAILED,
+    error,
   };
 }
 
@@ -88,5 +92,25 @@ export function loginWithProviderSucceeded(response) {
 export function loginWithProviderFailed(error) {
   return {
     type: FIREBASE_LOGIN_WITH_PROVIDER_FAILED,
+    error,
+  };
+}
+
+export function logout() {
+  return {
+    type: FIREBASE_LOGOUT,
+  };
+}
+
+export function logoutSucceeded() {
+  return {
+    type: FIREBASE_LOGOUT_SUCCEEDED,
+  };
+}
+
+export function logoutFailed(error) {
+  return {
+    type: FIREBASE_LOGOUT_FAILED,
+    error,
   };
 }
