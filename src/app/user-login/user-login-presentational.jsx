@@ -50,7 +50,7 @@ const UserLoginPresentational = () =>
         lgOffset={4}
         lg={4}
       >
-        <SocialLoginContainer />
+        <SocialLoginContainer login />
       </Col>
     </Row>
   </Grid>;
