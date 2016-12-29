@@ -16,7 +16,11 @@ const UserMenuLoggedInPresentational = ({
       <NavDropdown title={userDisplayName}>
         <MenuItem> Logout </MenuItem>
       </NavDropdown>
-      <Image src={userPhotoUrl} responsive />
+      <Image
+        src={userPhotoUrl}
+        className="navbar-user-photo"
+        circle
+      />
     </Nav>;
 
 UserMenuLoggedInPresentational.propTypes = {
