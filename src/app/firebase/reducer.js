@@ -44,6 +44,14 @@ function handleFetchUserSucceeded(state, action) {
   return createStateWithoutUserInfo(state);
 }
 
+function handleRegisterSucceeded(state, action) {
+  if (action.userInfo.userFetched) {
+    return createStateWithUserInfo(state, action.userInfo);
+  }
+
+  return createStateWithoutUserInfo(state);
+}
+
 function handleLoginSucceeded(state, action) {
   if (action.userInfo.userFetched) {
     return createStateWithUserInfo(state, action.userInfo);
@@ -61,14 +69,13 @@ export default function (state = initialState.firebaseContext, action) {
     return createStateWithoutUserInfo(state, action.error);
 
   case FIREBASE_REGISTER_WITH_PROVIDER_SUCCEEDED:
+    return handleRegisterSucceeded(state, action);
+
   case FIREBASE_REGISTER_WITH_PROVIDER_FAILED:
-    return action.response;
+    return createStateWithoutUserInfo(state, action.error);
 
   case FIREBASE_LOGIN_WITH_PROVIDER_SUCCEEDED:
-    console.log(state);
-    const x = handleLoginSucceeded(state, action);
-    console.log(x);
-    return x;
+    return handleLoginSucceeded(state, action);
 
   case FIREBASE_LOGIN_WITH_PROVIDER_FAILED:
     return createStateWithoutUserInfo(state, action.error);
