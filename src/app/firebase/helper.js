@@ -25,6 +25,12 @@ const firebaseHelper = {
     }
   },
 
+  registerWithUsernameOrEmailAndPassword: (usernameOrEmail, password) =>
+    firebaseAuth.createUserWithEmailAndPassword(usernameOrEmail, password),
+
+  loginWithUsernameOrEmailAndPassword: (usernameOrEmail, password) =>
+    firebaseAuth.signInWithEmailAndPassword(usernameOrEmail, password),
+
   loginWithProvider: (providerName) => {
     const provider = firebaseHelper.getProvider(providerName);
 

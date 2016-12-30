@@ -3,7 +3,7 @@
 import {
   call,
   put,
-  takeEvery,
+  takeLatest,
 } from 'redux-saga/effects';
 import {
   FIREBASE_REGISTER_WITH_PROVIDER,
@@ -25,5 +25,5 @@ function* registerWithProviderAsync(action) {
 }
 
 export default function* watchRegisterWithProvider() {
-  yield takeEvery(FIREBASE_REGISTER_WITH_PROVIDER, registerWithProviderAsync);
+  yield takeLatest(FIREBASE_REGISTER_WITH_PROVIDER, registerWithProviderAsync);
 }

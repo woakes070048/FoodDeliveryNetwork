@@ -3,7 +3,7 @@
 import {
   call,
   put,
-  takeEvery,
+  takeLatest,
 } from 'redux-saga/effects';
 import {
   FIREBASE_LOGIN_WITH_PROVIDER,
@@ -25,5 +25,5 @@ function* loginWithProviderAsync(action) {
 }
 
 export default function* watchLoginWithProvider() {
-  yield takeEvery(FIREBASE_LOGIN_WITH_PROVIDER, loginWithProviderAsync);
+  yield takeLatest(FIREBASE_LOGIN_WITH_PROVIDER, loginWithProviderAsync);
 }
