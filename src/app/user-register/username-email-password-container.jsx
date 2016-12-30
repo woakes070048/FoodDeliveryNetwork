@@ -8,11 +8,11 @@ import {
   connect,
 } from 'react-redux';
 import * as firebaseActions from '../firebase/actions';
-import UserRegisterEmailPasswordPresentational from './user-register-email-password-presentational';
+import UsernameEmailPasswordPresentational from './username-email-password-presentational';
 
-class UserRegisterEmailPasswordContainer extends Component {
+class UsernameEmailPasswordContainer extends Component {
   render() {
-    return (< UserRegisterEmailPasswordPresentational />);
+    return (< UsernameEmailPasswordPresentational />);
   }
 }
 
@@ -26,4 +26,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserRegisterEmailPasswordContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(UsernameEmailPasswordContainer);

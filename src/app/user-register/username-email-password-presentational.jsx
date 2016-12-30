@@ -8,7 +8,7 @@ import {
   InputGroup,
 } from 'react-bootstrap';
 
-const UserLoginEmailPasswordPresentational = () =>
+const UsernameEmailPasswordPresentational = () =>
   <Form horizontal>
     <FormGroup>
       <InputGroup>
@@ -27,6 +27,14 @@ const UserLoginEmailPasswordPresentational = () =>
       </InputGroup>
     </FormGroup>
     <FormGroup>
+      <InputGroup>
+        <InputGroup.Addon>
+          <Glyphicon glyph="lock" />
+        </InputGroup.Addon>
+        <FormControl type="password" placeholder="Re-enter password" />
+      </InputGroup>
+    </FormGroup>
+    <FormGroup>
       <Button
         type="submit"
         bsStyle="primary"
@@ -37,4 +45,4 @@ const UserLoginEmailPasswordPresentational = () =>
     </FormGroup>
   </Form>;
 
-export default UserLoginEmailPasswordPresentational;
+export default UsernameEmailPasswordPresentational;
