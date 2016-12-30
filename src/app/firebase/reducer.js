@@ -14,60 +14,70 @@ import {
 import helper from './helper';
 import initialState from '../store/initial-state';
 
+function createStateWithUserInfo(state, userInfo) {
+  return Object.assign({}, state, {
+    userInfo: {
+      userExists: true,
+      error: null,
+      userId: userInfo.userId,
+      email: userInfo.email,
+      displayName: userInfo.displayName,
+      photoUrl: userInfo.photoUrl,
+    },
+  });
+}
+
+function createStateWithoutUserInfo(state, error = null) {
+  return Object.assign({}, state, {
+    userInfo: {
+      userExists: false,
+      error,
+    },
+  });
+}
+
+function handleFetchUserSucceeded(state, action) {
+  if (action.userInfo.userFetched) {
+    return createStateWithUserInfo(state, action.userInfo);
+  }
+
+  return createStateWithoutUserInfo(state);
+}
+
+function handleLoginSucceeded(state, action) {
+  if (action.userInfo.userFetched) {
+    return createStateWithUserInfo(state, action.userInfo);
+  }
+
+  return createStateWithoutUserInfo(state);
+}
+
 export default function (state = initialState.firebaseContext, action) {
   switch (action.type) {
   case FIREBASE_FETCH_USER_SUCCEEDED:
-    if (action.response.userFetched) {
-      return Object.assign({}, state, {
-        userInfo: {
-          userExists: true,
-          error: null,
-          userId: action.response.userId,
-          email: action.response.email,
-          displayName: action.response.displayName,
-          photoUrl: action.response.photoUrl,
-        },
-      });
-    }
-
-    return Object.assign({}, state, {
-      userInfo: {
-        userExists: false,
-        error: null,
-      },
-    });
+    return handleFetchUserSucceeded(state, action);
 
   case FIREBASE_FETCH_USER_FAILED:
-    return Object.assign({}, state, {
-      userInfo: {
-        userExists: false,
-        error: action.response.error,
-      },
-    });
+    return createStateWithoutUserInfo(state, action.error);
 
   case FIREBASE_REGISTER_WITH_PROVIDER_SUCCEEDED:
   case FIREBASE_REGISTER_WITH_PROVIDER_FAILED:
     return action.response;
 
   case FIREBASE_LOGIN_WITH_PROVIDER_SUCCEEDED:
+    console.log(state);
+    const x = handleLoginSucceeded(state, action);
+    console.log(x);
+    return x;
+
   case FIREBASE_LOGIN_WITH_PROVIDER_FAILED:
-    return action.response;
+    return createStateWithoutUserInfo(state, action.error);
 
   case FIREBASE_LOGOUT_SUCCEEDED:
-    return Object.assign({}, state, {
-      userInfo: {
-        userExists: false,
-        error: null,
-      },
-    });
+    return createStateWithoutUserInfo(state);
 
   case FIREBASE_LOGOUT_FAILED:
-    return Object.assign({}, state, {
-      userInfo: {
-        userExists: false,
-        error: action.response.error,
-      },
-    });
+    return createStateWithoutUserInfo(state, action.error);
 
   default:
     return state;
