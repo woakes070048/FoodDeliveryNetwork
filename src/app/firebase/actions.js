@@ -15,6 +15,36 @@ import {
   FIREBASE_LOGOUT_FAILED,
 } from './action-types';
 
+function getUserInfo(info) {
+  return {
+    userFetched: true,
+    userId: info.uid,
+    email: info.email,
+    displayName: info.displayName,
+    photoUrl: info.photoURL,
+  };
+}
+
+function getEmptyUserInfo() {
+  return {
+    userFetched: false,
+  };
+}
+
+function createReplyWithUserInfo(type, userInfo) {
+  return {
+    type,
+    userInfo,
+  };
+}
+
+function createGenericError(type, error) {
+  return {
+    type,
+    error,
+  };
+}
+
 export function fetchUser() {
   return {
     type: FIREBASE_FETCH_USER,
@@ -25,31 +55,16 @@ export function fetchUserSucceeded(response) {
   const userFetched = response && response.uid;
 
   if (userFetched) {
-    return {
-      type: FIREBASE_FETCH_USER_SUCCEEDED,
-      userInfo: {
-        userFetched: true,
-        userId: response.uid,
-        email: response.email,
-        displayName: response.displayName,
-        photoUrl: response.photoURL,
-      },
-    };
+    return createReplyWithUserInfo(FIREBASE_FETCH_USER_SUCCEEDED, getUserInfo(
+      response));
   }
 
-  return {
-    type: FIREBASE_FETCH_USER_SUCCEEDED,
-    userInfo: {
-      userFetched: false,
-    },
-  };
+  return createReplyWithUserInfo(FIREBASE_FETCH_USER_SUCCEEDED,
+    getEmptyUserInfo());
 }
 
 export function fetchUserFailed(error) {
-  return {
-    type: FIREBASE_FETCH_USER_FAILED,
-    error,
-  };
+  return createGenericError(FIREBASE_FETCH_USER_FAILED, error);
 }
 
 export function registerWithProvider(providerName) {
@@ -65,31 +80,17 @@ export function registerWithProviderSucceeded(response) {
   if (userFetched) {
     const userInfo = response.user;
 
-    return {
-      type: FIREBASE_REGISTER_WITH_PROVIDER_SUCCEEDED,
-      userInfo: {
-        userFetched: true,
-        userId: userInfo.uid,
-        email: userInfo.email,
-        displayName: userInfo.displayName,
-        photoUrl: userInfo.photoURL,
-      },
-    };
+    return createReplyWithUserInfo(FIREBASE_REGISTER_WITH_PROVIDER_SUCCEEDED,
+      getUserInfo(
+        response.user));
   }
 
-  return {
-    type: FIREBASE_REGISTER_WITH_PROVIDER_SUCCEEDED,
-    userInfo: {
-      userFetched: false,
-    },
-  };
+  return createReplyWithUserInfo(FIREBASE_REGISTER_WITH_PROVIDER_SUCCEEDED,
+    getEmptyUserInfo());
 }
 
 export function registerWithProviderFailed(error) {
-  return {
-    type: FIREBASE_REGISTER_WITH_PROVIDER_FAILED,
-    error,
-  };
+  return createGenericError(FIREBASE_REGISTER_WITH_PROVIDER_FAILED, error);
 }
 
 export function loginWithProvider(providerName) {
@@ -105,31 +106,17 @@ export function loginWithProviderSucceeded(response) {
   if (userFetched) {
     const userInfo = response.user;
 
-    return {
-      type: FIREBASE_LOGIN_WITH_PROVIDER_SUCCEEDED,
-      userInfo: {
-        userFetched: true,
-        userId: userInfo.uid,
-        email: userInfo.email,
-        displayName: userInfo.displayName,
-        photoUrl: userInfo.photoURL,
-      },
-    };
+    return createReplyWithUserInfo(FIREBASE_LOGIN_WITH_PROVIDER_SUCCEEDED,
+      getUserInfo(
+        response.user));
   }
 
-  return {
-    type: FIREBASE_LOGIN_WITH_PROVIDER_SUCCEEDED,
-    userInfo: {
-      userFetched: false,
-    },
-  };
+  return createReplyWithUserInfo(FIREBASE_LOGIN_WITH_PROVIDER_SUCCEEDED,
+    getEmptyUserInfo());
 }
 
 export function loginWithProviderFailed(error) {
-  return {
-    type: FIREBASE_LOGIN_WITH_PROVIDER_FAILED,
-    error,
-  };
+  return createGenericError(FIREBASE_LOGIN_WITH_PROVIDER_FAILED, error);
 }
 
 export function logout() {
@@ -145,8 +132,5 @@ export function logoutSucceeded() {
 }
 
 export function logoutFailed(error) {
-  return {
-    type: FIREBASE_LOGOUT_FAILED,
-    error,
-  };
+  return createGenericError(FIREBASE_LOGOUT_FAILED, error);
 }
