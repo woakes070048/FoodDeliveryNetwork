@@ -1,11 +1,6 @@
 import React, {
   PropTypes,
 } from 'react';
-import {
-  Col,
-  Grid,
-  Row,
-} from 'react-bootstrap';
 import 'bootstrap-social/bootstrap-social.css';
 
 const SocialLoginPresentational = ({
@@ -14,88 +9,36 @@ const SocialLoginPresentational = ({
     onGoogleButtonClicked,
     onGithubButtonClicked,
   }) =>
-    <Grid>
-      <Row>
-        <Col
-          xsOffset={1}
-          xs={8}
-          smOffset={1}
-          sm={4}
-          mdOffset={0}
-          md={3}
-          lgOffset={0}
-          lg={3}
-        >
-          <a
-            className="btn btn-block btn-social btn-facebook social-login-button"
-            onClick={() => onFacebookButtonClicked()}
-          >
-            <span className="fa fa-facebook" />
+    <div>
+      <a
+        className="btn btn-block btn-social btn-facebook"
+        onClick={() => onFacebookButtonClicked()}
+      >
+        <span className="fa fa-facebook" />
             Sign in with Facebook
           </a>
-        </Col>
-      </Row>
-      <Row>
-        <Col
-          xsOffset={1}
-          xs={8}
-          smOffset={1}
-          sm={4}
-          mdOffset={0}
-          md={3}
-          lgOffset={0}
-          lg={3}
-        >
-          <a
-            className="btn btn-block btn-social btn-twitter social-login-button"
-            onClick={() => onTwitterButtonClicked()}
-          >
-            <span className="fa fa-twitter" />
+      <a
+        className="btn btn-block btn-social btn-twitter"
+        onClick={() => onTwitterButtonClicked()}
+      >
+        <span className="fa fa-twitter" />
             Sign in with Twitter
           </a>
-        </Col>
-      </Row>
-      <Row>
-        <Col
-          xsOffset={1}
-          xs={8}
-          smOffset={1}
-          sm={4}
-          mdOffset={0}
-          md={3}
-          lgOffset={0}
-          lg={3}
-        >
-          <a
-            className="btn btn-block btn-social btn-google social-login-button"
-            onClick={() => onGoogleButtonClicked()}
-          >
-            <span className="fa fa-google" />
+      <a
+        className="btn btn-block btn-social btn-google"
+        onClick={() => onGoogleButtonClicked()}
+      >
+        <span className="fa fa-google" />
             Sign in with Google
           </a>
-        </Col>
-      </Row>
-      <Row>
-        <Col
-          xsOffset={1}
-          xs={8}
-          smOffset={1}
-          sm={4}
-          mdOffset={0}
-          md={3}
-          lgOffset={0}
-          lg={3}
-        >
-          <a
-            className="btn btn-block btn-social btn-github social-login-button"
-            onClick={() => onGithubButtonClicked()}
-          >
-            <span className="fa fa-github" />
+      <a
+        className="btn btn-block btn-social btn-github"
+        onClick={() => onGithubButtonClicked()}
+      >
+        <span className="fa fa-github" />
             Sign in with Github
           </a>
-        </Col>
-      </Row>
-    </Grid>;
+    </div>;
 
 SocialLoginPresentational.propTypes = {
   onFacebookButtonClicked: PropTypes.func.isRequired,
