@@ -51,23 +51,23 @@ export default function (state = initialState.firebaseContext, action) {
 
   case FIREBASE_LOGIN_WITH_PROVIDER_SUCCEEDED:
   case FIREBASE_LOGIN_WITH_PROVIDER_FAILED:
-      return action.response;
+    return action.response;
 
   case FIREBASE_LOGOUT_SUCCEEDED:
-      return Object.assign({}, state, {
-          userInfo: {
-              userExists: false,
-              error: null,
-          },
-      });
+    return Object.assign({}, state, {
+      userInfo: {
+        userExists: false,
+        error: null,
+      },
+    });
 
   case FIREBASE_LOGOUT_FAILED:
-      return Object.assign({}, state, {
-          userInfo: {
-              userExists: false,
-              error: action.response.error,
-          },
-      });
+    return Object.assign({}, state, {
+      userInfo: {
+        userExists: false,
+        error: action.response.error,
+      },
+    });
 
   default:
     return state;

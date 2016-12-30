@@ -4,17 +4,18 @@ import React, {
 import {
   MenuItem,
   Nav,
-    NavDropdown,
-    Image,
+  NavDropdown,
+  Image,
 } from 'react-bootstrap';
 
 const UserMenuLoggedInPresentational = ({
     userDisplayName,
     userPhotoUrl,
+    onLogoutMenuItemClicked,
   }) =>
     <Nav pullRight>
       <NavDropdown title={userDisplayName}>
-        <MenuItem> Logout </MenuItem>
+        <MenuItem onClick={() => onLogoutMenuItemClicked()}> Logout </MenuItem>
       </NavDropdown>
       <Image
         src={userPhotoUrl}
@@ -26,6 +27,7 @@ const UserMenuLoggedInPresentational = ({
 UserMenuLoggedInPresentational.propTypes = {
   userDisplayName: PropTypes.string,
   userPhotoUrl: PropTypes.string,
+  onLogoutMenuItemClicked: PropTypes.func.isRequired,
 };
 
 export default UserMenuLoggedInPresentational;

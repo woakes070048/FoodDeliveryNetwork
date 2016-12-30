@@ -15,14 +15,14 @@ import {
 import helper from '../helper';
 
 function* logoutAsync() {
-    try {
-        yield call(helper.logout);
-        yield put(logoutSucceeded());
-    } catch (exception) {
-        yield put(logoutFailed(exception.message));
-    }
+  try {
+    yield call(helper.logout);
+    yield put(logoutSucceeded());
+  } catch (exception) {
+    yield put(logoutFailed(exception.message));
+  }
 }
 
 export default function* watchLogout() {
-    yield takeEvery(FIREBASE_LOGOUT, logoutAsync);
+  yield takeLatest(FIREBASE_LOGOUT, logoutAsync);
 }
