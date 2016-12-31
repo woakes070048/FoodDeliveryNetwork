@@ -25,13 +25,19 @@ const firebaseHelper = {
     }
   },
 
-  registerWithUsernameOrEmailAndPassword: (usernameOrEmail, password) =>
+  signUpWithUsernameOrEmailAndPassword: (usernameOrEmail, password) =>
     firebaseAuth.createUserWithEmailAndPassword(usernameOrEmail, password),
 
-  loginWithUsernameOrEmailAndPassword: (usernameOrEmail, password) =>
+  signInWithUsernameOrEmailAndPassword: (usernameOrEmail, password) =>
     firebaseAuth.signInWithEmailAndPassword(usernameOrEmail, password),
 
-  loginWithProvider: (providerName) => {
+  signUpWithProvider: (providerName) => {
+    const provider = firebaseHelper.getProvider(providerName);
+
+    return firebaseAuth.signInWithPopup(provider);
+  },
+
+  signInWithProvider: (providerName) => {
     const provider = firebaseHelper.getProvider(providerName);
 
     return firebaseAuth.signInWithPopup(provider);

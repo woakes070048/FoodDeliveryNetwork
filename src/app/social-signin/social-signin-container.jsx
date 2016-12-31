@@ -28,9 +28,9 @@ class SocialSignInContainer extends Component {
 
   signUpOrSignInWithProvider(provider) {
     if (this.props.signup)
-      this.props.firebaseActions.registerWithProvider(provider);
+      this.props.firebaseActions.signUpWithProvider(provider);
     else
-      this.props.firebaseActions.loginWithProvider(provider);
+      this.props.firebaseActions.signInWithProvider(provider);
   }
 
   render() {
@@ -47,8 +47,13 @@ class SocialSignInContainer extends Component {
 
 SocialSignInContainer.propTypes = {
   firebaseActions: PropTypes.object.isRequired,
-  login: PropTypes.bool,
-  register: PropTypes.bool,
+  signin: PropTypes.bool,
+  signup: PropTypes.bool,
+};
+
+SocialSignInContainer.defaultProps = {
+  signin: false,
+  signup: false,
 };
 
 function mapStateToProps(state) {
@@ -61,5 +66,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  SocialSignInContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SocialSignInContainer);

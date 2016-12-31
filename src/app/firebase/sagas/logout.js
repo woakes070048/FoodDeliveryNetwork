@@ -10,7 +10,7 @@ import {
 } from '../action-types';
 import {
     logoutSucceeded,
-    loginoutFailed,
+    logoutFailed,
 } from '../actions.js';
 import helper from '../helper';
 

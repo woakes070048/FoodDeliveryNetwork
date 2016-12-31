@@ -3,10 +3,10 @@
 import {
   FIREBASE_FETCH_USER_SUCCEEDED,
   FIREBASE_FETCH_USER_FAILED,
-  FIREBASE_REGISTER_WITH_PROVIDER_SUCCEEDED,
-  FIREBASE_REGISTER_WITH_PROVIDER_FAILED,
-  FIREBASE_LOGIN_WITH_PROVIDER_SUCCEEDED,
-  FIREBASE_LOGIN_WITH_PROVIDER_FAILED,
+  FIREBASE_SIGNUP_WITH_PROVIDER_SUCCEEDED,
+  FIREBASE_SIGNUP_WITH_PROVIDER_FAILED,
+  FIREBASE_SIGNIN_WITH_PROVIDER_SUCCEEDED,
+  FIREBASE_SIGNIN_WITH_PROVIDER_FAILED,
   FIREBASE_LOGOUT_SUCCEEDED,
   FIREBASE_LOGOUT_FAILED,
 } from './action-types';
@@ -44,7 +44,7 @@ function handleFetchUserSucceeded(state, action) {
   return createStateWithoutUserInfo(state);
 }
 
-function handleRegisterSucceeded(state, action) {
+function handleSignUpSucceeded(state, action) {
   if (action.userInfo.userFetched) {
     return createStateWithUserInfo(state, action.userInfo);
   }
@@ -52,7 +52,7 @@ function handleRegisterSucceeded(state, action) {
   return createStateWithoutUserInfo(state);
 }
 
-function handleLoginSucceeded(state, action) {
+function handleSignInSucceeded(state, action) {
   if (action.userInfo.userFetched) {
     return createStateWithUserInfo(state, action.userInfo);
   }
@@ -68,16 +68,16 @@ export default function (state = initialState.firebaseContext, action) {
   case FIREBASE_FETCH_USER_FAILED:
     return createStateWithoutUserInfo(state, action.error);
 
-  case FIREBASE_REGISTER_WITH_PROVIDER_SUCCEEDED:
-    return handleRegisterSucceeded(state, action);
+  case FIREBASE_SIGNUP_WITH_PROVIDER_SUCCEEDED:
+    return handleSignUpSucceeded(state, action);
 
-  case FIREBASE_REGISTER_WITH_PROVIDER_FAILED:
+  case FIREBASE_SIGNUP_WITH_PROVIDER_FAILED:
     return createStateWithoutUserInfo(state, action.error);
 
-  case FIREBASE_LOGIN_WITH_PROVIDER_SUCCEEDED:
-    return handleLoginSucceeded(state, action);
+  case FIREBASE_SIGNIN_WITH_PROVIDER_SUCCEEDED:
+    return handleSignInSucceeded(state, action);
 
-  case FIREBASE_LOGIN_WITH_PROVIDER_FAILED:
+  case FIREBASE_SIGNIN_WITH_PROVIDER_FAILED:
     return createStateWithoutUserInfo(state, action.error);
 
   case FIREBASE_LOGOUT_SUCCEEDED:

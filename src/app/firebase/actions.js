@@ -4,18 +4,18 @@ import {
   FIREBASE_FETCH_USER,
   FIREBASE_FETCH_USER_SUCCEEDED,
   FIREBASE_FETCH_USER_FAILED,
-  FIREBASE_REGISTER_WITH_USERNAME_OR_EMAIL_AND_PASSWORD,
-  FIREBASE_REGISTER_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_SUCCEEDED,
-  FIREBASE_REGISTER_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_FAILED,
-  FIREBASE_REGISTER_WITH_PROVIDER,
-  FIREBASE_REGISTER_WITH_PROVIDER_SUCCEEDED,
-  FIREBASE_REGISTER_WITH_PROVIDER_FAILED,
-  FIREBASE_LOGIN_WITH_USERNAME_OR_EMAIL_AND_PASSWORD,
-  FIREBASE_LOGIN_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_SUCCEEDED,
-  FIREBASE_LOGIN_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_FAILED,
-  FIREBASE_LOGIN_WITH_PROVIDER,
-  FIREBASE_LOGIN_WITH_PROVIDER_SUCCEEDED,
-  FIREBASE_LOGIN_WITH_PROVIDER_FAILED,
+  FIREBASE_SIGNUP_WITH_USERNAME_OR_EMAIL_AND_PASSWORD,
+  FIREBASE_SIGNUP_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_SUCCEEDED,
+  FIREBASE_SIGNUP_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_FAILED,
+  FIREBASE_SIGNUP_WITH_PROVIDER,
+  FIREBASE_SIGNUP_WITH_PROVIDER_SUCCEEDED,
+  FIREBASE_SIGNUP_WITH_PROVIDER_FAILED,
+  FIREBASE_SIGNIN_WITH_USERNAME_OR_EMAIL_AND_PASSWORD,
+  FIREBASE_SIGNIN_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_SUCCEEDED,
+  FIREBASE_SIGNIN_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_FAILED,
+  FIREBASE_SIGNIN_WITH_PROVIDER,
+  FIREBASE_SIGNIN_WITH_PROVIDER_SUCCEEDED,
+  FIREBASE_SIGNIN_WITH_PROVIDER_FAILED,
   FIREBASE_LOGOUT,
   FIREBASE_LOGOUT_SUCCEEDED,
   FIREBASE_LOGOUT_FAILED,
@@ -73,96 +73,96 @@ export function fetchUserFailed(error) {
   return createGenericError(FIREBASE_FETCH_USER_FAILED, error);
 }
 
-export function registerWithUsernameOrEmailAndPassword(usernameOrEmail,
+export function signUpWithUsernameOrEmailAndPassword(usernameOrEmail,
   password) {
   return {
-    type: FIREBASE_REGISTER_WITH_USERNAME_OR_EMAIL_AND_PASSWORD,
+    type: FIREBASE_SIGNUP_WITH_USERNAME_OR_EMAIL_AND_PASSWORD,
     usernameOrEmail,
     password,
   };
 }
 
-export function registerWithUsernameOrEmailAndPasswordSucceeded(response) {
+export function signUpWithUsernameOrEmailAndPasswordSucceeded(response) {
   return {
-    type: FIREBASE_REGISTER_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_SUCCEEDED,
+    type: FIREBASE_SIGNUP_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_SUCCEEDED,
   };
 }
 
-export function registerWithUsernameOrEmailAndPasswordFailed(error) {
+export function signUpWithUsernameOrEmailAndPasswordFailed(error) {
   return createGenericError(
-    FIREBASE_REGISTER_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_SUCCEEDED, error);
+    FIREBASE_SIGNUP_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_SUCCEEDED, error);
 }
 
-export function registerWithProvider(providerName) {
+export function signUpWithProvider(providerName) {
   return {
-    type: FIREBASE_REGISTER_WITH_PROVIDER,
+    type: FIREBASE_SIGNUP_WITH_PROVIDER,
     providerName,
   };
 }
 
-export function registerWithProviderSucceeded(response) {
+export function signUpWithProviderSucceeded(response) {
   const userFetched = response && response.user && response.user.uid;
 
   if (userFetched) {
     const userInfo = response.user;
 
-    return createReplyWithUserInfo(FIREBASE_REGISTER_WITH_PROVIDER_SUCCEEDED,
+    return createReplyWithUserInfo(FIREBASE_SIGNUP_WITH_PROVIDER_SUCCEEDED,
       getUserInfo(
         response.user));
   }
 
-  return createReplyWithUserInfo(FIREBASE_REGISTER_WITH_PROVIDER_SUCCEEDED,
+  return createReplyWithUserInfo(FIREBASE_SIGNUP_WITH_PROVIDER_SUCCEEDED,
     getEmptyUserInfo());
 }
 
-export function registerWithProviderFailed(error) {
-  return createGenericError(FIREBASE_REGISTER_WITH_PROVIDER_FAILED, error);
+export function signUpWithProviderFailed(error) {
+  return createGenericError(FIREBASE_SIGNUP_WITH_PROVIDER_FAILED, error);
 }
 
-export function loginWithUsernameOrEmailAndPassword(usernameOrEmail,
+export function signInWithUsernameOrEmailAndPassword(usernameOrEmail,
   password) {
   return {
-    type: FIREBASE_LOGIN_WITH_USERNAME_OR_EMAIL_AND_PASSWORD,
+    type: FIREBASE_SIGNIN_WITH_USERNAME_OR_EMAIL_AND_PASSWORD,
     usernameOrEmail,
     password,
   };
 }
 
-export function loginWithUsernameOrEmailAndPasswordSucceeded(response) {
+export function signInWithUsernameOrEmailAndPasswordSucceeded(response) {
   return {
-    type: FIREBASE_LOGIN_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_SUCCEEDED,
+    type: FIREBASE_SIGNIN_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_SUCCEEDED,
   };
 }
 
-export function loginWithUsernameOrEmailAndPasswordFailed(error) {
+export function signInWithUsernameOrEmailAndPasswordFailed(error) {
   return createGenericError(
-    FIREBASE_LOGIN_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_SUCCEEDED, error);
+    FIREBASE_SIGNIN_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_SUCCEEDED, error);
 }
 
-export function loginWithProvider(providerName) {
+export function signInWithProvider(providerName) {
   return {
-    type: FIREBASE_LOGIN_WITH_PROVIDER,
+    type: FIREBASE_SIGNIN_WITH_PROVIDER,
     providerName,
   };
 }
 
-export function loginWithProviderSucceeded(response) {
+export function signInWithProviderSucceeded(response) {
   const userFetched = response && response.user && response.user.uid;
 
   if (userFetched) {
     const userInfo = response.user;
 
-    return createReplyWithUserInfo(FIREBASE_LOGIN_WITH_PROVIDER_SUCCEEDED,
+    return createReplyWithUserInfo(FIREBASE_SIGNIN_WITH_PROVIDER_SUCCEEDED,
       getUserInfo(
         response.user));
   }
 
-  return createReplyWithUserInfo(FIREBASE_LOGIN_WITH_PROVIDER_SUCCEEDED,
+  return createReplyWithUserInfo(FIREBASE_SIGNIN_WITH_PROVIDER_SUCCEEDED,
     getEmptyUserInfo());
 }
 
-export function loginWithProviderFailed(error) {
-  return createGenericError(FIREBASE_LOGIN_WITH_PROVIDER_FAILED, error);
+export function signInWithProviderFailed(error) {
+  return createGenericError(FIREBASE_SIGNIN_WITH_PROVIDER_FAILED, error);
 }
 
 export function logout() {
