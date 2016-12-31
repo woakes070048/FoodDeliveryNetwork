@@ -7,9 +7,9 @@ import {
 import {
   browserHistory,
 } from 'react-router';
-import UserLoginPresentational from './user-login-presentational';
+import UserSignInPresentational from './user-signin-presentational';
 
-class UserLoginContainer extends Component {
+class UserSignInContainer extends Component {
   componentWillUpdate(nextProps) {
     if (nextProps.userExists) {
       browserHistory.push('/');
@@ -18,7 +18,7 @@ class UserLoginContainer extends Component {
 
   render() {
     return (
-      <UserLoginPresentational />
+      <UserSignInPresentational />
     );
   }
 }
@@ -37,4 +37,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(UserLoginContainer);
+export default connect(mapStateToProps)(UserSignInContainer);

@@ -32,7 +32,7 @@ const UsernameEmailPasswordPresentational = () =>
         bsStyle="primary"
         block
       >
-       Login
+       Sign in
      </Button>
     </FormGroup>
   </Form>;

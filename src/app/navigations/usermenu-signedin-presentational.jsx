@@ -8,14 +8,14 @@ import {
   Image,
 } from 'react-bootstrap';
 
-const UserMenuLoggedInPresentational = ({
+const UserMenuSignedInPresentational = ({
     userDisplayName,
     userPhotoUrl,
-    onLogoutMenuItemClicked,
+    onSignOutMenuItemClicked,
   }) =>
     <Nav pullRight>
       <NavDropdown title={userDisplayName}>
-        <MenuItem onClick={() => onLogoutMenuItemClicked()}> Logout </MenuItem>
+        <MenuItem onClick={() => onSignOutMenuItemClicked()}> Sign out </MenuItem>
       </NavDropdown>
       <Image
         src={userPhotoUrl}
@@ -24,10 +24,10 @@ const UserMenuLoggedInPresentational = ({
       />
     </Nav>;
 
-UserMenuLoggedInPresentational.propTypes = {
+UserMenuSignedInPresentational.propTypes = {
   userDisplayName: PropTypes.string,
   userPhotoUrl: PropTypes.string,
-  onLogoutMenuItemClicked: PropTypes.func.isRequired,
+  onSignOutMenuItemClicked: PropTypes.func.isRequired,
 };
 
-export default UserMenuLoggedInPresentational;
+export default UserMenuSignedInPresentational;

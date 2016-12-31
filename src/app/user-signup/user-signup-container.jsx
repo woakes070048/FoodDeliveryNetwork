@@ -7,9 +7,9 @@ import {
 import {
   browserHistory,
 } from 'react-router';
-import UserRegisterPresentational from './user-register-presentational';
+import UserSignUpPresentational from './user-signup-presentational';
 
-class UserRegisterContainer extends Component {
+class UserSignUpContainer extends Component {
   componentWillUpdate(nextProps) {
     if (nextProps.userExists) {
       browserHistory.push('/');
@@ -18,7 +18,7 @@ class UserRegisterContainer extends Component {
 
   render() {
     return (
-      <UserRegisterPresentational />
+      <UserSignUpPresentational />
     );
   }
 }
@@ -37,4 +37,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(UserRegisterContainer);
+export default connect(mapStateToProps)(UserSignUpContainer);

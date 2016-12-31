@@ -40,7 +40,7 @@ const UsernameEmailPasswordPresentational = () =>
         bsStyle="primary"
         block
       >
-       Login
+       Sign up
      </Button>
     </FormGroup>
   </Form>;

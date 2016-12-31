@@ -3,9 +3,9 @@ import {
   Col,
 } from 'react-bootstrap';
 import UsernameEmailPasswordContainer from './username-email-password-container';
-import SocialLoginContainer from '../social-login/social-login-container';
+import SocialSignInContainer from '../social-signin/social-signin-container';
 
-const UserRegisterPresentational = () =>
+const UserSignUpPresentational = () =>
   <Col
     smOffset={2}
     sm={8}
@@ -15,10 +15,10 @@ const UserRegisterPresentational = () =>
     lg={4}
   >
     <UsernameEmailPasswordContainer />
-    <h3 className="user-register-divider">
+    <h3 className="user-signup-divider">
       <span>or</span>
     </h3>
-    <SocialLoginContainer register />
+    <SocialSignInContainer signup />
   </Col>;
 
-export default UserRegisterPresentational;
+export default UserSignUpPresentational;

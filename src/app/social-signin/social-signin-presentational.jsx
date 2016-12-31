@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import 'bootstrap-social/bootstrap-social.css';
 
-const SocialLoginPresentational = ({
+const SocialSignInPresentational = ({
     onFacebookButtonClicked,
     onTwitterButtonClicked,
     onGoogleButtonClicked,
@@ -40,11 +40,11 @@ const SocialLoginPresentational = ({
           </a>
     </div>;
 
-SocialLoginPresentational.propTypes = {
+SocialSignInPresentational.propTypes = {
   onFacebookButtonClicked: PropTypes.func.isRequired,
   onTwitterButtonClicked: PropTypes.func.isRequired,
   onGoogleButtonClicked: PropTypes.func.isRequired,
   onGithubButtonClicked: PropTypes.func.isRequired,
 };
 
-export default SocialLoginPresentational;
+export default SocialSignInPresentational;

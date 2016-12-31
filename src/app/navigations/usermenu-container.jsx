@@ -8,34 +8,34 @@ import {
 import {
   bindActionCreators,
 } from 'redux';
-import UserMenuLoggedInPresentational from './usermenu-loggedin-presentational';
-import UserMenuLoggedOutPresentational from './usermenu-loggedout-presentational';
+import UserMenuSignedInPresentational from './usermenu-signedin-presentational';
+import UserMenuSignedOutPresentational from './usermenu-signedout-presentational';
 import * as firebaseActions from '../firebase/actions';
 
 class UserMenuContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.onLogoutMenuItemClicked = this.onLogoutMenuItemClicked.bind(this);
+    this.onSignOutMenuItemClicked = this.onSignOutMenuItemClicked.bind(this);
   }
 
-  onLogoutMenuItemClicked() {
+  onSignOutMenuItemClicked() {
     this.props.firebaseActions.logout();
   }
 
   render() {
     if (this.props.userExists) {
       return (
-        <UserMenuLoggedInPresentational
+        <UserMenuSignedInPresentational
           userDisplayName={this.props.userDisplayName}
           userPhotoUrl={this.props.userPhotoUrl}
-          onLogoutMenuItemClicked={() => this.onLogoutMenuItemClicked()}
+          onSignOutMenuItemClicked={() => this.onSignOutMenuItemClicked()}
         />
       );
     }
 
     return (
-      <UserMenuLoggedOutPresentational />
+      <UserMenuSignedOutPresentational />
     );
   }
 }
