@@ -27,21 +27,22 @@ class SocialSignInContainer extends Component {
   }
 
   signUpOrSignInWithProvider(provider) {
-    if (this.props.signup)
+    if (this.props.signup) {
       this.props.firebaseActions.signUpWithProvider(provider);
-    else
+    } else {
       this.props.firebaseActions.signInWithProvider(provider);
+    }
   }
 
   render() {
-      return (
-        <SocialSignInPresentational
-          onFacebookButtonClicked={() => this.signUpOrSignInWithProvider('facebook')}
-          onTwitterButtonClicked={() => this.signUpOrSignInWithProvider('twitter')}
-          onGoogleButtonClicked={() => this.signUpOrSignInWithProvider('google')}
-          onGithubButtonClicked={() => this.signUpOrSignInWithProvider('github')}
-        />
-      );
+    return (
+      <SocialSignInPresentational
+        onFacebookButtonClicked={() => this.signUpOrSignInWithProvider('facebook')}
+        onTwitterButtonClicked={() => this.signUpOrSignInWithProvider('twitter')}
+        onGoogleButtonClicked={() => this.signUpOrSignInWithProvider('google')}
+        onGithubButtonClicked={() => this.signUpOrSignInWithProvider('github')}
+      />
+    );
   }
 }
 

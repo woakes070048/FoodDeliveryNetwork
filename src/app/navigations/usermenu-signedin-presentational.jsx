@@ -14,14 +14,16 @@ const UserMenuSignedInPresentational = ({
     onSignOutMenuItemClicked,
   }) =>
     <Nav pullRight>
-      <NavDropdown title={userDisplayName}>
+      <NavDropdown
+        title={
+          <Image
+            src={userPhotoUrl}
+            className="navbar-user-photo"
+            rounded
+          />}
+      >
         <MenuItem onClick={() => onSignOutMenuItemClicked()}> Sign out </MenuItem>
       </NavDropdown>
-      <Image
-        src={userPhotoUrl}
-        className="navbar-user-photo"
-        circle
-      />
     </Nav>;
 
 UserMenuSignedInPresentational.propTypes = {
