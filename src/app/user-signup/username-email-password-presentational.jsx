@@ -29,6 +29,7 @@ class UsernameEmailPasswordPresentational extends Component {
       reEnteredPasswordValidationMessage: '',
       reEnteredPassword: '',
       reEnteredPasswordChanged: false,
+      signupClicked: false,
     };
 
     this.onUsernameOrEmailAddressChanged = this.onUsernameOrEmailAddressChanged.bind(this);
@@ -69,7 +70,17 @@ class UsernameEmailPasswordPresentational extends Component {
   }
 
   onSignUpClicked() {
-    this.props.onSignUpClicked(this.state.usernameOrEmailAddress, this.state.password);
+    this.setState(Object.assign(this.state, {
+      signupClicked: true,
+    }));
+
+    this.validateState();
+
+    if (!this.state.usernameOrEmailAddressValidationResult &&
+      !this.state.passwordValidationResult &&
+      !this.state.reEnteredPasswordValidationResult) {
+      this.props.onSignUpClicked(this.state.usernameOrEmailAddress, this.state.password);
+    }
   }
 
   validateUsernameOrEmailAddress() {
@@ -95,12 +106,13 @@ class UsernameEmailPasswordPresentational extends Component {
     } = this.props.validateState(this.state.usernameOrEmailAddress, this.state.password, this.state.reEnteredPassword);
 
     this.setState(Object.assign(this.state, {
-      usernameOrEmailAddressValidationResult: this.state.usernameOrEmailAddressChanged ?
+      usernameOrEmailAddressValidationResult: this.state.signupClicked || this.state.usernameOrEmailAddressChanged ?
         usernameOrEmailAddressValidationResult : null,
       usernameOrEmailAddressValidationMessage,
-      passwordValidationResult: this.state.passwordChanged ? passwordValidationResult : null,
+      passwordValidationResult: this.state.signupClicked || this.state.passwordChanged ?
+        passwordValidationResult : null,
       passwordValidationMessage,
-      reEnteredPasswordValidationResult: this.state.reEnteredPasswordChanged ?
+      reEnteredPasswordValidationResult: this.state.signupClicked || this.state.reEnteredPasswordChanged ?
         reEnteredPasswordValidationResult : null,
       reEnteredPasswordValidationMessage,
     }));
@@ -166,7 +178,6 @@ class UsernameEmailPasswordPresentational extends Component {
         </FormGroup>
         <FormGroup>
           <Button
-            type="submit"
             bsStyle="primary"
             block
             onClick={this.onSignUpClicked}
