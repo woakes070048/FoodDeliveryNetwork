@@ -1,5 +1,6 @@
 import React, {
-  Component,
+    Component,
+    PropTypes,
 } from 'react';
 import {
   bindActionCreators,
@@ -18,7 +19,9 @@ class UsernameEmailPasswordContainer extends Component {
     this.onSignUpClicked = this.onSignUpClicked.bind(this);
   }
 
-  onSignUpClicked(usernameOrEmailAddress, password) {}
+  onSignUpClicked(usernameOrEmailAddress, password) {
+    this.props.firebaseActions.signUpWithUsernameOrEmailAndPassword(usernameOrEmailAddress, password);
+  }
 
   validateState(usernameOrEmailAddress, password, reEnteredPassword) {
     return {
@@ -43,13 +46,17 @@ class UsernameEmailPasswordContainer extends Component {
   }
 }
 
+UsernameEmailPasswordContainer.propTypes = {
+  firebaseActions: PropTypes.object.isRequired,
+};
+
 function mapStateToProps(state) {
   return state;
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(firebaseActions, dispatch),
+    firebaseActions: bindActionCreators(firebaseActions, dispatch),
   };
 }
 

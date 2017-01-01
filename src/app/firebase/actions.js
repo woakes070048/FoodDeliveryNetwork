@@ -73,8 +73,7 @@ export function fetchUserFailed(error) {
   return createGenericError(FIREBASE_FETCH_USER_FAILED, error);
 }
 
-export function signUpWithUsernameOrEmailAndPassword(usernameOrEmail,
-  password) {
+export function signUpWithUsernameOrEmailAndPassword(usernameOrEmail, password) {
   return {
     type: FIREBASE_SIGNUP_WITH_USERNAME_OR_EMAIL_AND_PASSWORD,
     usernameOrEmail,
