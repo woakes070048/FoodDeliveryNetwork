@@ -41,7 +41,7 @@ const UserMenuSignedInPresentational = ({
     userPhotoUrl,
     onSignOutMenuItemClicked,
   }) =>
-    <Nav pullRight>
+    <Nav collapseOnSelect pullRight>
       <NavDropdown
         title={
           <Image
