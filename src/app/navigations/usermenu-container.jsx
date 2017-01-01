@@ -28,6 +28,7 @@ class UserMenuContainer extends Component {
       return (
         <UserMenuSignedInPresentational
           userDisplayName={this.props.userDisplayName}
+          userEmailAddress={this.props.userEmailAddress}
           userPhotoUrl={this.props.userPhotoUrl}
           onSignOutMenuItemClicked={() => this.onSignOutMenuItemClicked()}
         />
@@ -44,6 +45,7 @@ UserMenuContainer.propTypes = {
   firebaseActions: PropTypes.object.isRequired,
   userExists: PropTypes.bool.isRequired,
   userDisplayName: PropTypes.string,
+  userEmailAddress: PropTypes.string,
   userPhotoUrl: PropTypes.string,
 };
 
@@ -54,6 +56,7 @@ function mapStateToProps(state) {
     return {
       userExists: true,
       userDisplayName: userInfo.displayName,
+      userEmailAddress: userInfo.email,
       userPhotoUrl: userInfo.photoUrl,
     };
   }
