@@ -11,7 +11,7 @@ import {
 import {
   fetchUserSucceeded,
   fetchUserFailed,
-} from '../actions.js';
+} from '../actions';
 import helper from '../helper';
 
 function* fetchUserAsync() {

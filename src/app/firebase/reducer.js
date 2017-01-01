@@ -11,7 +11,6 @@ import {
   FIREBASE_LOGOUT_FAILED,
 } from './action-types';
 
-import helper from './helper';
 import initialState from '../store/initial-state';
 
 function createStateWithUserInfo(state, userInfo) {

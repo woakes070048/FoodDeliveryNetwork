@@ -11,7 +11,7 @@ import {
 import {
   signInWithUsernameOrEmailAndPasswordSucceeded,
   signInWithUsernameOrEmailAndPasswordFailed,
-} from '../actions.js';
+} from '../actions';
 import helper from '../helper';
 
 function* signInWithUsernameOrEmailAndPasswordAsync(action) {

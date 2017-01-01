@@ -90,7 +90,7 @@ export function signUpWithUsernameOrEmailAndPasswordSucceeded(response) {
 
 export function signUpWithUsernameOrEmailAndPasswordFailed(error) {
   return createGenericError(
-    FIREBASE_SIGNUP_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_SUCCEEDED, error);
+    FIREBASE_SIGNUP_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_FAILED, error);
 }
 
 export function signUpWithProvider(providerName) {
@@ -136,7 +136,7 @@ export function signInWithUsernameOrEmailAndPasswordSucceeded(response) {
 
 export function signInWithUsernameOrEmailAndPasswordFailed(error) {
   return createGenericError(
-    FIREBASE_SIGNIN_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_SUCCEEDED, error);
+    FIREBASE_SIGNIN_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_FAILED, error);
 }
 
 export function signInWithProvider(providerName) {

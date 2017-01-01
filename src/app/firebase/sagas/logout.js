@@ -11,7 +11,7 @@ import {
 import {
     logoutSucceeded,
     logoutFailed,
-} from '../actions.js';
+} from '../actions';
 import helper from '../helper';
 
 function* logoutAsync() {

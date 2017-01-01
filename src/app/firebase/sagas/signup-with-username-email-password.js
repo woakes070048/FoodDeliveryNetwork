@@ -11,7 +11,7 @@ import {
 import {
   signUpWithUsernameOrEmailAndPasswordSucceeded,
   signUpWithUsernameOrEmailAndPasswordFailed,
-} from '../actions.js';
+} from '../actions';
 import helper from '../helper';
 
 function* signUpWithUsernameOrEmailAndPasswordAsync(action) {

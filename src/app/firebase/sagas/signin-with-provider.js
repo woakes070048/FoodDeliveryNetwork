@@ -11,7 +11,7 @@ import {
 import {
   signInWithProviderSucceeded,
   signInWithProviderFailed,
-} from '../actions.js';
+} from '../actions';
 import helper from '../helper';
 
 function* signInWithProviderAsync(action) {
