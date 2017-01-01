@@ -29,7 +29,7 @@ class UsernameEmailPasswordPresentational extends Component {
       reEnteredPasswordValidationMessage: '',
       reEnteredPassword: '',
       reEnteredPasswordChanged: false,
-      signupClicked: false,
+      signUpClicked: false,
     };
 
     this.onUsernameOrEmailAddressChanged = this.onUsernameOrEmailAddressChanged.bind(this);
@@ -71,7 +71,7 @@ class UsernameEmailPasswordPresentational extends Component {
 
   onSignUpClicked() {
     this.setState(Object.assign(this.state, {
-      signupClicked: true,
+      signUpClicked: true,
     }));
 
     this.validateState();
@@ -106,13 +106,13 @@ class UsernameEmailPasswordPresentational extends Component {
     } = this.props.validateState(this.state.usernameOrEmailAddress, this.state.password, this.state.reEnteredPassword);
 
     this.setState(Object.assign(this.state, {
-      usernameOrEmailAddressValidationResult: this.state.signupClicked || this.state.usernameOrEmailAddressChanged ?
+      usernameOrEmailAddressValidationResult: this.state.signUpClicked || this.state.usernameOrEmailAddressChanged ?
         usernameOrEmailAddressValidationResult : null,
       usernameOrEmailAddressValidationMessage,
-      passwordValidationResult: this.state.signupClicked || this.state.passwordChanged ?
+      passwordValidationResult: this.state.signUpClicked || this.state.passwordChanged ?
         passwordValidationResult : null,
       passwordValidationMessage,
-      reEnteredPasswordValidationResult: this.state.signupClicked || this.state.reEnteredPasswordChanged ?
+      reEnteredPasswordValidationResult: this.state.signUpClicked || this.state.reEnteredPasswordChanged ?
         reEnteredPasswordValidationResult : null,
       reEnteredPasswordValidationMessage,
     }));
@@ -182,8 +182,8 @@ class UsernameEmailPasswordPresentational extends Component {
             block
             onClick={this.onSignUpClicked}
           >
-       Sign up
-     </Button>
+            Sign up
+          </Button>
         </FormGroup>
       </Form>
     );
