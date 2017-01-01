@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Col,
 } from 'react-bootstrap';
-import UsernameEmailPasswordContainer from './username-email-password-container';
+import EmailPasswordContainer from './email-password-container';
 import SocialSignInContainer from '../social-signin/social-signin-container';
 
 const UserSignInPresentational = () =>
@@ -14,7 +14,7 @@ const UserSignInPresentational = () =>
     lgOffset={4}
     lg={4}
   >
-    <UsernameEmailPasswordContainer />
+    <EmailPasswordContainer />
     <h3 className="user-signin-divider">
       <span>or</span>
     </h3>

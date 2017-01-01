@@ -26,13 +26,9 @@ class UserSignUpContainer extends Component {
 function mapStateToProps(state) {
   const userInfo = state.firebase.userInfo;
 
-  if (userInfo.userExists) {
-    return {
-      userExists: true,
-    };
-  }
-
-  return {
+  return userInfo.userExists ? {
+    userExists: true,
+  } : {
     userExists: false,
   };
 }

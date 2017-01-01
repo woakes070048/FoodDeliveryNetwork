@@ -12,15 +12,15 @@ import {
   InputGroup,
 } from 'react-bootstrap';
 
-class UsernameEmailPasswordPresentational extends Component {
+class EmailPasswordPresentational extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      usernameOrEmailAddressValidationResult: null,
-      usernameOrEmailAddressValidationMessage: '',
-      usernameOrEmailAddress: this.props.initialUsernameOrEmailAddress,
-      usernameOrEmailAddressChanged: false,
+      emailAddressValidationResult: null,
+      emailAddressValidationMessage: '',
+      emailAddress: this.props.initialEmailAddress,
+      emailAddressChanged: false,
       passwordValidationResult: null,
       passwordValidationMessage: '',
       password: '',
@@ -28,18 +28,18 @@ class UsernameEmailPasswordPresentational extends Component {
       signInClicked: false,
     };
 
-    this.onUsernameOrEmailAddressChanged = this.onUsernameOrEmailAddressChanged.bind(this);
+    this.onEmailAddressChanged = this.onEmailAddressChanged.bind(this);
     this.onPasswordChanged = this.onPasswordChanged.bind(this);
     this.validateState = this.validateState.bind(this);
-    this.validateUsernameOrEmailAddress = this.validateUsernameOrEmailAddress.bind(this);
+    this.validateEmailAddress = this.validateEmailAddress.bind(this);
     this.validatePassword = this.validatePassword.bind(this);
     this.onSignInClicked = this.onSignInClicked.bind(this);
   }
 
-  onUsernameOrEmailAddressChanged(e) {
+  onEmailAddressChanged(e) {
     this.setState(Object.assign(this.state, {
-      usernameOrEmailAddress: e.target.value,
-      usernameOrEmailAddressChanged: true,
+      emailAddress: e.target.value,
+      emailAddressChanged: true,
     }));
 
     this.validateState();
@@ -61,13 +61,13 @@ class UsernameEmailPasswordPresentational extends Component {
 
     this.validateState();
 
-    if (!this.state.usernameOrEmailAddressValidationResult && !this.state.passwordValidationResult) {
-      this.props.onSignInClicked(this.state.usernameOrEmailAddress, this.state.password);
+    if (!this.state.emailAddressValidationResult && !this.state.passwordValidationResult) {
+      this.props.onSignInClicked(this.state.emailAddress, this.state.password);
     }
   }
 
-  validateUsernameOrEmailAddress() {
-    return this.state.usernameOrEmailAddressValidationResult;
+  validateEmailAddress() {
+    return this.state.emailAddressValidationResult;
   }
 
   validatePassword() {
@@ -76,16 +76,16 @@ class UsernameEmailPasswordPresentational extends Component {
 
   validateState() {
     const {
-      usernameOrEmailAddressValidationResult,
-      usernameOrEmailAddressValidationMessage,
+      emailAddressValidationResult,
+      emailAddressValidationMessage,
       passwordValidationResult,
       passwordValidationMessage,
-    } = this.props.validateState(this.state.usernameOrEmailAddress, this.state.password);
+    } = this.props.validateState(this.state.emailAddress, this.state.password);
 
     this.setState(Object.assign(this.state, {
-      usernameOrEmailAddressValidationResult: this.state.signInClicked || this.state.usernameOrEmailAddressChanged ?
-        usernameOrEmailAddressValidationResult : null,
-      usernameOrEmailAddressValidationMessage,
+      emailAddressValidationResult: this.state.signInClicked || this.state.emailAddressChanged ?
+        emailAddressValidationResult : null,
+      emailAddressValidationMessage,
       passwordValidationResult: this.state.signInClicked || this.state.passwordChanged ?
         passwordValidationResult : null,
       passwordValidationMessage,
@@ -93,8 +93,8 @@ class UsernameEmailPasswordPresentational extends Component {
   }
 
   render() {
-    const usernameOrEmailAddressHelpBlock = this.state.usernameOrEmailAddressValidationResult ?
-      <HelpBlock>{this.state.usernameOrEmailAddressValidationMessage}</HelpBlock> :
+    const emailAddressHelpBlock = this.state.emailAddressValidationResult ?
+      <HelpBlock>{this.state.emailAddressValidationMessage}</HelpBlock> :
       <div />;
     const passwordHelpBlock = this.state.passwordValidationResult ?
       <HelpBlock>{this.state.passwordValidationMessage}</HelpBlock> :
@@ -102,20 +102,20 @@ class UsernameEmailPasswordPresentational extends Component {
 
     return (
       <Form horizontal>
-        <FormGroup validationState={this.validateUsernameOrEmailAddress()}>
+        <FormGroup validationState={this.validateEmailAddress()}>
           <InputGroup>
             <InputGroup.Addon>
               <Glyphicon glyph="user" />
             </InputGroup.Addon>
             <FormControl
-              type="text"
-              placeholder="Username or email"
-              value={this.state.usernameOrEmailAddress}
-              onChange={this.onUsernameOrEmailAddressChanged}
+              type="email"
+              placeholder="Email address"
+              value={this.state.emailAddress}
+              onChange={this.onEmailAddressChanged}
             />
           </InputGroup>
           <FormControl.Feedback />
-          {usernameOrEmailAddressHelpBlock}
+          {emailAddressHelpBlock}
         </FormGroup>
         <FormGroup validationState={this.validatePassword()}>
           <InputGroup>
@@ -146,14 +146,14 @@ class UsernameEmailPasswordPresentational extends Component {
   }
 }
 
-UsernameEmailPasswordPresentational.propTypes = {
-  initialUsernameOrEmailAddress: PropTypes.string,
+EmailPasswordPresentational.propTypes = {
+  initialEmailAddress: PropTypes.string,
   onSignInClicked: PropTypes.func.isRequired,
   validateState: PropTypes.func.isRequired,
 };
 
-UsernameEmailPasswordPresentational.defaultProps = {
-  initialUsernameOrEmailAddress: '',
+EmailPasswordPresentational.defaultProps = {
+  initialEmailAddress: '',
 };
 
-export default UsernameEmailPasswordPresentational;
+export default EmailPasswordPresentational;

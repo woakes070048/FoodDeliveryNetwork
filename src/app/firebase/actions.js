@@ -4,15 +4,15 @@ import {
   FIREBASE_FETCH_USER,
   FIREBASE_FETCH_USER_SUCCEEDED,
   FIREBASE_FETCH_USER_FAILED,
-  FIREBASE_SIGNUP_WITH_USERNAME_OR_EMAIL_AND_PASSWORD,
-  FIREBASE_SIGNUP_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_SUCCEEDED,
-  FIREBASE_SIGNUP_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_FAILED,
+  FIREBASE_SIGNUP_WITH_EMAIL_AND_PASSWORD,
+  FIREBASE_SIGNUP_WITH_EMAIL_AND_PASSWORD_SUCCEEDED,
+  FIREBASE_SIGNUP_WITH_EMAIL_AND_PASSWORD_FAILED,
   FIREBASE_SIGNUP_WITH_PROVIDER,
   FIREBASE_SIGNUP_WITH_PROVIDER_SUCCEEDED,
   FIREBASE_SIGNUP_WITH_PROVIDER_FAILED,
-  FIREBASE_SIGNIN_WITH_USERNAME_OR_EMAIL_AND_PASSWORD,
-  FIREBASE_SIGNIN_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_SUCCEEDED,
-  FIREBASE_SIGNIN_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_FAILED,
+  FIREBASE_SIGNIN_WITH_EMAIL_AND_PASSWORD,
+  FIREBASE_SIGNIN_WITH_EMAIL_AND_PASSWORD_SUCCEEDED,
+  FIREBASE_SIGNIN_WITH_EMAIL_AND_PASSWORD_FAILED,
   FIREBASE_SIGNIN_WITH_PROVIDER,
   FIREBASE_SIGNIN_WITH_PROVIDER_SUCCEEDED,
   FIREBASE_SIGNIN_WITH_PROVIDER_FAILED,
@@ -73,23 +73,23 @@ export function fetchUserFailed(error) {
   return createGenericError(FIREBASE_FETCH_USER_FAILED, error);
 }
 
-export function signUpWithUsernameOrEmailAndPassword(usernameOrEmail, password) {
+export function signUpWithEmailAndPassword(emailAddress, password) {
   return {
-    type: FIREBASE_SIGNUP_WITH_USERNAME_OR_EMAIL_AND_PASSWORD,
-    usernameOrEmail,
+    type: FIREBASE_SIGNUP_WITH_EMAIL_AND_PASSWORD,
+    emailAddress,
     password,
   };
 }
 
-export function signUpWithUsernameOrEmailAndPasswordSucceeded(response) {
+export function signUpWithEmailAndPasswordSucceeded(response) {
   return {
-    type: FIREBASE_SIGNUP_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_SUCCEEDED,
+    type: FIREBASE_SIGNUP_WITH_EMAIL_AND_PASSWORD_SUCCEEDED,
   };
 }
 
-export function signUpWithUsernameOrEmailAndPasswordFailed(error) {
+export function signUpWithEmailAndPasswordFailed(error) {
   return createGenericError(
-    FIREBASE_SIGNUP_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_FAILED, error);
+    FIREBASE_SIGNUP_WITH_EMAIL_AND_PASSWORD_FAILED, error);
 }
 
 export function signUpWithProvider(providerName) {
@@ -118,24 +118,24 @@ export function signUpWithProviderFailed(error) {
   return createGenericError(FIREBASE_SIGNUP_WITH_PROVIDER_FAILED, error);
 }
 
-export function signInWithUsernameOrEmailAndPassword(usernameOrEmail,
+export function signInWithEmailAndPassword(emailAddress,
   password) {
   return {
-    type: FIREBASE_SIGNIN_WITH_USERNAME_OR_EMAIL_AND_PASSWORD,
-    usernameOrEmail,
+    type: FIREBASE_SIGNIN_WITH_EMAIL_AND_PASSWORD,
+    emailAddress,
     password,
   };
 }
 
-export function signInWithUsernameOrEmailAndPasswordSucceeded(response) {
+export function signInWithEmailAndPasswordSucceeded(response) {
   return {
-    type: FIREBASE_SIGNIN_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_SUCCEEDED,
+    type: FIREBASE_SIGNIN_WITH_EMAIL_AND_PASSWORD_SUCCEEDED,
   };
 }
 
-export function signInWithUsernameOrEmailAndPasswordFailed(error) {
+export function signInWithEmailAndPasswordFailed(error) {
   return createGenericError(
-    FIREBASE_SIGNIN_WITH_USERNAME_OR_EMAIL_AND_PASSWORD_FAILED, error);
+    FIREBASE_SIGNIN_WITH_EMAIL_AND_PASSWORD_FAILED, error);
 }
 
 export function signInWithProvider(providerName) {
