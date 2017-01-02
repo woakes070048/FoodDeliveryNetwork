@@ -3,8 +3,12 @@
 import {
   FIREBASE_FETCH_USER_SUCCEEDED,
   FIREBASE_FETCH_USER_FAILED,
+  FIREBASE_SIGNUP_WITH_EMAIL_AND_PASSWORD_SUCCEEDED,
+  FIREBASE_SIGNUP_WITH_EMAIL_AND_PASSWORD_FAILED,
   FIREBASE_SIGNUP_WITH_PROVIDER_SUCCEEDED,
   FIREBASE_SIGNUP_WITH_PROVIDER_FAILED,
+  FIREBASE_SIGNIN_WITH_EMAIL_AND_PASSWORD_SUCCEEDED,
+  FIREBASE_SIGNIN_WITH_EMAIL_AND_PASSWORD_FAILED,
   FIREBASE_SIGNIN_WITH_PROVIDER_SUCCEEDED,
   FIREBASE_SIGNIN_WITH_PROVIDER_FAILED,
   FIREBASE_SIGNOUT_SUCCEEDED,
@@ -72,6 +76,19 @@ function handleFetchUserFailed(state, action) {
   return createStateWithoutUserInfo(stateWithOperationInfo);
 }
 
+function handleSignUpWithEmailAndPasswordSucceeded(state, action) {
+  const stateWithOperationInfo = addSucceededOperationToState(state, action.operationId);
+
+  return action.userInfo.userFetched ? createStateWithUserInfo(stateWithOperationInfo, action.userInfo) :
+        createStateWithoutUserInfo(stateWithOperationInfo);
+}
+
+function handleSignUpWithEmailAndPasswordFailed(state, action) {
+  const stateWithOperationInfo = addFailedOperationToState(state, action.operationId, action.error);
+
+  return createStateWithoutUserInfo(stateWithOperationInfo);
+}
+
 function handleSignUpWithProviderSucceeded(state, action) {
   const stateWithOperationInfo = addSucceededOperationToState(state, action.operationId);
 
@@ -117,6 +134,12 @@ export default function (state = initialState.firebaseContext, action) {
 
   case FIREBASE_FETCH_USER_FAILED:
     return handleFetchUserFailed(state, action);
+
+  case FIREBASE_SIGNUP_WITH_EMAIL_AND_PASSWORD_SUCCEEDED:
+    return handleSignUpWithEmailAndPasswordSucceeded(state, action);
+
+  case FIREBASE_SIGNUP_WITH_EMAIL_AND_PASSWORD_FAILED:
+    return handleSignUpWithEmailAndPasswordFailed(state, action);
 
   case FIREBASE_SIGNUP_WITH_PROVIDER_SUCCEEDED:
     return handleSignUpWithProviderSucceeded(state, action);
