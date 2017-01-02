@@ -7,8 +7,8 @@ import {
   FIREBASE_SIGNUP_WITH_PROVIDER_FAILED,
   FIREBASE_SIGNIN_WITH_PROVIDER_SUCCEEDED,
   FIREBASE_SIGNIN_WITH_PROVIDER_FAILED,
-  FIREBASE_LOGOUT_SUCCEEDED,
-  FIREBASE_LOGOUT_FAILED,
+  FIREBASE_SIGNOUT_SUCCEEDED,
+  FIREBASE_SIGNOUT_FAILED,
 } from './action-types';
 
 import initialState from '../store/initial-state';
@@ -17,6 +17,19 @@ function addSucceededOperationToState(state, operationId) {
   const newOperation = {
     operationId,
     failed: false,
+  };
+  const operations = [...state.operations, Object.assign({}, newOperation)];
+
+  return Object.assign({}, state, {
+    operations,
+  });
+}
+
+function addFailedOperationToState(state, operationId, error) {
+  const newOperation = {
+    operationId,
+    failed: true,
+    error,
   };
   const operations = [...state.operations, Object.assign({}, newOperation)];
 
@@ -38,11 +51,10 @@ function createStateWithUserInfo(state, userInfo) {
   });
 }
 
-function createStateWithoutUserInfo(state, error = null) {
+function createStateWithoutUserInfo(state) {
   return Object.assign({}, state, {
     userInfo: {
       userExists: false,
-      error,
     },
   });
 }
@@ -54,11 +66,23 @@ function handleFetchUserSucceeded(state, action) {
     createStateWithoutUserInfo(stateWithOperationInfo);
 }
 
+function handleFetchUserFailed(state, action) {
+  const stateWithOperationInfo = addFailedOperationToState(state, action.operationId, action.error);
+
+  return createStateWithoutUserInfo(stateWithOperationInfo);
+}
+
 function handleSignUpWithProviderSucceeded(state, action) {
   const stateWithOperationInfo = addSucceededOperationToState(state, action.operationId);
 
   return action.userInfo.userFetched ? createStateWithUserInfo(stateWithOperationInfo, action.userInfo) :
     createStateWithoutUserInfo(stateWithOperationInfo);
+}
+
+function handleSignUpWithProviderFailed(state, action) {
+  const stateWithOperationInfo = addFailedOperationToState(state, action.operationId, action.error);
+
+  return createStateWithoutUserInfo(stateWithOperationInfo);
 }
 
 function handleSignInWithProviderSucceeded(state, action) {
@@ -68,31 +92,49 @@ function handleSignInWithProviderSucceeded(state, action) {
     createStateWithoutUserInfo(stateWithOperationInfo);
 }
 
+function handleSignInWithProviderFailed(state, action) {
+  const stateWithOperationInfo = addFailedOperationToState(state, action.operationId, action.error);
+
+  return createStateWithoutUserInfo(stateWithOperationInfo);
+}
+
+function handleSignOutSucceeded(state, action) {
+  const stateWithOperationInfo = addSucceededOperationToState(state, action.operationId);
+
+  return createStateWithoutUserInfo(stateWithOperationInfo);
+}
+
+function handleSignOutFailed(state, action) {
+  const stateWithOperationInfo = addFailedOperationToState(state, action.operationId, action.error);
+
+  return createStateWithoutUserInfo(stateWithOperationInfo);
+}
+
 export default function (state = initialState.firebaseContext, action) {
   switch (action.type) {
   case FIREBASE_FETCH_USER_SUCCEEDED:
     return handleFetchUserSucceeded(state, action);
 
   case FIREBASE_FETCH_USER_FAILED:
-    return createStateWithoutUserInfo(state, action.error);
+    return handleFetchUserFailed(state, action);
 
   case FIREBASE_SIGNUP_WITH_PROVIDER_SUCCEEDED:
     return handleSignUpWithProviderSucceeded(state, action);
 
   case FIREBASE_SIGNUP_WITH_PROVIDER_FAILED:
-    return createStateWithoutUserInfo(state, action.error);
+    return handleSignUpWithProviderFailed(state, action);
 
   case FIREBASE_SIGNIN_WITH_PROVIDER_SUCCEEDED:
     return handleSignInWithProviderSucceeded(state, action);
 
   case FIREBASE_SIGNIN_WITH_PROVIDER_FAILED:
-    return createStateWithoutUserInfo(state, action.error);
+    return handleSignInWithProviderFailed(state, action);
 
-  case FIREBASE_LOGOUT_SUCCEEDED:
-    return createStateWithoutUserInfo(state);
+  case FIREBASE_SIGNOUT_SUCCEEDED:
+    return handleSignOutSucceeded(state, action);
 
-  case FIREBASE_LOGOUT_FAILED:
-    return createStateWithoutUserInfo(state, action.error);
+  case FIREBASE_SIGNOUT_FAILED:
+    return handleSignOutFailed(state, action);
 
   default:
     return state;

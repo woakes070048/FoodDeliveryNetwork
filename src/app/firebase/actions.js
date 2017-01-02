@@ -17,9 +17,9 @@ import {
   FIREBASE_SIGNIN_WITH_PROVIDER,
   FIREBASE_SIGNIN_WITH_PROVIDER_SUCCEEDED,
   FIREBASE_SIGNIN_WITH_PROVIDER_FAILED,
-  FIREBASE_LOGOUT,
-  FIREBASE_LOGOUT_SUCCEEDED,
-  FIREBASE_LOGOUT_FAILED,
+  FIREBASE_SIGNOUT,
+  FIREBASE_SIGNOUT_SUCCEEDED,
+  FIREBASE_SIGNOUT_FAILED,
 } from './action-types';
 
 function getUserInfo(info) {
@@ -152,20 +152,20 @@ export function signInWithProviderFailed(operationId, error) {
   return createGenericError(FIREBASE_SIGNIN_WITH_PROVIDER_FAILED, operationId, error);
 }
 
-export function logout() {
+export function signOut() {
   return {
-    type: FIREBASE_LOGOUT,
+    type: FIREBASE_SIGNOUT,
     operationId: shortid.generate(),
   };
 }
 
-export function logoutSucceeded(operationId) {
+export function signOutSucceeded(operationId) {
   return {
-    type: FIREBASE_LOGOUT_SUCCEEDED,
+    type: FIREBASE_SIGNOUT_SUCCEEDED,
     operationId,
   };
 }
 
-export function logoutFailed(operationId, error) {
-  return createGenericError(FIREBASE_LOGOUT_FAILED, operationId, error);
+export function signOutFailed(operationId, error) {
+  return createGenericError(FIREBASE_SIGNOUT_FAILED, operationId, error);
 }

@@ -20,7 +20,7 @@ class UserMenuContainer extends Component {
   }
 
   onSignOutMenuItemClicked() {
-    this.props.firebaseActions.logout();
+    this.props.firebaseActions.signOut();
   }
 
   render() {

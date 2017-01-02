@@ -180,9 +180,6 @@ EmailPasswordPresentational.propTypes = {
   initialEmailAddress: PropTypes.string,
   onSignUpClicked: PropTypes.func.isRequired,
   validateState: PropTypes.func.isRequired,
-  isLastOperationInProgress: PropTypes.func.isRequired,
-  didLastOperationFail: PropTypes.func.isRequired,
-  lastOperationFailedMessage: PropTypes.func.isRequired,
 };
 
 EmailPasswordPresentational.defaultProps = {
