@@ -65,6 +65,10 @@ module.exports = (options) => {
         dry: false
       }),
     ],
+    node: {
+      dns: 'mock',
+      net: 'mock'
+    },
   };
 
   if (options.isProduction) {

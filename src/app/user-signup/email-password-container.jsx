@@ -1,3 +1,4 @@
+import isEmail from 'isemail';
 import React, {
   Component,
   PropTypes,
@@ -22,6 +23,7 @@ class EmailPasswordContainer extends Component {
     this.validateState = this.validateState.bind(this);
     this.onSignUpClicked = this.onSignUpClicked.bind(this);
     this.checkIfEmailAddressProvided = this.checkIfEmailAddressProvided.bind(this);
+    this.checkIfEmailAddressFromattedCorrectly = this.checkIfEmailAddressFromattedCorrectly.bind(this);
     this.checkIfPasswordProvided = this.checkIfPasswordProvided.bind(this);
     this.checkIfPasswordAndReEnteredPasswordMatch = this.checkIfPasswordAndReEnteredPasswordMatch.bind(this);
 
@@ -64,6 +66,16 @@ class EmailPasswordContainer extends Component {
     });
   }
 
+  checkIfEmailAddressFromattedCorrectly(emailAddress, validationMessages) {
+    if (validationMessages.emailAddressValidationMessage) {
+      return validationMessages;
+    }
+
+    return isEmail.validate(emailAddress) ? validationMessages : Object.assign(validationMessages, {
+      emailAddressValidationMessage: 'Email address is badly formatted.',
+    });
+  }
+
   checkIfPasswordProvided(password, validationMessages) {
     if (validationMessages.passwordValidationMessage) {
       return validationMessages;
@@ -92,6 +104,7 @@ class EmailPasswordContainer extends Component {
     };
 
     validationMessages = this.checkIfEmailAddressProvided(emailAddress, validationMessages);
+    validationMessages = this.checkIfEmailAddressFromattedCorrectly(emailAddress, validationMessages);
     validationMessages = this.checkIfPasswordProvided(password, validationMessages);
     validationMessages = this.checkIfPasswordAndReEnteredPasswordMatch(password, reEnteredPassword,
       validationMessages);
