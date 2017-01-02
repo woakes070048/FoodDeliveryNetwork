@@ -9,6 +9,7 @@ import {
   connect,
 } from 'react-redux';
 import AppPresentational from './app-presentational';
+import * as notificationActions from './notification/actions';
 import * as firebaseActions from './firebase/actions';
 
 class AppContainer extends Component {
@@ -32,6 +33,10 @@ class AppContainer extends Component {
     }
   }
 
+  componentDidUpdate() {
+    this.props.notifications.forEach(notification => this.props.notificationActions.added(notification.notificationId));
+  }
+
   render() {
     return (
       <AppPresentational
@@ -43,21 +48,15 @@ class AppContainer extends Component {
 }
 
 AppContainer.propTypes = {
-  children: PropTypes.object.isRequired,
   firebaseActions: PropTypes.object.isRequired,
+  notificationActions: PropTypes.object.isRequired,
+  children: PropTypes.object.isRequired,
   notifications: PropTypes.array,
 };
 
 function mapStateToProps(state) {
-  const notifications = state.firebase.operations.filter(operation => operation.failed)
-    .map(operation => ({
-      message: operation.errorMessage,
-      level: operation.errorLevel,
-      position: 'br',
-    }));
-
   return {
-    notifications,
+    notifications: state.notification,
     operations: state.firebase.operations,
   };
 }
@@ -65,6 +64,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     firebaseActions: bindActionCreators(firebaseActions, dispatch),
+    notificationActions: bindActionCreators(notificationActions, dispatch),
   };
 }
 

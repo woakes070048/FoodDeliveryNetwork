@@ -34,7 +34,6 @@ function addFailedOperationToState(state, operationId, error) {
     operationId,
     failed: true,
     errorMessage: error,
-    errorLevel: 'error',
   };
   const operations = [...state.operations, Object.assign({}, newOperation)];
 
