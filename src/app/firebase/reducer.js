@@ -15,7 +15,6 @@ import {
   FIREBASE_SIGNOUT_SUCCEEDED,
   FIREBASE_SIGNOUT_FAILED,
 } from './action-types';
-
 import initialState from '../store/initial-state';
 
 function addSucceededOperationToState(state, operationId) {

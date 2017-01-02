@@ -1,0 +1,4 @@
+/* jshint esversion: 6 */
+
+export const NOTIFICATION_ADDED = 'NOTIFICATION_ADDED';
+export const NOTIFICATION_ADD_ERROR = 'NOTIFICATION_ADD_ERROR';

@@ -8,4 +8,6 @@ export default {
       error: null,
     },
   },
+
+  notificationContext: [],
 };
