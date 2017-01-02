@@ -17,10 +17,17 @@ class EmailPasswordContainer extends Component {
 
     this.validateState = this.validateState.bind(this);
     this.onSignInClicked = this.onSignInClicked.bind(this);
+
+    this.state = {
+      lastOperationId: '',
+    };
   }
 
   onSignInClicked(emailAddress, password) {
-    this.props.firebaseActions.signInWithEmailAndPassword(emailAddress, password);
+    this.setState({
+      lastOperationId: this.props.firebaseActions.signInWithEmailAndPassword(emailAddress, password)
+        .operationId,
+    });
   }
 
   validateState(emailAddress, password) {
@@ -49,7 +56,9 @@ EmailPasswordContainer.propTypes = {
 };
 
 function mapStateToProps(state) {
-  return state;
+  return {
+    operations: state.firebase.operations,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
