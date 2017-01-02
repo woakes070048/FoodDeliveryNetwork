@@ -24,14 +24,29 @@ class SocialSignInContainer extends Component {
     if (!this.props.signin && !this.props.signup) {
       throw new Error('Neither signin nor signup property is provided!!!');
     }
+
+    this.state = {
+      lastOperationId: '',
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.state.lastOperationId) {
+      const lastOperation =
+            nextProps.operations.find(operation => operation.operationId === this.state.lastOperationId);
+
+      if (lastOperation) {
+        this.props.firebaseActions.acknowledgeOperaation(lastOperation.operationId);
+      }
+    }
   }
 
   signUpOrSignInWithProvider(provider) {
-    if (this.props.signup) {
-      this.props.firebaseActions.signUpWithProvider(provider);
-    } else {
-      this.props.firebaseActions.signInWithProvider(provider);
-    }
+    this.setState({
+      lastOperationId: this.props.signup ? this.props.firebaseActions.signUpWithProvider(provider)
+        .opertionId : this.props.firebaseActions.signInWithProvider(provider)
+        .operationId,
+    });
   }
 
   render() {
@@ -58,7 +73,9 @@ SocialSignInContainer.defaultProps = {
 };
 
 function mapStateToProps(state) {
-  return state;
+  return {
+    operations: state.firebase.operations,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
