@@ -1,5 +1,6 @@
 /* jshint esversion: 6 */
 
+import shortid from 'shortid';
 import {
   FIREBASE_FETCH_USER,
   FIREBASE_FETCH_USER_SUCCEEDED,
@@ -76,8 +77,10 @@ export function fetchUserFailed(error) {
 export function signUpWithEmailAndPassword(emailAddress, password) {
   return {
     type: FIREBASE_SIGNUP_WITH_EMAIL_AND_PASSWORD,
+    operationId: shortid.generate(),
     emailAddress,
     password,
+
   };
 }
 

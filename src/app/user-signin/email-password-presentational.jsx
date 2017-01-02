@@ -31,8 +31,6 @@ class EmailPasswordPresentational extends Component {
     this.onEmailAddressChanged = this.onEmailAddressChanged.bind(this);
     this.onPasswordChanged = this.onPasswordChanged.bind(this);
     this.validateState = this.validateState.bind(this);
-    this.validateEmailAddress = this.validateEmailAddress.bind(this);
-    this.validatePassword = this.validatePassword.bind(this);
     this.onSignInClicked = this.onSignInClicked.bind(this);
   }
 
@@ -66,14 +64,6 @@ class EmailPasswordPresentational extends Component {
     }
   }
 
-  validateEmailAddress() {
-    return this.state.emailAddressValidationResult;
-  }
-
-  validatePassword() {
-    return this.state.passwordValidationResult;
-  }
-
   validateState() {
     const {
       emailAddressValidationResult,
@@ -102,7 +92,7 @@ class EmailPasswordPresentational extends Component {
 
     return (
       <Form horizontal>
-        <FormGroup validationState={this.validateEmailAddress()}>
+        <FormGroup validationState={this.state.emailAddressValidationResult}>
           <InputGroup>
             <InputGroup.Addon>
               <Glyphicon glyph="user" />
@@ -117,7 +107,7 @@ class EmailPasswordPresentational extends Component {
           <FormControl.Feedback />
           {emailAddressHelpBlock}
         </FormGroup>
-        <FormGroup validationState={this.validatePassword()}>
+        <FormGroup validationState={this.state.passwordValidationResult}>
           <InputGroup>
             <InputGroup.Addon>
               <Glyphicon glyph="lock" />

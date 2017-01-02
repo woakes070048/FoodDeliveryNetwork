@@ -1,6 +1,6 @@
 import React, {
-    Component,
-    PropTypes,
+  Component,
+  PropTypes,
 } from 'react';
 import {
   bindActionCreators,
@@ -17,10 +17,17 @@ class EmailPasswordContainer extends Component {
 
     this.validateState = this.validateState.bind(this);
     this.onSignUpClicked = this.onSignUpClicked.bind(this);
+
+    this.state = {
+      lastOperationId: '',
+    };
   }
 
   onSignUpClicked(emailAddress, password) {
-    this.props.firebaseActions.signUpWithEmailAndPassword(emailAddress, password);
+    this.setState({
+      operationId: this.props.firebaseActions.signUpWithEmailAndPassword(emailAddress, password)
+        .operationId,
+    });
   }
 
   validateState(emailAddress, password, reEnteredPassword) {

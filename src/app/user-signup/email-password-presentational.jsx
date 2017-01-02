@@ -1,3 +1,4 @@
+
 import React, {
   Component,
   PropTypes,
@@ -36,9 +37,6 @@ class EmailPasswordPresentational extends Component {
     this.onPasswordChanged = this.onPasswordChanged.bind(this);
     this.onReEnteredPasswordChanged = this.onReEnteredPasswordChanged.bind(this);
     this.validateState = this.validateState.bind(this);
-    this.validateEmailAddress = this.validateEmailAddress.bind(this);
-    this.validatePassword = this.validatePassword.bind(this);
-    this.validateReEnteredPassword = this.validateReEnteredPassword.bind(this);
     this.onSignUpClicked = this.onSignUpClicked.bind(this);
   }
 
@@ -83,18 +81,6 @@ class EmailPasswordPresentational extends Component {
     }
   }
 
-  validateEmailAddress() {
-    return this.state.emailAddressValidationResult;
-  }
-
-  validatePassword() {
-    return this.state.passwordValidationResult;
-  }
-
-  validateReEnteredPassword() {
-    return this.state.reEnteredPasswordValidationResult;
-  }
-
   validateState() {
     const {
       emailAddressValidationResult,
@@ -131,7 +117,7 @@ class EmailPasswordPresentational extends Component {
 
     return (
       <Form horizontal>
-        <FormGroup validationState={this.validateEmailAddress()}>
+        <FormGroup validationState={this.state.emailAddressValidationResult}>
           <InputGroup>
             <InputGroup.Addon>
               <Glyphicon glyph="user" />
@@ -146,7 +132,7 @@ class EmailPasswordPresentational extends Component {
           <FormControl.Feedback />
           {emailAddressHelpBlock}
         </FormGroup>
-        <FormGroup validationState={this.validatePassword()}>
+        <FormGroup validationState={this.state.passwordValidationResult}>
           <InputGroup>
             <InputGroup.Addon>
               <Glyphicon glyph="lock" />
@@ -161,7 +147,7 @@ class EmailPasswordPresentational extends Component {
           <FormControl.Feedback />
           {passwordHelpBlock}
         </FormGroup>
-        <FormGroup validationState={this.validateReEnteredPassword()}>
+        <FormGroup validationState={this.state.reEnteredPasswordValidationResult}>
           <InputGroup>
             <InputGroup.Addon>
               <Glyphicon glyph="lock" />
@@ -194,6 +180,9 @@ EmailPasswordPresentational.propTypes = {
   initialEmailAddress: PropTypes.string,
   onSignUpClicked: PropTypes.func.isRequired,
   validateState: PropTypes.func.isRequired,
+  isLastOperationInProgress: PropTypes.func.isRequired,
+  didLastOperationFail: PropTypes.func.isRequired,
+  lastOperationFailedMessage: PropTypes.func.isRequired,
 };
 
 EmailPasswordPresentational.defaultProps = {
