@@ -20,7 +20,10 @@ class AppContainer extends Component {
 
   render() {
     return (
-      <AppPresentational children={this.props.children} />
+      <AppPresentational
+        children={this.props.children}
+        notifications={this.props.notifications}
+      />
     );
   }
 }
@@ -28,10 +31,20 @@ class AppContainer extends Component {
 AppContainer.propTypes = {
   children: PropTypes.object.isRequired,
   firebaseActions: PropTypes.object.isRequired,
+  notifications: PropTypes.array,
 };
 
 function mapStateToProps(state) {
-  return state;
+  const notifications = state.firebase.operations.filter(operation => operation.failed)
+    .map(operation => ({
+      message: operation.errorMessage,
+      level: operation.errorLevel,
+      position: 'br',
+    }));
+
+  return {
+    notifications,
+  };
 }
 
 function mapDispatchToProps(dispatch) {

@@ -33,7 +33,8 @@ function addFailedOperationToState(state, operationId, error) {
   const newOperation = {
     operationId,
     failed: true,
-    error,
+    errorMessage: error,
+    errorLevel: 'error',
   };
   const operations = [...state.operations, Object.assign({}, newOperation)];
 
@@ -80,7 +81,7 @@ function handleSignUpWithEmailAndPasswordSucceeded(state, action) {
   const stateWithOperationInfo = addSucceededOperationToState(state, action.operationId);
 
   return action.userInfo.userFetched ? createStateWithUserInfo(stateWithOperationInfo, action.userInfo) :
-        createStateWithoutUserInfo(stateWithOperationInfo);
+    createStateWithoutUserInfo(stateWithOperationInfo);
 }
 
 function handleSignUpWithEmailAndPasswordFailed(state, action) {

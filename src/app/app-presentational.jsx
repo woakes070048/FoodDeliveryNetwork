@@ -6,13 +6,13 @@ import React, {
 import NavbarContainer from './navigations/navbar-container';
 
 class AppPresentational extends Component {
-  componentDidMount() {
+  componentDidUpdate() {
     if (this.props.notifications) {
       this.props.notifications.forEach((notification) => {
         this.notificationSystem.addNotification({
           message: notification.message,
           level: notification.level,
-          position: 'br',
+          position: notification.position,
         });
       });
     }
