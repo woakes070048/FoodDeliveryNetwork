@@ -68,7 +68,7 @@ UserMenuContainer.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const operations = state.firebase.operation;
+  const operations = state.firebase.operations;
   const userInfo = state.firebase.userInfo;
 
   return userInfo.userExists ? {
