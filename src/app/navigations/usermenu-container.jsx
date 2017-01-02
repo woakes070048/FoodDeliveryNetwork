@@ -71,17 +71,13 @@ function mapStateToProps(state) {
   const operations = state.firebase.operation;
   const userInfo = state.firebase.userInfo;
 
-  if (userInfo.userExists) {
-    return {
-      userExists: true,
-      userDisplayName: userInfo.displayName,
-      userEmailAddress: userInfo.email,
-      userPhotoUrl: userInfo.photoUrl,
-      operations,
-    };
-  }
-
-  return {
+  return userInfo.userExists ? {
+    userExists: true,
+    userDisplayName: userInfo.displayName,
+    userEmailAddress: userInfo.email,
+    userPhotoUrl: userInfo.photoUrl,
+    operations,
+  } : {
     userExists: false,
     operations,
   };
