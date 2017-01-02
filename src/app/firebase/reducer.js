@@ -67,7 +67,7 @@ function createStateWithoutUserInfo(state) {
 
 function handleAcknowledgeOperation(state, action) {
   return Object.assign({}, state, {
-    operations: [...state.operaations.filter(operation => operation.operationId !== action.operationId)],
+    operations: [...state.operations.filter(operation => operation.operationId !== action.operationId)],
   });
 }
 

@@ -15,7 +15,21 @@ class AppContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.props.firebaseActions.fetchUser();
+    this.state = {
+      lastOperationId: this.props.firebaseActions.fetchUser()
+        .operationId,
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.state.lastOperationId) {
+      const lastOperation =
+        nextProps.operations.find(operation => operation.operationId === this.state.lastOperationId);
+
+      if (lastOperation) {
+        this.props.firebaseActions.acknowledgeOperaation(lastOperation.operationId);
+      }
+    }
   }
 
   render() {
@@ -44,6 +58,7 @@ function mapStateToProps(state) {
 
   return {
     notifications,
+    operations: state.firebase.operations,
   };
 }
 

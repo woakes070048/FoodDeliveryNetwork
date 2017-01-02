@@ -23,9 +23,20 @@ class EmailPasswordContainer extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.state.lastOperationId) {
+      const lastOperation =
+            nextProps.operations.find(operation => operation.operationId === this.state.lastOperationId);
+
+      if (lastOperation) {
+        this.props.firebaseActions.acknowledgeOperaation(lastOperation.operationId);
+      }
+    }
+  }
+
   onSignUpClicked(emailAddress, password) {
     this.setState({
-      operationId: this.props.firebaseActions.signUpWithEmailAndPassword(emailAddress, password)
+      lastOperationId: this.props.firebaseActions.signUpWithEmailAndPassword(emailAddress, password)
         .operationId,
     });
   }
@@ -58,7 +69,9 @@ EmailPasswordContainer.propTypes = {
 };
 
 function mapStateToProps(state) {
-  return state;
+  return {
+    operations: state.firebase.operations,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
