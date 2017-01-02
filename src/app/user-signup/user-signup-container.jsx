@@ -10,7 +10,7 @@ import {
 import UserSignUpPresentational from './user-signup-presentational';
 
 class UserSignUpContainer extends Component {
-  componentWillUpdate(nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.userExists) {
       browserHistory.push('/');
     }
