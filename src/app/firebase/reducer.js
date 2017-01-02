@@ -13,6 +13,18 @@ import {
 
 import initialState from '../store/initial-state';
 
+function addSucceededOperationToState(state, operationId) {
+  const newOperation = {
+    operationId,
+    failed: false,
+  };
+  const operations = [...state.operations, Object.assign({}, newOperation)];
+
+  return Object.assign({}, state, {
+    operations,
+  });
+}
+
 function createStateWithUserInfo(state, userInfo) {
   return Object.assign({}, state, {
     userInfo: {
@@ -36,27 +48,24 @@ function createStateWithoutUserInfo(state, error = null) {
 }
 
 function handleFetchUserSucceeded(state, action) {
-  if (action.userInfo.userFetched) {
-    return createStateWithUserInfo(state, action.userInfo);
-  }
+  const stateWithOperationInfo = addSucceededOperationToState(state, action.operationId);
 
-  return createStateWithoutUserInfo(state);
+  return action.userInfo.userFetched ? createStateWithUserInfo(stateWithOperationInfo, action.userInfo) :
+    createStateWithoutUserInfo(stateWithOperationInfo);
 }
 
-function handleSignUpSucceeded(state, action) {
-  if (action.userInfo.userFetched) {
-    return createStateWithUserInfo(state, action.userInfo);
-  }
+function handleSignUpWithProviderSucceeded(state, action) {
+  const stateWithOperationInfo = addSucceededOperationToState(state, action.operationId);
 
-  return createStateWithoutUserInfo(state);
+  return action.userInfo.userFetched ? createStateWithUserInfo(stateWithOperationInfo, action.userInfo) :
+    createStateWithoutUserInfo(stateWithOperationInfo);
 }
 
-function handleSignInSucceeded(state, action) {
-  if (action.userInfo.userFetched) {
-    return createStateWithUserInfo(state, action.userInfo);
-  }
+function handleSignInWithProviderSucceeded(state, action) {
+  const stateWithOperationInfo = addSucceededOperationToState(state, action.operationId);
 
-  return createStateWithoutUserInfo(state);
+  return action.userInfo.userFetched ? createStateWithUserInfo(stateWithOperationInfo, action.userInfo) :
+    createStateWithoutUserInfo(stateWithOperationInfo);
 }
 
 export default function (state = initialState.firebaseContext, action) {
@@ -68,13 +77,13 @@ export default function (state = initialState.firebaseContext, action) {
     return createStateWithoutUserInfo(state, action.error);
 
   case FIREBASE_SIGNUP_WITH_PROVIDER_SUCCEEDED:
-    return handleSignUpSucceeded(state, action);
+    return handleSignUpWithProviderSucceeded(state, action);
 
   case FIREBASE_SIGNUP_WITH_PROVIDER_FAILED:
     return createStateWithoutUserInfo(state, action.error);
 
   case FIREBASE_SIGNIN_WITH_PROVIDER_SUCCEEDED:
-    return handleSignInSucceeded(state, action);
+    return handleSignInWithProviderSucceeded(state, action);
 
   case FIREBASE_SIGNIN_WITH_PROVIDER_FAILED:
     return createStateWithoutUserInfo(state, action.error);

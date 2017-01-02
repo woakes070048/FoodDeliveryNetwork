@@ -1,25 +1,25 @@
 /* jshint esversion: 6 */
 
 import {
-    call,
-    put,
-    takeLatest,
+  call,
+  put,
+  takeLatest,
 } from 'redux-saga/effects';
 import {
-    FIREBASE_LOGOUT,
+  FIREBASE_LOGOUT,
 } from '../action-types';
 import {
-    logoutSucceeded,
-    logoutFailed,
+  logoutSucceeded,
+  logoutFailed,
 } from '../actions';
 import helper from '../helper';
 
-function* logoutAsync() {
+function* logoutAsync(action) {
   try {
     yield call(helper.logout);
-    yield put(logoutSucceeded());
+    yield put(logoutSucceeded(action.operationId));
   } catch (exception) {
-    yield put(logoutFailed(exception.message));
+    yield put(logoutFailed(action.operationId, exception.message));
   }
 }
 

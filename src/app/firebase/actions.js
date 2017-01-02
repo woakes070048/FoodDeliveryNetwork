@@ -38,16 +38,18 @@ function getEmptyUserInfo() {
   };
 }
 
-function createReplyWithUserInfo(type, userInfo) {
+function createReplyWithUserInfo(type, operationId, userInfo) {
   return {
     type,
+    operationId,
     userInfo,
   };
 }
 
-function createGenericError(type, error) {
+function createGenericError(type, operationId, error) {
   return {
     type,
+    operationId,
     error,
   };
 }
@@ -55,23 +57,19 @@ function createGenericError(type, error) {
 export function fetchUser() {
   return {
     type: FIREBASE_FETCH_USER,
+    operationId: shortid.generate(),
   };
 }
 
-export function fetchUserSucceeded(response) {
+export function fetchUserSucceeded(operationId, response) {
   const userFetched = response && response.uid;
 
-  if (userFetched) {
-    return createReplyWithUserInfo(FIREBASE_FETCH_USER_SUCCEEDED, getUserInfo(
-      response));
-  }
-
-  return createReplyWithUserInfo(FIREBASE_FETCH_USER_SUCCEEDED,
-    getEmptyUserInfo());
+  return userFetched ? createReplyWithUserInfo(FIREBASE_FETCH_USER_SUCCEEDED, operationId, getUserInfo(response)) :
+    createReplyWithUserInfo(FIREBASE_FETCH_USER_SUCCEEDED, operationId, getEmptyUserInfo());
 }
 
-export function fetchUserFailed(error) {
-  return createGenericError(FIREBASE_FETCH_USER_FAILED, error);
+export function fetchUserFailed(operationId, error) {
+  return createGenericError(FIREBASE_FETCH_USER_FAILED, operationId, error);
 }
 
 export function signUpWithEmailAndPassword(emailAddress, password) {
@@ -84,101 +82,90 @@ export function signUpWithEmailAndPassword(emailAddress, password) {
   };
 }
 
-export function signUpWithEmailAndPasswordSucceeded(response) {
+export function signUpWithEmailAndPasswordSucceeded(operationId, response) {
   return {
     type: FIREBASE_SIGNUP_WITH_EMAIL_AND_PASSWORD_SUCCEEDED,
+    operationId,
   };
 }
 
-export function signUpWithEmailAndPasswordFailed(error) {
-  return createGenericError(
-    FIREBASE_SIGNUP_WITH_EMAIL_AND_PASSWORD_FAILED, error);
+export function signUpWithEmailAndPasswordFailed(operationId, error) {
+  return createGenericError(FIREBASE_SIGNUP_WITH_EMAIL_AND_PASSWORD_FAILED, operationId, error);
 }
 
 export function signUpWithProvider(providerName) {
   return {
     type: FIREBASE_SIGNUP_WITH_PROVIDER,
+    operationId: shortid.generate(),
     providerName,
   };
 }
 
-export function signUpWithProviderSucceeded(response) {
+export function signUpWithProviderSucceeded(operationId, response) {
   const userFetched = response && response.user && response.user.uid;
 
-  if (userFetched) {
-    const userInfo = response.user;
-
-    return createReplyWithUserInfo(FIREBASE_SIGNUP_WITH_PROVIDER_SUCCEEDED,
-      getUserInfo(
-        response.user));
-  }
-
-  return createReplyWithUserInfo(FIREBASE_SIGNUP_WITH_PROVIDER_SUCCEEDED,
-    getEmptyUserInfo());
+  return userFetched ?
+    createReplyWithUserInfo(FIREBASE_SIGNUP_WITH_PROVIDER_SUCCEEDED, operationId, getUserInfo(response.user)) :
+    createReplyWithUserInfo(FIREBASE_SIGNUP_WITH_PROVIDER_SUCCEEDED, operationId, getEmptyUserInfo());
 }
 
-export function signUpWithProviderFailed(error) {
-  return createGenericError(FIREBASE_SIGNUP_WITH_PROVIDER_FAILED, error);
+export function signUpWithProviderFailed(operationId, error) {
+  return createGenericError(FIREBASE_SIGNUP_WITH_PROVIDER_FAILED, operationId, error);
 }
 
-export function signInWithEmailAndPassword(emailAddress,
-  password) {
+export function signInWithEmailAndPassword(emailAddress, password) {
   return {
     type: FIREBASE_SIGNIN_WITH_EMAIL_AND_PASSWORD,
+    operationId: shortid.generate(),
     emailAddress,
     password,
   };
 }
 
-export function signInWithEmailAndPasswordSucceeded(response) {
+export function signInWithEmailAndPasswordSucceeded(operationId, response) {
   return {
     type: FIREBASE_SIGNIN_WITH_EMAIL_AND_PASSWORD_SUCCEEDED,
+    operationId,
   };
 }
 
-export function signInWithEmailAndPasswordFailed(error) {
-  return createGenericError(
-    FIREBASE_SIGNIN_WITH_EMAIL_AND_PASSWORD_FAILED, error);
+export function signInWithEmailAndPasswordFailed(operationId, error) {
+  return createGenericError(FIREBASE_SIGNIN_WITH_EMAIL_AND_PASSWORD_FAILED, operationId, error);
 }
 
 export function signInWithProvider(providerName) {
   return {
     type: FIREBASE_SIGNIN_WITH_PROVIDER,
+    operationId: shortid.generate(),
     providerName,
   };
 }
 
-export function signInWithProviderSucceeded(response) {
+export function signInWithProviderSucceeded(operationId, response) {
   const userFetched = response && response.user && response.user.uid;
 
-  if (userFetched) {
-    const userInfo = response.user;
-
-    return createReplyWithUserInfo(FIREBASE_SIGNIN_WITH_PROVIDER_SUCCEEDED,
-      getUserInfo(
-        response.user));
-  }
-
-  return createReplyWithUserInfo(FIREBASE_SIGNIN_WITH_PROVIDER_SUCCEEDED,
-    getEmptyUserInfo());
+  return userFetched ? createReplyWithUserInfo(FIREBASE_SIGNIN_WITH_PROVIDER_SUCCEEDED, operationId, getUserInfo(
+    response.user)) : createReplyWithUserInfo(FIREBASE_SIGNIN_WITH_PROVIDER_SUCCEEDED, operationId, getEmptyUserInfo());
 }
 
-export function signInWithProviderFailed(error) {
-  return createGenericError(FIREBASE_SIGNIN_WITH_PROVIDER_FAILED, error);
+export function signInWithProviderFailed(operationId, error) {
+  return createGenericError(FIREBASE_SIGNIN_WITH_PROVIDER_FAILED, operationId, error);
 }
 
 export function logout() {
   return {
     type: FIREBASE_LOGOUT,
+    operationId: shortid.generate(),
   };
 }
 
-export function logoutSucceeded() {
+export function logoutSucceeded(operationId) {
   return {
     type: FIREBASE_LOGOUT_SUCCEEDED,
+    operationId,
   };
 }
 
-export function logoutFailed(error) {
-  return createGenericError(FIREBASE_LOGOUT_FAILED, error);
+export function logoutFailed(operationId, error) {
+  return createGenericError(FIREBASE_LOGOUT_FAILED, operationId, error);
 }

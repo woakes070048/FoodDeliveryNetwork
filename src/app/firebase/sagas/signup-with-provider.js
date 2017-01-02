@@ -18,9 +18,9 @@ function* signUpWithProviderAsync(action) {
   try {
     const response = yield call(helper.signUpWithProvider, action.providerName);
 
-    yield put(signUpWithProviderSucceeded(response));
+    yield put(signUpWithProviderSucceeded(action.operationId, response));
   } catch (exception) {
-    yield put(signUpWithProviderFailed(exception.message));
+    yield put(signUpWithProviderFailed(action.operationId, exception.message));
   }
 }
 

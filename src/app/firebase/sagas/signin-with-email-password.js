@@ -18,9 +18,9 @@ function* signInWithEmailAndPasswordAsync(action) {
   try {
     const response = yield call(helper.signInWithEmailAndPassword, action.emailAddress, action.password);
 
-    yield put(signInWithEmailAndPasswordSucceeded(response));
+    yield put(signInWithEmailAndPasswordSucceeded(action.operationId, response));
   } catch (exception) {
-    yield put(signInWithEmailAndPasswordFailed(exception.message));
+    yield put(signInWithEmailAndPasswordFailed(action.operationId, exception.message));
   }
 }
 

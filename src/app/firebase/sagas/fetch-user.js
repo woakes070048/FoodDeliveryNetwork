@@ -14,13 +14,13 @@ import {
 } from '../actions';
 import helper from '../helper';
 
-function* fetchUserAsync() {
+function* fetchUserAsync(action) {
   try {
     const response = yield call(helper.fetchUser);
 
-    yield put(fetchUserSucceeded(response));
+    yield put(fetchUserSucceeded(action.operationId, response));
   } catch (exception) {
-    yield put(fetchUserFailed(exception.message));
+    yield put(fetchUserFailed(action.operationId, exception.message));
   }
 }
 
