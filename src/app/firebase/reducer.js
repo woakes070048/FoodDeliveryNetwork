@@ -1,6 +1,7 @@
 /* jshint esversion: 6 */
 
 import {
+  FIREBASE_ACKNOWLEDGE_OPERATION,
   FIREBASE_FETCH_USER_SUCCEEDED,
   FIREBASE_FETCH_USER_FAILED,
   FIREBASE_SIGNUP_WITH_EMAIL_AND_PASSWORD_SUCCEEDED,
@@ -61,6 +62,12 @@ function createStateWithoutUserInfo(state) {
     userInfo: {
       userExists: false,
     },
+  });
+}
+
+function handleAcknowledgeOperation(state, action) {
+  return Object.assign({}, state, {
+    operations: [...state.operaations.filter(operation => operation.operationId !== action.operationId)],
   });
 }
 
@@ -130,6 +137,9 @@ function handleSignOutFailed(state, action) {
 
 export default function (state = initialState.firebaseContext, action) {
   switch (action.type) {
+  case FIREBASE_ACKNOWLEDGE_OPERATION:
+    return handleAcknowledgeOperation(state, action);
+
   case FIREBASE_FETCH_USER_SUCCEEDED:
     return handleFetchUserSucceeded(state, action);
 

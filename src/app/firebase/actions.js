@@ -2,6 +2,7 @@
 
 import shortid from 'shortid';
 import {
+  FIREBASE_ACKNOWLEDGE_OPERATION,
   FIREBASE_FETCH_USER,
   FIREBASE_FETCH_USER_SUCCEEDED,
   FIREBASE_FETCH_USER_FAILED,
@@ -58,6 +59,13 @@ export function fetchUser() {
   return {
     type: FIREBASE_FETCH_USER,
     operationId: shortid.generate(),
+  };
+}
+
+export function acknowledgeOperaation(operationId) {
+  return {
+    type: FIREBASE_ACKNOWLEDGE_OPERATION,
+    operationId,
   };
 }
 
