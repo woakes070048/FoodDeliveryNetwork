@@ -17,10 +17,28 @@ class UserMenuContainer extends Component {
     super(props);
 
     this.onSignOutMenuItemClicked = this.onSignOutMenuItemClicked.bind(this);
+
+    this.state = {
+      lastOperationId: '',
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.state.lastOperationId) {
+      const lastOperation =
+        nextProps.operations.find(operation => operation.operationId === this.state.lastOperationId);
+
+      if (lastOperation) {
+        this.props.firebaseActions.acknowledgeOperaation(lastOperation.operationId);
+      }
+    }
   }
 
   onSignOutMenuItemClicked() {
-    this.props.firebaseActions.signOut();
+    this.setState({
+      lastOperationId: this.props.firebaseActions.signOut()
+        .operationId,
+    });
   }
 
   render() {
@@ -50,6 +68,7 @@ UserMenuContainer.propTypes = {
 };
 
 function mapStateToProps(state) {
+  const operations = state.firebase.operation;
   const userInfo = state.firebase.userInfo;
 
   if (userInfo.userExists) {
@@ -58,11 +77,13 @@ function mapStateToProps(state) {
       userDisplayName: userInfo.displayName,
       userEmailAddress: userInfo.email,
       userPhotoUrl: userInfo.photoUrl,
+      operations,
     };
   }
 
   return {
     userExists: false,
+    operations,
   };
 }
 
