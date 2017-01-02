@@ -17,6 +17,8 @@ class EmailPasswordContainer extends Component {
 
     this.validateState = this.validateState.bind(this);
     this.onSignInClicked = this.onSignInClicked.bind(this);
+    this.checkIfEmailAddressProvided = this.checkIfEmailAddressProvided.bind(this);
+    this.checkIfPasswordProvided = this.checkIfPasswordProvided.bind(this);
 
     this.state = {
       lastOperationId: '',
@@ -41,13 +43,39 @@ class EmailPasswordContainer extends Component {
     });
   }
 
+  checkIfEmailAddressProvided(emailAddress, validationMessages) {
+    if (validationMessages.emailAddressValidationMessage) {
+      return validationMessages;
+    }
+
+    return emailAddress ? validationMessages : Object.assign(validationMessages, {
+      emailAddressValidationMessage: 'Email address is required.',
+    });
+  }
+
+  checkIfPasswordProvided(password, validationMessages) {
+    if (validationMessages.passwordValidationMessage) {
+      return validationMessages;
+    }
+
+    return password ? validationMessages : Object.assign(validationMessages, {
+      passwordValidationMessage: 'Password is required.',
+    });
+  }
+
   validateState(emailAddress, password) {
-    return {
-      emailAddressValidationResult: emailAddress ? null : 'error',
-      emailAddressValidationMessage: emailAddress ? null : 'Email address is required.',
-      passwordValidationResult: password ? null : 'error',
-      passwordValidationMessage: password ? null : 'Password is required.',
+    let validationMessages = {
+      emailAddressValidationMessage: null,
+      passwordValidationMessage: null,
     };
+
+    validationMessages = this.checkIfEmailAddressProvided(emailAddress, validationMessages);
+    validationMessages = this.checkIfPasswordProvided(password, validationMessages);
+
+    return Object.assign(validationMessages, {
+      emailAddressValidationResult: validationMessages.emailAddressValidationMessage ? 'error' : null,
+      passwordValidationResult: validationMessages.passwordValidationMessage ? 'error' : null,
+    });
   }
 
   render() {

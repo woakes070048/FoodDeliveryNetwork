@@ -21,6 +21,9 @@ class EmailPasswordContainer extends Component {
 
     this.validateState = this.validateState.bind(this);
     this.onSignUpClicked = this.onSignUpClicked.bind(this);
+    this.checkIfEmailAddressProvided = this.checkIfEmailAddressProvided.bind(this);
+    this.checkIfPasswordProvided = this.checkIfPasswordProvided.bind(this);
+    this.checkIfPasswordAndReEnteredPasswordMatch = this.checkIfPasswordAndReEnteredPasswordMatch.bind(this);
 
     this.state = {
       lastOperationId: '',
@@ -51,15 +54,53 @@ class EmailPasswordContainer extends Component {
     });
   }
 
+  checkIfEmailAddressProvided(emailAddress, validationMessages) {
+    if (validationMessages.emailAddressValidationMessage) {
+      return validationMessages;
+    }
+
+    return emailAddress ? validationMessages : Object.assign(validationMessages, {
+      emailAddressValidationMessage: 'Email address is required.',
+    });
+  }
+
+  checkIfPasswordProvided(password, validationMessages) {
+    if (validationMessages.passwordValidationMessage) {
+      return validationMessages;
+    }
+
+    return password ? validationMessages : Object.assign(validationMessages, {
+      passwordValidationMessage: 'Password is required.',
+    });
+  }
+
+  checkIfPasswordAndReEnteredPasswordMatch(password, reEnteredPassword, validationMessages) {
+    if (validationMessages.passwordValidationMessage || validationMessages.reEnteredPasswordValidationMessage) {
+      return validationMessages;
+    }
+
+    return password === reEnteredPassword ? validationMessages : Object.assign(validationMessages, {
+      reEnteredPasswordValidationMessage: 'Should match the above Password',
+    });
+  }
+
   validateState(emailAddress, password, reEnteredPassword) {
-    return {
-      emailAddressValidationResult: emailAddress ? null : 'error',
-      emailAddressValidationMessage: emailAddress ? null : 'Email address is required.',
-      passwordValidationResult: password ? null : 'error',
-      passwordValidationMessage: password ? null : 'Password is required.',
-      reEnteredPasswordValidationResult: reEnteredPassword === password ? null : 'error',
-      reEnteredPasswordValidationMessage: reEnteredPassword === password ? null : 'Should match the above Password.',
+    let validationMessages = {
+      emailAddressValidationMessage: null,
+      passwordValidationMessage: null,
+      reEnteredPasswordValidationMessage: null,
     };
+
+    validationMessages = this.checkIfEmailAddressProvided(emailAddress, validationMessages);
+    validationMessages = this.checkIfPasswordProvided(password, validationMessages);
+    validationMessages = this.checkIfPasswordAndReEnteredPasswordMatch(password, reEnteredPassword,
+      validationMessages);
+
+    return Object.assign(validationMessages, {
+      emailAddressValidationResult: validationMessages.emailAddressValidationMessage ? 'error' : null,
+      passwordValidationResult: validationMessages.passwordValidationMessage ? 'error' : null,
+      reEnteredPasswordValidationResult: validationMessages.reEnteredPasswordValidationMessage ? 'error' : null,
+    });
   }
 
   render() {
