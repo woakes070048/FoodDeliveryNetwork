@@ -40,7 +40,7 @@ class AppContainer extends Component {
   render() {
     return (
       <AppPresentational
-        children={this.props.children}
+        nestedChildren={this.props.children}
         notifications={this.props.notifications}
       />
     );

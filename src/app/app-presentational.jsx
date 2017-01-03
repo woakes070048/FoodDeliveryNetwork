@@ -23,7 +23,7 @@ class AppPresentational extends Component {
       <div>
         <NavbarContainer />
         <div className="container-fluid">
-          {this.props.children}
+          {this.props.nestedChildren}
         </div>
         <NotificationSystem ref={(component) => { this.notificationSystem = component; }} />
       </div>
@@ -33,7 +33,7 @@ class AppPresentational extends Component {
 }
 
 AppPresentational.propTypes = {
-  children: PropTypes.object.isRequired,
+  nestedChildren: PropTypes.object.isRequired,
   notifications: PropTypes.array,
 };
 
