@@ -11,6 +11,9 @@ import {
   Glyphicon,
   InputGroup,
 } from 'react-bootstrap';
+import {
+  LinkContainer,
+} from 'react-router-bootstrap';
 
 class EmailPasswordPresentational extends Component {
   constructor(props) {
@@ -131,6 +134,9 @@ class EmailPasswordPresentational extends Component {
             Sign in
           </Button>
         </FormGroup>
+        <LinkContainer to="/resetPassword">
+          <a> Forgot password? </a>
+        </LinkContainer>
       </Form>
     );
   }
