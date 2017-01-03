@@ -43,6 +43,10 @@ class UserResetPasswordContainer extends Component {
   }
 
   onResetPasswordClicked(emailAddress) {
+    this.setState({
+      lastOperationId: this.props.firebaseActions.resetPassword(emailAddress)
+        .operationId,
+    });
   }
 
   checkIfEmailAddressProvided(emailAddress, validationMessages) {

@@ -137,12 +137,24 @@ function handleSignInWithProviderFailed(state, action) {
 }
 
 function handleSignOutSucceeded(state, action) {
+    const stateWithOperationInfo = addSucceededOperationToState(state, action.operationId);
+
+    return createStateWithoutUserInfo(stateWithOperationInfo);
+}
+
+function handleSignOutFailed(state, action) {
+    const stateWithOperationInfo = addFailedOperationToState(state, action.operationId, action.error);
+
+    return createStateWithoutUserInfo(stateWithOperationInfo);
+}
+
+function handleResetPasswordSucceeded(state, action) {
   const stateWithOperationInfo = addSucceededOperationToState(state, action.operationId);
 
   return createStateWithoutUserInfo(stateWithOperationInfo);
 }
 
-function handleSignOutFailed(state, action) {
+function handleResetPasswordFailed(state, action) {
   const stateWithOperationInfo = addFailedOperationToState(state, action.operationId, action.error);
 
   return createStateWithoutUserInfo(stateWithOperationInfo);
@@ -184,10 +196,16 @@ export default function (state = initialState.firebaseContext, action) {
     return handleSignInWithProviderFailed(state, action);
 
   case FIREBASE_SIGNOUT_SUCCEEDED:
-    return handleSignOutSucceeded(state, action);
+      return handleSignOutSucceeded(state, action);
 
   case FIREBASE_SIGNOUT_FAILED:
-    return handleSignOutFailed(state, action);
+      return handleSignOutFailed(state, action);
+
+  case FIREBASE_RESET_PASSWORD_SUCCEEDED:
+    return handleResetPasswordSucceeded(state, action);
+
+  case FIREBASE_RESET_PASSWORD_FAILED:
+    return handleResetPasswordFailed(state, action);
 
   default:
     return state;
