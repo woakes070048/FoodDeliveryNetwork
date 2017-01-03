@@ -1,4 +1,4 @@
-import isEmail from 'isemail';
+import emailValidator from 'email-validator';
 import React, {
   Component,
   PropTypes,
@@ -60,7 +60,7 @@ class EmailPasswordContainer extends Component {
       return validationMessages;
     }
 
-    return isEmail.validate(emailAddress) ? validationMessages : Object.assign(validationMessages, {
+    return emailValidator.validate(emailAddress) ? validationMessages : Object.assign(validationMessages, {
       emailAddressValidationMessage: 'Email address is badly formatted.',
     });
   }
