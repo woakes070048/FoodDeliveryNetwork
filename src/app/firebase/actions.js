@@ -21,6 +21,9 @@ import {
   FIREBASE_SIGNOUT,
   FIREBASE_SIGNOUT_SUCCEEDED,
   FIREBASE_SIGNOUT_FAILED,
+  FIREBASE_RESET_PASSWORD,
+  FIREBASE_RESET_PASSWORD_SUCCEEDED,
+  FIREBASE_RESET_PASSWORD_FAILED,
 } from './action-types';
 
 function getUserInfo(info) {
@@ -78,6 +81,25 @@ export function fetchUserSucceeded(operationId, response) {
 
 export function fetchUserFailed(operationId, error) {
   return createGenericError(FIREBASE_FETCH_USER_FAILED, operationId, error);
+}
+
+export function resetPassword(emailAddress) {
+  return {
+    type: FIREBASE_RESET_PASSWORD,
+    operationId: shortid.generate(),
+    emailAddress,
+  };
+}
+
+export function resetPasswordSucceeded(operationId) {
+  return {
+    type: FIREBASE_RESET_PASSWORD_SUCCEEDED,
+    operationId,
+  };
+}
+
+export function resetPasswordFailed(operationId, error) {
+  return createGenericError(FIREBASE_RESET_PASSWORD_FAILED, operationId, error);
 }
 
 export function signUpWithEmailAndPassword(emailAddress, password) {

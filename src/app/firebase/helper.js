@@ -45,6 +45,8 @@ const firebaseHelper = {
 
   signOut: () => firebaseAuth.signOut(),
 
+  resetPassword: (emailAddress) => firebaseAuth.sendPasswordResetEmail(emailAddress),
+
   fetchUser: () => new Promise((resolve, reject) => {
     const unsub = firebaseAuth.onAuthStateChanged((user) => {
       unsub();
