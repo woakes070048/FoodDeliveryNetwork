@@ -78,12 +78,7 @@ class EmailPasswordContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.validateState = this.validateState.bind(this);
     this.onSignUpClicked = this.onSignUpClicked.bind(this);
-    this.checkIfEmailAddressProvided = this.checkIfEmailAddressProvided.bind(this);
-    this.checkIfEmailAddressFromattedCorrectly = this.checkIfEmailAddressFromattedCorrectly.bind(this);
-    this.checkIfPasswordProvided = this.checkIfPasswordProvided.bind(this);
-    this.checkIfPasswordAndReEnteredPasswordMatch = this.checkIfPasswordAndReEnteredPasswordMatch.bind(this);
 
     this.state = {
       lastOperationId: '',
