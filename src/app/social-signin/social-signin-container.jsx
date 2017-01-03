@@ -33,7 +33,7 @@ class SocialSignInContainer extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.state.lastOperationId) {
       const lastOperation =
-            nextProps.operations.find(operation => operation.operationId === this.state.lastOperationId);
+        nextProps.operations.find(operation => operation.operationId === this.state.lastOperationId);
 
       if (lastOperation) {
         this.props.firebaseActions.acknowledgeOperaation(lastOperation.operationId);
@@ -62,7 +62,7 @@ class SocialSignInContainer extends Component {
 }
 
 SocialSignInContainer.propTypes = {
-  firebaseActions: PropTypes.object.isRequired,
+  firebaseActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   signin: PropTypes.bool,
   signup: PropTypes.bool,
 };

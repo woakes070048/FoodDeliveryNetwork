@@ -5,7 +5,6 @@ import config from './config';
 
 const firebaseApp = firebase.initializeApp(config);
 const firebaseAuth = firebaseApp.auth();
-const firebaseDatabase = firebaseApp.database();
 
 const firebaseHelper = {
   getProvider: (provider) => {

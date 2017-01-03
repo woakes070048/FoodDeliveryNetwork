@@ -102,8 +102,8 @@ class UserResetPasswordContainer extends Component {
 }
 
 UserResetPasswordContainer.propTypes = {
-  firebaseActions: PropTypes.object.isRequired,
-  notificationActions: PropTypes.object.isRequired,
+  firebaseActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  notificationActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 function mapStateToProps(state) {

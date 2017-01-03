@@ -48,9 +48,9 @@ class AppContainer extends Component {
 }
 
 AppContainer.propTypes = {
-  firebaseActions: PropTypes.object.isRequired,
-  notificationActions: PropTypes.object.isRequired,
-  children: PropTypes.object.isRequired,
+  firebaseActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  notificationActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  children: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   notifications: PropTypes.array,
 };
 
