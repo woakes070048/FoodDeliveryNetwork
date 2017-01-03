@@ -14,6 +14,7 @@ import {
 import UserMenuSignedInPresentational from './usermenu-signedin-presentational';
 import UserMenuSignedOutPresentational from './usermenu-signedout-presentational';
 import * as firebaseActions from '../firebase/actions';
+import * as notificationActions from '../notification/actions';
 
 class UserMenuContainer extends Component {
   constructor(props) {
@@ -70,6 +71,7 @@ class UserMenuContainer extends Component {
 
 UserMenuContainer.propTypes = {
   firebaseActions: PropTypes.object.isRequired,
+  notificationActions: PropTypes.object.isRequired,
   userExists: PropTypes.bool.isRequired,
   userDisplayName: PropTypes.string,
   userEmailAddress: PropTypes.string,
@@ -95,6 +97,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     firebaseActions: bindActionCreators(firebaseActions, dispatch),
+    notificationActions: bindActionCreators(notificationActions, dispatch),
   };
 }
 

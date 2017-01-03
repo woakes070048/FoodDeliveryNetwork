@@ -9,9 +9,6 @@ import {
 import {
   connect,
 } from 'react-redux';
-import {
-  browserHistory,
-} from 'react-router';
 import * as firebaseActions from '../firebase/actions';
 import * as notificationActions from '../notification/actions';
 import EmailPasswordPresentational from './email-password-presentational';

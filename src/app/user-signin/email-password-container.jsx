@@ -110,6 +110,7 @@ class EmailPasswordContainer extends Component {
 
 EmailPasswordContainer.propTypes = {
   firebaseActions: PropTypes.object.isRequired,
+  notificationActions: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
