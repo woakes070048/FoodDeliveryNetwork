@@ -40,8 +40,6 @@ class EmailPasswordContainer extends Component {
       if (lastOperation) {
         if (lastOperation.failed) {
           this.props.notificationActions.addError(lastOperation.errorMessage);
-        } else {
-          browserHistory.push('/');
         }
 
         this.props.firebaseActions.acknowledgeOperaation(lastOperation.operationId);

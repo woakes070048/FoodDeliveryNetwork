@@ -10,6 +10,7 @@ import {
   connect,
 } from 'react-redux';
 import * as firebaseActions from '../firebase/actions';
+import * as notificationActions from '../notification/actions';
 import EmailPasswordPresentational from './email-password-presentational';
 
 class EmailPasswordContainer extends Component {
@@ -33,6 +34,10 @@ class EmailPasswordContainer extends Component {
         nextProps.operations.find(operation => operation.operationId === this.state.lastOperationId);
 
       if (lastOperation) {
+        if (lastOperation.failed) {
+          this.props.notificationActions.addError(lastOperation.errorMessage);
+        }
+
         this.props.firebaseActions.acknowledgeOperaation(lastOperation.operationId);
       }
     }
@@ -116,6 +121,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     firebaseActions: bindActionCreators(firebaseActions, dispatch),
+    notificationActions: bindActionCreators(notificationActions, dispatch),
   };
 }
 

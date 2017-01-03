@@ -6,6 +6,9 @@ import {
   connect,
 } from 'react-redux';
 import {
+  browserHistory,
+} from 'react-router';
+import {
   bindActionCreators,
 } from 'redux';
 import UserMenuSignedInPresentational from './usermenu-signedin-presentational';
@@ -29,6 +32,12 @@ class UserMenuContainer extends Component {
         nextProps.operations.find(operation => operation.operationId === this.state.lastOperationId);
 
       if (lastOperation) {
+        if (lastOperation.failed) {
+          this.props.notificationActions.addError(lastOperation.errorMessage);
+        } else {
+          browserHistory.push('/');
+        }
+
         this.props.firebaseActions.acknowledgeOperaation(lastOperation.operationId);
       }
     }
