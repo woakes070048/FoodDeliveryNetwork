@@ -91,10 +91,10 @@ export function signUpWithEmailAndPassword(emailAddress, password) {
 }
 
 export function signUpWithEmailAndPasswordSucceeded(operationId, response) {
-  return {
-    type: FIREBASE_SIGNUP_WITH_EMAIL_AND_PASSWORD_SUCCEEDED,
-    operationId,
-  };
+  const userFetched = response && response.uid;
+
+  return userFetched ? createReplyWithUserInfo(FIREBASE_SIGNUP_WITH_EMAIL_AND_PASSWORD_SUCCEEDED, operationId, getUserInfo(response)) :
+        createReplyWithUserInfo(FIREBASE_FETCH_USER_SUCCEEDED, operationId, getEmptyUserInfo());
 }
 
 export function signUpWithEmailAndPasswordFailed(operationId, error) {

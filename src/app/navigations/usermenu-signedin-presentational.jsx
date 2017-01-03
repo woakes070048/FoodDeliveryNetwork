@@ -11,28 +11,42 @@ import {
   LinkContainer,
 } from 'react-router-bootstrap';
 
+function getUserDisplayName(userDisplayName) {
+  return userDisplayName || 'Unknown';
+}
+
 function formatUserInfoToDisplay(userDisplayName, userEmailAddress) {
-  if (userEmailAddress) {
-    return (
+  return userEmailAddress ?
+    (
       <div>
       Signed in as
       <br />
         <strong>
-          {userDisplayName} ({userEmailAddress})
+          {getUserDisplayName(userDisplayName)} ({userEmailAddress})
       </strong>
       </div>
-    );
-  }
-
-  return (
-    <div>
+    ) :
+    (
+      <div>
       Signed in as
       <br />
-      <strong>
-        {userDisplayName}
-      </strong>
-    </div>
-  );
+        <strong>
+          {getUserDisplayName(userDisplayName)}
+        </strong>
+      </div>
+    );
+}
+
+function getUserImageOrDisplayName(userDisplayName, userPhotoUrl) {
+  return userPhotoUrl ?
+    (
+      <Image
+        src={userPhotoUrl}
+        className="navbar-user-photo"
+        rounded
+      />
+    ) :
+    (<span>{getUserDisplayName(userDisplayName)}</span>);
 }
 
 const UserMenuSignedInPresentational = ({
@@ -42,14 +56,7 @@ const UserMenuSignedInPresentational = ({
     onSignOutMenuItemClicked,
   }) =>
     <Nav collapseOnSelect pullRight>
-      <NavDropdown
-        title={
-          <Image
-            src={userPhotoUrl}
-            className="navbar-user-photo"
-            rounded
-          />}
-      >
+      <NavDropdown title={getUserImageOrDisplayName(userDisplayName, userPhotoUrl)} >
         <MenuItem disabled>
           {formatUserInfoToDisplay(userDisplayName, userEmailAddress)}
         </MenuItem>
