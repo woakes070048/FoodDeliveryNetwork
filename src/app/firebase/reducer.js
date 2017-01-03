@@ -108,6 +108,19 @@ function handleSignUpWithProviderFailed(state, action) {
   return createStateWithoutUserInfo(stateWithOperationInfo);
 }
 
+function handleSignInWithEmailAndPasswordSucceeded(state, action) {
+  const stateWithOperationInfo = addSucceededOperationToState(state, action.operationId);
+
+  return action.userInfo.userFetched ? createStateWithUserInfo(stateWithOperationInfo, action.userInfo) :
+    createStateWithoutUserInfo(stateWithOperationInfo);
+}
+
+function handleSignInWithEmailAndPasswordFailed(state, action) {
+  const stateWithOperationInfo = addFailedOperationToState(state, action.operationId, action.error);
+
+  return createStateWithoutUserInfo(stateWithOperationInfo);
+}
+
 function handleSignInWithProviderSucceeded(state, action) {
   const stateWithOperationInfo = addSucceededOperationToState(state, action.operationId);
 
@@ -155,6 +168,12 @@ export default function (state = initialState.firebaseContext, action) {
 
   case FIREBASE_SIGNUP_WITH_PROVIDER_FAILED:
     return handleSignUpWithProviderFailed(state, action);
+
+  case FIREBASE_SIGNIN_WITH_EMAIL_AND_PASSWORD_SUCCEEDED:
+    return handleSignInWithEmailAndPasswordSucceeded(state, action);
+
+  case FIREBASE_SIGNIN_WITH_EMAIL_AND_PASSWORD_FAILED:
+    return handleSignInWithEmailAndPasswordFailed(state, action);
 
   case FIREBASE_SIGNIN_WITH_PROVIDER_SUCCEEDED:
     return handleSignInWithProviderSucceeded(state, action);
