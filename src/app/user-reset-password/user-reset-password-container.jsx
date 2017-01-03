@@ -9,6 +9,9 @@ import {
 import {
   connect,
 } from 'react-redux';
+import {
+  browserHistory,
+} from 'react-router';
 import * as firebaseActions from '../firebase/actions';
 import * as notificationActions from '../notification/actions';
 import UserResetPasswordPresentational from './user-reset-password-presentational';
@@ -28,6 +31,12 @@ class UserResetPasswordContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.userExists) {
+      browserHistory.push('/');
+
+      return;
+    }
+
     if (this.state.lastOperationId) {
       const lastOperation =
         nextProps.operations.find(operation => operation.operationId === this.state.lastOperationId);
@@ -102,6 +111,7 @@ UserResetPasswordContainer.propTypes = {
 function mapStateToProps(state) {
   return {
     operations: state.firebase.operations,
+    userExists: state.firebase.userInfo.userExists,
   };
 }
 

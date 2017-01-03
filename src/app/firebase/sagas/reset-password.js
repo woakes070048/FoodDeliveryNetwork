@@ -15,14 +15,14 @@ import {
 import helper from '../helper';
 
 function* resetPasswordAsync(action) {
-    try {
-        yield call(helper.resetPassword, action.emailAddress);
-        yield put(resetPasswordSucceeded(action.operationId));
-    } catch (exception) {
-        yield put(resetPasswordFailed(action.operationId, exception.message));
-    }
+  try {
+    yield call(helper.resetPassword, action.emailAddress);
+    yield put(resetPasswordSucceeded(action.operationId));
+  } catch (exception) {
+    yield put(resetPasswordFailed(action.operationId, exception.message));
+  }
 }
 
 export default function* watchResetPassword() {
-    yield takeLatest(FIREBASE_RESET_PASSWORD, resetPasswordAsync);
+  yield takeLatest(FIREBASE_RESET_PASSWORD, resetPasswordAsync);
 }
