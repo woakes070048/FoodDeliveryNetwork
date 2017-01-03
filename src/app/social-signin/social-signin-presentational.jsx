@@ -10,34 +10,34 @@ const SocialSignInPresentational = ({
     onGithubButtonClicked,
   }) =>
     <div>
-      <a
+      <button
         className="btn btn-block btn-social btn-facebook"
         onClick={() => onFacebookButtonClicked()}
       >
         <span className="fa fa-facebook" />
             Sign in with Facebook
-          </a>
-      <a
+      </button>
+      <button
         className="btn btn-block btn-social btn-twitter"
         onClick={() => onTwitterButtonClicked()}
       >
         <span className="fa fa-twitter" />
             Sign in with Twitter
-          </a>
-      <a
+      </button>
+      <button
         className="btn btn-block btn-social btn-google"
         onClick={() => onGoogleButtonClicked()}
       >
         <span className="fa fa-google" />
             Sign in with Google
-          </a>
-      <a
+      </button>
+      <button
         className="btn btn-block btn-social btn-github"
         onClick={() => onGithubButtonClicked()}
       >
         <span className="fa fa-github" />
             Sign in with Github
-          </a>
+      </button>
     </div>;
 
 SocialSignInPresentational.propTypes = {
