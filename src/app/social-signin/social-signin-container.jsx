@@ -10,6 +10,7 @@ import {
 } from 'react-redux';
 import SocialSignInPresentational from './social-signin-presentational';
 import * as firebaseActions from '../firebase/actions';
+import * as notificationActions from '../notification/actions';
 
 class SocialSignInContainer extends Component {
   constructor(props) {
@@ -36,6 +37,10 @@ class SocialSignInContainer extends Component {
         nextProps.operations.find(operation => operation.operationId === this.state.lastOperationId);
 
       if (lastOperation) {
+        if (lastOperation.failed) {
+          this.props.notificationActions.addError(lastOperation.errorMessage);
+        }
+
         this.props.firebaseActions.acknowledgeOperaation(lastOperation.operationId);
       }
     }
@@ -63,6 +68,7 @@ class SocialSignInContainer extends Component {
 
 SocialSignInContainer.propTypes = {
   firebaseActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  notificationActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   signin: PropTypes.bool,
   signup: PropTypes.bool,
 };
@@ -81,6 +87,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     firebaseActions: bindActionCreators(firebaseActions, dispatch),
+    notificationActions: bindActionCreators(notificationActions, dispatch),
   };
 }
 
