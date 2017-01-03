@@ -17,13 +17,44 @@ import * as notificationActions from '../notification/actions';
 import UserResetPasswordPresentational from './user-reset-password-presentational';
 
 class UserResetPasswordContainer extends Component {
+  static checkIfEmailAddressProvided(emailAddress, validationMessages) {
+    if (validationMessages.emailAddressValidationMessage) {
+      return validationMessages;
+    }
+
+    return emailAddress ? validationMessages : Object.assign(validationMessages, {
+      emailAddressValidationMessage: 'Email address is required.',
+    });
+  }
+
+  static checkIfEmailAddressFromattedCorrectly(emailAddress, validationMessages) {
+    if (validationMessages.emailAddressValidationMessage) {
+      return validationMessages;
+    }
+
+    return emailValidator.validate(emailAddress) ? validationMessages : Object.assign(validationMessages, {
+      emailAddressValidationMessage: 'Email address is badly formatted.',
+    });
+  }
+
+  static validateState(emailAddress) {
+    let validationMessages = {
+      emailAddressValidationMessage: null,
+    };
+
+    validationMessages = UserResetPasswordContainer.checkIfEmailAddressProvided(emailAddress, validationMessages);
+    validationMessages = UserResetPasswordContainer.checkIfEmailAddressFromattedCorrectly(emailAddress,
+      validationMessages);
+
+    return Object.assign(validationMessages, {
+      emailAddressValidationResult: validationMessages.emailAddressValidationMessage ? 'error' : null,
+    });
+  }
+
   constructor(props) {
     super(props);
 
-    this.validateState = this.validateState.bind(this);
     this.onResetPasswordClicked = this.onResetPasswordClicked.bind(this);
-    this.checkIfEmailAddressProvided = this.checkIfEmailAddressProvided.bind(this);
-    this.checkIfEmailAddressFromattedCorrectly = this.checkIfEmailAddressFromattedCorrectly.bind(this);
 
     this.state = {
       lastOperationId: '',
@@ -58,46 +89,13 @@ class UserResetPasswordContainer extends Component {
     });
   }
 
-  checkIfEmailAddressProvided(emailAddress, validationMessages) {
-    if (validationMessages.emailAddressValidationMessage) {
-      return validationMessages;
-    }
-
-    return emailAddress ? validationMessages : Object.assign(validationMessages, {
-      emailAddressValidationMessage: 'Email address is required.',
-    });
-  }
-
-  checkIfEmailAddressFromattedCorrectly(emailAddress, validationMessages) {
-    if (validationMessages.emailAddressValidationMessage) {
-      return validationMessages;
-    }
-
-    return emailValidator.validate(emailAddress) ? validationMessages : Object.assign(validationMessages, {
-      emailAddressValidationMessage: 'Email address is badly formatted.',
-    });
-  }
-
-  validateState(emailAddress) {
-    let validationMessages = {
-      emailAddressValidationMessage: null,
-    };
-
-    validationMessages = this.checkIfEmailAddressProvided(emailAddress, validationMessages);
-    validationMessages = this.checkIfEmailAddressFromattedCorrectly(emailAddress, validationMessages);
-
-    return Object.assign(validationMessages, {
-      emailAddressValidationResult: validationMessages.emailAddressValidationMessage ? 'error' : null,
-    });
-  }
-
   render() {
     return (
       <UserResetPasswordPresentational
         onResetPasswordClicked={emailAddress =>
               this.onResetPasswordClicked(emailAddress)}
         validateState={emailAddress =>
-              this.validateState(emailAddress)}
+              UserResetPasswordContainer.validateState(emailAddress)}
       />
     );
   }

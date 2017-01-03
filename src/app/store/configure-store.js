@@ -1,6 +1,5 @@
 /* jshint esversion: 6 */
 
-import 'babel-polyfill';
 import {
   createStore,
   applyMiddleware,

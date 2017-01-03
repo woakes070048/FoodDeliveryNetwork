@@ -14,6 +14,67 @@ import * as notificationActions from '../notification/actions';
 import EmailPasswordPresentational from './email-password-presentational';
 
 class EmailPasswordContainer extends Component {
+  static checkIfEmailAddressProvided(emailAddress, validationMessages) {
+    if (validationMessages.emailAddressValidationMessage) {
+      return validationMessages;
+    }
+
+    return emailAddress ? validationMessages : Object.assign(validationMessages, {
+      emailAddressValidationMessage: 'Email address is required.',
+    });
+  }
+
+  static checkIfEmailAddressFromattedCorrectly(emailAddress, validationMessages) {
+    if (validationMessages.emailAddressValidationMessage) {
+      return validationMessages;
+    }
+
+    return emailValidator.validate(emailAddress) ? validationMessages : Object.assign(validationMessages, {
+      emailAddressValidationMessage: 'Email address is badly formatted.',
+    });
+  }
+
+  static checkIfPasswordProvided(password, validationMessages) {
+    if (validationMessages.passwordValidationMessage) {
+      return validationMessages;
+    }
+
+    return password ? validationMessages : Object.assign(validationMessages, {
+      passwordValidationMessage: 'Password is required.',
+    });
+  }
+
+  static checkIfPasswordAndReEnteredPasswordMatch(password, reEnteredPassword, validationMessages) {
+    if (validationMessages.passwordValidationMessage || validationMessages.reEnteredPasswordValidationMessage) {
+      return validationMessages;
+    }
+
+    return password === reEnteredPassword ? validationMessages : Object.assign(validationMessages, {
+      reEnteredPasswordValidationMessage: 'Should match the above Password',
+    });
+  }
+
+  static validateState(emailAddress, password, reEnteredPassword) {
+    let validationMessages = {
+      emailAddressValidationMessage: null,
+      passwordValidationMessage: null,
+      reEnteredPasswordValidationMessage: null,
+    };
+
+    validationMessages = EmailPasswordContainer.checkIfEmailAddressProvided(emailAddress, validationMessages);
+    validationMessages = EmailPasswordContainer.checkIfEmailAddressFromattedCorrectly(emailAddress,
+      validationMessages);
+    validationMessages = EmailPasswordContainer.checkIfPasswordProvided(password, validationMessages);
+    validationMessages = EmailPasswordContainer.checkIfPasswordAndReEnteredPasswordMatch(password, reEnteredPassword,
+      validationMessages);
+
+    return Object.assign(validationMessages, {
+      emailAddressValidationResult: validationMessages.emailAddressValidationMessage ? 'error' : null,
+      passwordValidationResult: validationMessages.passwordValidationMessage ? 'error' : null,
+      reEnteredPasswordValidationResult: validationMessages.reEnteredPasswordValidationMessage ? 'error' : null,
+    });
+  }
+
   constructor(props) {
     super(props);
 
@@ -51,73 +112,13 @@ class EmailPasswordContainer extends Component {
     });
   }
 
-  checkIfEmailAddressProvided(emailAddress, validationMessages) {
-    if (validationMessages.emailAddressValidationMessage) {
-      return validationMessages;
-    }
-
-    return emailAddress ? validationMessages : Object.assign(validationMessages, {
-      emailAddressValidationMessage: 'Email address is required.',
-    });
-  }
-
-  checkIfEmailAddressFromattedCorrectly(emailAddress, validationMessages) {
-    if (validationMessages.emailAddressValidationMessage) {
-      return validationMessages;
-    }
-
-    return emailValidator.validate(emailAddress) ? validationMessages : Object.assign(validationMessages, {
-      emailAddressValidationMessage: 'Email address is badly formatted.',
-    });
-  }
-
-  checkIfPasswordProvided(password, validationMessages) {
-    if (validationMessages.passwordValidationMessage) {
-      return validationMessages;
-    }
-
-    return password ? validationMessages : Object.assign(validationMessages, {
-      passwordValidationMessage: 'Password is required.',
-    });
-  }
-
-  checkIfPasswordAndReEnteredPasswordMatch(password, reEnteredPassword, validationMessages) {
-    if (validationMessages.passwordValidationMessage || validationMessages.reEnteredPasswordValidationMessage) {
-      return validationMessages;
-    }
-
-    return password === reEnteredPassword ? validationMessages : Object.assign(validationMessages, {
-      reEnteredPasswordValidationMessage: 'Should match the above Password',
-    });
-  }
-
-  validateState(emailAddress, password, reEnteredPassword) {
-    let validationMessages = {
-      emailAddressValidationMessage: null,
-      passwordValidationMessage: null,
-      reEnteredPasswordValidationMessage: null,
-    };
-
-    validationMessages = this.checkIfEmailAddressProvided(emailAddress, validationMessages);
-    validationMessages = this.checkIfEmailAddressFromattedCorrectly(emailAddress, validationMessages);
-    validationMessages = this.checkIfPasswordProvided(password, validationMessages);
-    validationMessages = this.checkIfPasswordAndReEnteredPasswordMatch(password, reEnteredPassword,
-      validationMessages);
-
-    return Object.assign(validationMessages, {
-      emailAddressValidationResult: validationMessages.emailAddressValidationMessage ? 'error' : null,
-      passwordValidationResult: validationMessages.passwordValidationMessage ? 'error' : null,
-      reEnteredPasswordValidationResult: validationMessages.reEnteredPasswordValidationMessage ? 'error' : null,
-    });
-  }
-
   render() {
     return (
       <EmailPasswordPresentational
         onSignUpClicked={(emailAddress, password) =>
               this.onSignUpClicked(emailAddress, password)}
         validateState={(emailAddress, password, reEnteredPassword) =>
-              this.validateState(emailAddress, password, reEnteredPassword)}
+              EmailPasswordContainer.validateState(emailAddress, password, reEnteredPassword)}
       />
     );
   }
