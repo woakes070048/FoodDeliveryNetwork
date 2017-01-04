@@ -1,4 +1,5 @@
 import NotificationSystem from 'react-notification-system';
+import Loader from 'react-loader';
 import React, {
   Component,
   PropTypes,
@@ -24,6 +25,7 @@ class AppPresentational extends Component {
         <NavbarContainer />
         <div className="container-fluid">
           {this.props.nestedChildren}
+          <Loader loaded={!this.props.loading} />
         </div>
         <NotificationSystem ref={(component) => { this.notificationSystem = component; }} />
       </div>
@@ -35,6 +37,11 @@ class AppPresentational extends Component {
 AppPresentational.propTypes = {
   nestedChildren: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   notifications: PropTypes.array,
+  loading: PropTypes.bool,
+};
+
+AppPresentational.defaultProps = {
+  loading: false,
 };
 
 export default AppPresentational;

@@ -10,4 +10,5 @@ export default {
   },
 
   notificationContext: [],
+  loadingContext: 'none',
 };

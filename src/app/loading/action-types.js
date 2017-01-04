@@ -1,0 +1,5 @@
+/* jshint esversion: 6 */
+
+export const LOADING_START_MAIN = 'LOADING_START_MAIN';
+export const LOADING_START_TRANSPARENT = 'LOADING_START_TRANSPARENT';
+export const LOADING_STOP = 'LOADING_STOP';
