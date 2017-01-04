@@ -51,11 +51,14 @@ class UserResetPasswordContainer extends Component {
     });
   }
 
+  static onReturnToSignInClicked() {
+    browserHistory.push('/signin');
+  }
+
   constructor(props) {
     super(props);
 
     this.onResetPasswordClicked = this.onResetPasswordClicked.bind(this);
-    this.onReturnToSignInClicked = this.onReturnToSignInClicked.bind(this);
 
     this.state = {
       lastOperationId: '',
@@ -95,18 +98,12 @@ class UserResetPasswordContainer extends Component {
     }));
   }
 
-  onReturnToSignInClicked() {
-    this.setState(Object.assign(this.state, {
-      resetPasswordEmailSent: false,
-    }));
-  }
-
   render() {
     return (
       <UserResetPasswordPresentational
         onResetPasswordClicked={emailAddress =>
             this.onResetPasswordClicked(emailAddress)}
-        onReturnToSignInClicked={() => this.onReturnToSignInClicked()}
+        onReturnToSignInClicked={() => UserResetPasswordContainer.onReturnToSignInClicked()}
         validateState={emailAddress =>
             UserResetPasswordContainer.validateState(emailAddress)}
         resetPasswordEmailSent={this.state.resetPasswordEmailSent}
