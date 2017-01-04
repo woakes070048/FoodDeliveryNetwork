@@ -23,10 +23,12 @@ class AppPresentational extends Component {
     return (
       <div>
         <NavbarContainer />
-        <div className="container-fluid">
-          {this.props.nestedChildren}
-          <Loader loaded={!this.props.loading} />
-        </div>
+        <Loader loaded={this.props.loadingState === 'none' || this.props.loadingState === 'transparent'} >
+          <div className="container-fluid">
+            {this.props.nestedChildren}
+            <Loader loaded={this.props.loadingState === 'none' || this.props.loadingState === 'main'} />
+          </div>
+        </Loader>
         <NotificationSystem ref={(component) => { this.notificationSystem = component; }} />
       </div>
 
@@ -37,11 +39,11 @@ class AppPresentational extends Component {
 AppPresentational.propTypes = {
   nestedChildren: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   notifications: PropTypes.array,
-  loading: PropTypes.bool,
+  loadingState: PropTypes.string,
 };
 
 AppPresentational.defaultProps = {
-  loading: false,
+  loadingState: 'none',
 };
 
 export default AppPresentational;

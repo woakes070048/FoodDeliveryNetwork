@@ -47,7 +47,7 @@ class AppContainer extends Component {
       <AppPresentational
         nestedChildren={this.props.children}
         notifications={this.props.notifications}
-        loading={this.props.loading === 'main'}
+        loadingState={this.props.loadingState}
       />
     );
   }
@@ -58,7 +58,7 @@ AppContainer.propTypes = {
   loadingActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   notificationActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   children: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  loading: PropTypes.string,
+  loadingState: PropTypes.string,
   notifications: PropTypes.array,
 };
 
@@ -66,7 +66,7 @@ function mapStateToProps(state) {
   return {
     notifications: state.notification,
     operations: state.firebase.operations,
-    loading: state.loading,
+    loadingState: state.loading,
   };
 }
 
