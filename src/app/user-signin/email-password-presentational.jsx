@@ -126,6 +126,11 @@ class EmailPasswordPresentational extends Component {
           {passwordHelpBlock}
         </FormGroup>
         <FormGroup>
+          <LinkContainer to="/resetPassword">
+            <a> Forgot password? </a>
+          </LinkContainer>
+        </FormGroup>
+        <FormGroup>
           <Button
             bsStyle="primary"
             block
@@ -134,9 +139,12 @@ class EmailPasswordPresentational extends Component {
             Sign in
           </Button>
         </FormGroup>
-        <LinkContainer to="/resetPassword">
-          <a> Forgot password? </a>
+        <FormGroup>
+        New?
+        <LinkContainer to="/signup">
+          <a> Create an account. </a>
         </LinkContainer>
+        </FormGroup>
       </Form>
     );
   }
