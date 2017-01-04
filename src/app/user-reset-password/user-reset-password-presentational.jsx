@@ -5,12 +5,14 @@ import React, {
 import {
   Button,
   Col,
-  HelpBlock,
   Form,
   FormControl,
   FormGroup,
   Glyphicon,
+  HelpBlock,
   InputGroup,
+  Panel,
+  Well,
 } from 'react-bootstrap';
 
 class UserResetPasswordPresentational extends Component {
@@ -28,6 +30,9 @@ class UserResetPasswordPresentational extends Component {
     this.onEmailAddressChanged = this.onEmailAddressChanged.bind(this);
     this.validateState = this.validateState.bind(this);
     this.onResetPasswordClicked = this.onResetPasswordClicked.bind(this);
+    this.onReturnToSignInClicked = this.onReturnToSignInClicked.bind(this);
+    this.getResetPasswordUI = this.getResetPasswordUI.bind(this);
+    this.getResetPasswordEmailSentUI = this.getResetPasswordEmailSentUI.bind(this);
   }
 
   onEmailAddressChanged(e) {
@@ -51,6 +56,65 @@ class UserResetPasswordPresentational extends Component {
     }
   }
 
+  onReturnToSignInClicked() {
+    this.props.onReturnToSignInClicked();
+  }
+
+  getResetPasswordUI() {
+    const emailAddressHelpBlock = this.state.emailAddressValidationResult ?
+      <HelpBlock>{this.state.emailAddressValidationMessage}</HelpBlock> :
+      <div />;
+
+    return (
+      <Form horizontal>
+        <FormGroup validationState={this.state.emailAddressValidationResult}>
+          <InputGroup>
+            <InputGroup.Addon>
+              <Glyphicon glyph="user" />
+            </InputGroup.Addon>
+            <FormControl
+              type="email"
+              placeholder="Email address"
+              value={this.state.emailAddress}
+              onChange={this.onEmailAddressChanged}
+            />
+          </InputGroup>
+          <FormControl.Feedback />
+          {emailAddressHelpBlock}
+        </FormGroup>
+        <FormGroup>
+          <Button
+            bsStyle="primary"
+            block
+            onClick={this.onResetPasswordClicked}
+          >
+            Reset password
+          </Button>
+        </FormGroup>
+      </Form>
+    );
+  }
+
+  getResetPasswordEmailSentUI() {
+    const message = 'Check your email for a link to reset your password.' +
+      'If it doesn\'t appear within a few minutes, check your spam folder.';
+
+    return (
+      <Panel header={<strong>Reset your password</strong>}>
+        <Well>
+          {message}
+        </Well>
+        <Button
+          bsStyle="primary"
+          block
+          onClick={this.onReturnToSignInClicked}
+        >
+            Return to sign in
+          </Button>
+      </Panel>
+    );
+  }
+
   validateState() {
     const {
       emailAddressValidationResult,
@@ -65,10 +129,6 @@ class UserResetPasswordPresentational extends Component {
   }
 
   render() {
-    const emailAddressHelpBlock = this.state.emailAddressValidationResult ?
-      <HelpBlock>{this.state.emailAddressValidationMessage}</HelpBlock> :
-      <div />;
-
     return (
       <Col
         smOffset={2}
@@ -78,32 +138,7 @@ class UserResetPasswordPresentational extends Component {
         lgOffset={4}
         lg={4}
       >
-        <Form horizontal>
-          <FormGroup validationState={this.state.emailAddressValidationResult}>
-            <InputGroup>
-              <InputGroup.Addon>
-                <Glyphicon glyph="user" />
-              </InputGroup.Addon>
-              <FormControl
-                type="email"
-                placeholder="Email address"
-                value={this.state.emailAddress}
-                onChange={this.onEmailAddressChanged}
-              />
-            </InputGroup>
-            <FormControl.Feedback />
-            {emailAddressHelpBlock}
-          </FormGroup>
-          <FormGroup>
-            <Button
-              bsStyle="primary"
-              block
-              onClick={this.onResetPasswordClicked}
-            >
-            Reset password
-          </Button>
-          </FormGroup>
-        </Form>
+        {this.props.resetPasswordEmailSent ? this.getResetPasswordEmailSentUI() : this.getResetPasswordUI()}
       </Col>
     );
   }
@@ -112,7 +147,9 @@ class UserResetPasswordPresentational extends Component {
 UserResetPasswordPresentational.propTypes = {
   initialEmailAddress: PropTypes.string,
   onResetPasswordClicked: PropTypes.func.isRequired,
+  onReturnToSignInClicked: PropTypes.func.isRequired,
   validateState: PropTypes.func.isRequired,
+  resetPasswordEmailSent: PropTypes.bool.isRequired,
 };
 
 UserResetPasswordPresentational.defaultProps = {

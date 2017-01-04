@@ -55,9 +55,11 @@ class UserResetPasswordContainer extends Component {
     super(props);
 
     this.onResetPasswordClicked = this.onResetPasswordClicked.bind(this);
+    this.onReturnToSignInClicked = this.onReturnToSignInClicked.bind(this);
 
     this.state = {
       lastOperationId: '',
+      resetPasswordEmailSent: false,
     };
   }
 
@@ -75,6 +77,10 @@ class UserResetPasswordContainer extends Component {
       if (lastOperation) {
         if (lastOperation.failed) {
           this.props.notificationActions.addError(lastOperation.errorMessage);
+        } else {
+          this.setState(Object.assign(this.state, {
+            resetPasswordEmailSent: true,
+          }));
         }
 
         this.props.firebaseActions.acknowledgeOperaation(lastOperation.operationId);
@@ -83,19 +89,27 @@ class UserResetPasswordContainer extends Component {
   }
 
   onResetPasswordClicked(emailAddress) {
-    this.setState({
+    this.setState(Object.assign(this.state, {
       lastOperationId: this.props.firebaseActions.resetPassword(emailAddress)
         .operationId,
-    });
+    }));
+  }
+
+  onReturnToSignInClicked() {
+    this.setState(Object.assign(this.state, {
+      resetPasswordEmailSent: false,
+    }));
   }
 
   render() {
     return (
       <UserResetPasswordPresentational
         onResetPasswordClicked={emailAddress =>
-              this.onResetPasswordClicked(emailAddress)}
+            this.onResetPasswordClicked(emailAddress)}
+        onReturnToSignInClicked={() => this.onReturnToSignInClicked()}
         validateState={emailAddress =>
-              UserResetPasswordContainer.validateState(emailAddress)}
+            UserResetPasswordContainer.validateState(emailAddress)}
+        resetPasswordEmailSent={this.state.resetPasswordEmailSent}
       />
     );
   }
