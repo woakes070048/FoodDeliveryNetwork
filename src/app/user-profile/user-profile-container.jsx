@@ -1,5 +1,6 @@
 import React, {
   Component,
+  PropTypes,
 } from 'react';
 import {
   connect,
@@ -18,15 +19,20 @@ class UserProfileContainer extends Component {
 
   render() {
     return (
-      <UserProfilePresentational />
+      <UserProfilePresentational selectedProfileSubItem={this.props.profileSubItem.toLowerCase()} />
     );
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
     userExists: state.firebase.userInfo.userExists,
+    profileSubItem: ownProps.params.profileSubIte ? 'public' : ownProps.params.profileSubItem,
   };
 }
+
+UserProfileContainer.propTypes = {
+  profileSubItem: PropTypes.string,
+};
 
 export default connect(mapStateToProps)(UserProfileContainer);

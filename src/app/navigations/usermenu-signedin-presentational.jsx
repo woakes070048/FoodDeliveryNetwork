@@ -61,7 +61,7 @@ const UserMenuSignedInPresentational = ({
           {formatUserInfoToDisplay(userDisplayName, userEmailAddress)}
         </MenuItem>
         <MenuItem divider />
-        <LinkContainer to="/profile" >
+        <LinkContainer to="/profile/public" >
           <MenuItem> My profile </MenuItem>
         </LinkContainer>
         <MenuItem divider />

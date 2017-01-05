@@ -13,7 +13,7 @@ import UserSignUpContainer from './user-signup/user-signup-container';
 export default (
   <Route path="/" component={AppContainer}>
     <IndexRoute component={HomeContainer} />
-    <Route path="/profile" component={UserProfileContainer} />
+    <Route path="/profile/:profileSubItem" component={UserProfileContainer} />
     <Route path="/resetPassword" component={UserResetPasswordContainer} />
     <Route path="/signin" component={UserSignInContainer} />
     <Route path="/signup" component={UserSignUpContainer} />
