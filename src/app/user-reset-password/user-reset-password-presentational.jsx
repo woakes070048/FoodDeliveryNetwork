@@ -88,7 +88,7 @@ class UserResetPasswordPresentational extends Component {
             block
             onClick={this.onResetPasswordClicked}
           >
-            Reset password
+            Send password reset email
           </Button>
         </FormGroup>
       </Form>

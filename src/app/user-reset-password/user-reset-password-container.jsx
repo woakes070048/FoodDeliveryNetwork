@@ -56,6 +56,12 @@ class UserResetPasswordContainer extends Component {
     browserHistory.push('/signin');
   }
 
+  static redirectIfRequired(userExists) {
+    if (userExists) {
+      browserHistory.push('/');
+    }
+  }
+
   constructor(props) {
     super(props);
 
@@ -67,12 +73,12 @@ class UserResetPasswordContainer extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.userExists) {
-      browserHistory.push('/');
+  componentWillMount() {
+    UserResetPasswordContainer.redirectIfRequired(this.props.userExists);
+  }
 
-      return;
-    }
+  componentWillReceiveProps(nextProps) {
+    UserResetPasswordContainer.redirectIfRequired(nextProps.userExists);
 
     if (this.state.lastOperationId) {
       const lastOperation =
@@ -120,6 +126,7 @@ UserResetPasswordContainer.propTypes = {
   firebaseActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   loadingActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   notificationActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  userExists: PropTypes.bool,
 };
 
 function mapStateToProps(state) {

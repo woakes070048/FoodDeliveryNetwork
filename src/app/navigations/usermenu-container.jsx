@@ -56,20 +56,15 @@ class UserMenuContainer extends Component {
   }
 
   render() {
-    if (this.props.userExists) {
-      return (
+    return this.props.userExists ?
+      (
         <UserMenuSignedInPresentational
           userDisplayName={this.props.userDisplayName}
           userEmailAddress={this.props.userEmailAddress}
           userPhotoUrl={this.props.userPhotoUrl}
           onSignOutMenuItemClicked={() => this.onSignOutMenuItemClicked()}
         />
-      );
-    }
-
-    return (
-      <UserMenuSignedOutPresentational />
-    );
+      ) : (<UserMenuSignedOutPresentational />);
   }
 }
 
