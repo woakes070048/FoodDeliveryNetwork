@@ -14,6 +14,7 @@ import {
 import UserMenuSignedInPresentational from './usermenu-signedin-presentational';
 import UserMenuSignedOutPresentational from './usermenu-signedout-presentational';
 import * as firebaseActions from '../firebase/actions';
+import * as loadingActions from '../loading/actions';
 import * as notificationActions from '../notification/actions';
 
 class UserMenuContainer extends Component {
@@ -40,6 +41,7 @@ class UserMenuContainer extends Component {
         }
 
         this.props.firebaseActions.acknowledgeOperaation(lastOperation.operationId);
+        this.props.loadingActions.stop();
       }
     }
   }
@@ -49,6 +51,8 @@ class UserMenuContainer extends Component {
       lastOperationId: this.props.firebaseActions.signOut()
         .operationId,
     });
+
+    this.props.loadingActions.startTransparent();
   }
 
   render() {
@@ -71,6 +75,7 @@ class UserMenuContainer extends Component {
 
 UserMenuContainer.propTypes = {
   firebaseActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  loadingActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   notificationActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   userExists: PropTypes.bool.isRequired,
   userDisplayName: PropTypes.string,
@@ -97,6 +102,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     firebaseActions: bindActionCreators(firebaseActions, dispatch),
+    loadingActions: bindActionCreators(loadingActions, dispatch),
     notificationActions: bindActionCreators(notificationActions, dispatch),
   };
 }

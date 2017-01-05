@@ -32,7 +32,6 @@ class AppContainer extends Component {
 
       if (lastOperation) {
         this.props.firebaseActions.acknowledgeOperaation(lastOperation.operationId);
-
         this.props.loadingActions.stop();
       }
     }

@@ -13,6 +13,7 @@ import {
   browserHistory,
 } from 'react-router';
 import * as firebaseActions from '../firebase/actions';
+import * as loadingActions from '../loading/actions';
 import * as notificationActions from '../notification/actions';
 import UserResetPasswordPresentational from './user-reset-password-presentational';
 
@@ -87,6 +88,7 @@ class UserResetPasswordContainer extends Component {
         }
 
         this.props.firebaseActions.acknowledgeOperaation(lastOperation.operationId);
+        this.props.loadingActions.stop();
       }
     }
   }
@@ -96,6 +98,8 @@ class UserResetPasswordContainer extends Component {
       lastOperationId: this.props.firebaseActions.resetPassword(emailAddress)
         .operationId,
     }));
+
+    this.props.loadingActions.startTransparent();
   }
 
   render() {
@@ -114,6 +118,7 @@ class UserResetPasswordContainer extends Component {
 
 UserResetPasswordContainer.propTypes = {
   firebaseActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  loadingActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   notificationActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
@@ -127,6 +132,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     firebaseActions: bindActionCreators(firebaseActions, dispatch),
+    loadingActions: bindActionCreators(loadingActions, dispatch),
     notificationActions: bindActionCreators(notificationActions, dispatch),
   };
 }

@@ -10,6 +10,7 @@ import {
 } from 'react-redux';
 import SocialSignInPresentational from './social-signin-presentational';
 import * as firebaseActions from '../firebase/actions';
+import * as loadingActions from '../loading/actions';
 import * as notificationActions from '../notification/actions';
 
 class SocialSignInContainer extends Component {
@@ -42,6 +43,7 @@ class SocialSignInContainer extends Component {
         }
 
         this.props.firebaseActions.acknowledgeOperaation(lastOperation.operationId);
+        this.props.loadingActions.stop();
       }
     }
   }
@@ -49,9 +51,11 @@ class SocialSignInContainer extends Component {
   signUpOrSignInWithProvider(provider) {
     this.setState({
       lastOperationId: this.props.signup ? this.props.firebaseActions.signUpWithProvider(provider)
-        .opertionId : this.props.firebaseActions.signInWithProvider(provider)
+        .operationId : this.props.firebaseActions.signInWithProvider(provider)
         .operationId,
     });
+
+    this.props.loadingActions.startTransparent();
   }
 
   render() {
@@ -68,6 +72,7 @@ class SocialSignInContainer extends Component {
 
 SocialSignInContainer.propTypes = {
   firebaseActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  loadingActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   notificationActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   signin: PropTypes.bool,
   signup: PropTypes.bool,
@@ -87,6 +92,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     firebaseActions: bindActionCreators(firebaseActions, dispatch),
+    loadingActions: bindActionCreators(loadingActions, dispatch),
     notificationActions: bindActionCreators(notificationActions, dispatch),
   };
 }
