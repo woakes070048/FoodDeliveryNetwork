@@ -56,12 +56,6 @@ class UserResetPasswordContainer extends Component {
     browserHistory.push('/signin');
   }
 
-  static redirectIfRequired(userExists) {
-    if (userExists) {
-      browserHistory.push('/');
-    }
-  }
-
   constructor(props) {
     super(props);
 
@@ -73,13 +67,7 @@ class UserResetPasswordContainer extends Component {
     };
   }
 
-  componentWillMount() {
-    UserResetPasswordContainer.redirectIfRequired(this.props.userExists);
-  }
-
   componentWillReceiveProps(nextProps) {
-    UserResetPasswordContainer.redirectIfRequired(nextProps.userExists);
-
     if (this.state.lastOperationId) {
       const lastOperation =
         nextProps.operations.find(operation => operation.operationId === this.state.lastOperationId);
@@ -117,6 +105,7 @@ class UserResetPasswordContainer extends Component {
         validateState={emailAddress =>
             UserResetPasswordContainer.validateState(emailAddress)}
         resetPasswordEmailSent={this.state.resetPasswordEmailSent}
+        initialEmailAddress={this.props.emailAddress}
       />
     );
   }
@@ -126,13 +115,13 @@ UserResetPasswordContainer.propTypes = {
   firebaseActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   loadingActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   notificationActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  userExists: PropTypes.bool,
+  emailAddress: PropTypes.string,
 };
 
 function mapStateToProps(state) {
   return {
     operations: state.firebase.operations,
-    userExists: state.firebase.userInfo.userExists,
+    emailAddress: state.firebase.userInfo.userExists ? state.firebase.userInfo.emailAddress : '',
   };
 }
 

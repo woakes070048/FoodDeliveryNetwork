@@ -50,7 +50,7 @@ function createStateWithUserInfo(state, userInfo) {
       userExists: true,
       error: null,
       userId: userInfo.userId,
-      email: userInfo.email,
+      emailAddress: userInfo.emailAddress,
       displayName: userInfo.displayName,
       photoUrl: userInfo.photoUrl,
     },

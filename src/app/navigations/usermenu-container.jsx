@@ -85,7 +85,7 @@ function mapStateToProps(state) {
   return userInfo.userExists ? {
     userExists: true,
     userDisplayName: userInfo.displayName,
-    userEmailAddress: userInfo.email,
+    userEmailAddress: userInfo.emailAddress,
     userPhotoUrl: userInfo.photoUrl,
     operations,
   } : {

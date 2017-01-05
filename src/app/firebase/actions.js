@@ -30,7 +30,7 @@ function getUserInfo(info) {
   return {
     userFetched: true,
     userId: info.uid,
-    email: info.email,
+    emailAddress: info.email,
     displayName: info.displayName,
     photoUrl: info.photoURL,
   };
