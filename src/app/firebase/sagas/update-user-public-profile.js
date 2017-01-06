@@ -16,7 +16,7 @@ import helper from '../helper';
 
 function* updateUserPublicProfileAsync(action) {
   try {
-    yield call(helper.updateUserPublicProfile, action.displayName, action.emailAddress);
+    yield call(helper.updateUserPublicProfile, action.displayName);
     yield put(updateUserPublicProfileSucceeded(action.operationId));
   } catch (exception) {
     yield put(updateUserPublicProfileFailed(action.operationId, exception.message));

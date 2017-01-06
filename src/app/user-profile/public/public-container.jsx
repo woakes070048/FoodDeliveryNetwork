@@ -1,4 +1,3 @@
-import emailValidator from 'email-validator';
 import React, {
   Component,
   PropTypes,
@@ -15,44 +14,11 @@ import * as notificationActions from '../../notification/actions';
 import PublicPresentational from './public-presentational';
 
 class PublicContainer extends Component {
-  static checkIfEmailAddressProvided(emailAddress, validationMessages) {
-    if (validationMessages.emailAddressValidationMessage) {
-      return validationMessages;
-    }
-
-    return emailAddress ? validationMessages : Object.assign(validationMessages, {
-      emailAddressValidationMessage: 'Email address is required.',
-    });
-  }
-
-  static checkIfEmailAddressFromattedCorrectly(emailAddress, validationMessages) {
-    if (validationMessages.emailAddressValidationMessage) {
-      return validationMessages;
-    }
-
-    return emailValidator.validate(emailAddress) ? validationMessages : Object.assign(validationMessages, {
-      emailAddressValidationMessage: 'Email address is badly formatted.',
-    });
-  }
-
-  static validateState(emailAddress) {
-    let validationMessages = {
-      emailAddressValidationMessage: null,
-    };
-
-    validationMessages = PublicContainer.checkIfEmailAddressProvided(emailAddress, validationMessages);
-    validationMessages = PublicContainer.checkIfEmailAddressFromattedCorrectly(emailAddress, validationMessages);
-
-    return Object.assign(validationMessages, {
-      emailAddressValidationResult: validationMessages.emailAddressValidationMessage ? 'error' : null,
-    });
-  }
-
   constructor(props) {
     super(props);
 
     this.onUpdateClicked = this.onUpdateClicked.bind(this);
-    this.handleFetchUserOperation = this.handleFetchUserOperation.bind(this);
+    this.handleUpdateOperation = this.handleUpdateOperation.bind(this);
     this.handleFetchUserOperation = this.handleFetchUserOperation.bind(this);
     this.fetchUser = this.fetchUser.bind(this);
 
@@ -67,9 +33,9 @@ class PublicContainer extends Component {
     this.handleFetchUserOperation(nextProps);
   }
 
-  onUpdateClicked(displayName, emailAddress) {
+  onUpdateClicked(displayName) {
     this.setState(Object.assign(this.state, {
-      lastUpdateOperationId: this.props.firebaseActions.updateUserPublicProfile(displayName, emailAddress)
+      lastUpdateOperationId: this.props.firebaseActions.updateUserPublicProfile(displayName)
         .operationId,
     }));
 
@@ -123,12 +89,9 @@ class PublicContainer extends Component {
   render() {
     return (
       <PublicPresentational
-        onUpdateClicked={(displayName, emailAddress) =>
-            this.onUpdateClicked(displayName, emailAddress)}
-        validateState={emailAddress =>
-            PublicContainer.validateState(emailAddress)}
+        onUpdateClicked={displayName =>
+            this.onUpdateClicked(displayName)}
         initialDisplayName={this.props.displayName}
-        initialEmailAddress={this.props.emailAddress}
       />
     );
   }
@@ -139,14 +102,12 @@ PublicContainer.propTypes = {
   loadingActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   notificationActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   displayName: PropTypes.string,
-  emailAddress: PropTypes.string,
 };
 
 function mapStateToProps(state) {
   return {
     operations: state.firebase.operations,
     displayName: state.firebase.userInfo.displayName || '',
-    emailAddress: state.firebase.userInfo.emailAddress,
   };
 }
 

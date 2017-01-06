@@ -8,7 +8,6 @@ import {
   Form,
   FormControl,
   FormGroup,
-  HelpBlock,
   InputGroup,
   Panel,
   Row,
@@ -19,20 +18,11 @@ class PublicPresentational extends Component {
     super(props);
 
     this.state = {
-      displayNameValidationResult: null,
-      displayNameValidationMessage: '',
       displayName: this.props.initialDisplayName,
       displayNameChanged: false,
-      emailAddressValidationResult: null,
-      emailAddressValidationMessage: '',
-      emailAddress: this.props.initialEmailAddress,
-      emailAddressChanged: false,
-      updateClicked: false,
     };
 
     this.onDisplayNameChanged = this.onDisplayNameChanged.bind(this);
-    this.onEmailAddressChanged = this.onEmailAddressChanged.bind(this);
-    this.validateState = this.validateState.bind(this);
     this.onUpdateClicked = this.onUpdateClicked.bind(this);
   }
 
@@ -41,49 +31,13 @@ class PublicPresentational extends Component {
       displayName: e.target.value,
       displayNameChanged: true,
     }));
-
-    this.validateState();
-  }
-
-  onEmailAddressChanged(e) {
-    this.setState(Object.assign(this.state, {
-      emailAddress: e.target.value,
-      emailAddressChanged: true,
-    }));
-
-    this.validateState();
   }
 
   onUpdateClicked() {
-    this.setState(Object.assign(this.state, {
-      updatelicked: true,
-    }));
-
-    this.validateState();
-
-    if (!this.state.displayNameValidationResult && !this.state.emailAddressValidationResult) {
-      this.props.onUpdateClicked(this.state.displayName, this.state.emailAddress);
-    }
-  }
-
-  validateState() {
-    const {
-      emailAddressValidationResult,
-      emailAddressValidationMessage,
-    } = this.props.validateState(this.state.emailAddress);
-
-    this.setState(Object.assign(this.state, {
-      emailAddressValidationResult: this.state.UpdateClicked || this.state.emailAddressChanged ?
-        emailAddressValidationResult : null,
-      emailAddressValidationMessage,
-    }));
+    this.props.onUpdateClicked(this.state.displayName);
   }
 
   render() {
-    const emailAddressHelpBlock = this.state.emailAddressValidationResult ?
-      <HelpBlock>{this.state.emailAddressValidationMessage}</HelpBlock> :
-      <div />;
-
     return (
       <Panel header="Public profile">
         <Form horizontal>
@@ -93,7 +47,7 @@ class PublicPresentational extends Component {
             mdOffset={1}
             lgOffset={1}
           >
-            <FormGroup validationState={this.state.displayNameValidationResult}>
+            <FormGroup>
               <InputGroup>
                 <Row> Display name </Row>
                 <Row>
@@ -104,20 +58,6 @@ class PublicPresentational extends Component {
                   />
                 </Row>
               </InputGroup>
-            </FormGroup>
-            <FormGroup validationState={this.state.emailAddressValidationResult}>
-              <InputGroup>
-                <Row> Email address </Row>
-                <Row>
-                  <FormControl
-                    type="email"
-                    value={this.state.emailAddress}
-                    onChange={this.onEmailAddressChanged}
-                  />
-                </Row>
-              </InputGroup>
-              <FormControl.Feedback />
-              {emailAddressHelpBlock}
             </FormGroup>
             <FormGroup>
               <Button
@@ -136,14 +76,11 @@ class PublicPresentational extends Component {
 
 PublicPresentational.propTypes = {
   initialDisplayName: PropTypes.string,
-  initialEmailAddress: PropTypes.string.isRequired,
   onUpdateClicked: PropTypes.func.isRequired,
-  validateState: PropTypes.func.isRequired,
 };
 
 PublicPresentational.defaultProps = {
   initialDisplayName: '',
-  initialEmailAddress: '',
 };
 
 export default PublicPresentational;

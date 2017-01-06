@@ -205,12 +205,11 @@ export function resetPasswordFailed(operationId, error) {
   return createGenericError(FIREBASE_RESET_PASSWORD_FAILED, operationId, error);
 }
 
-export function updateUserPublicProfile(displayName, emailAddress) {
+export function updateUserPublicProfile(displayName) {
   return {
     type: FIREBASE_UPDATE_USER_PUBLIC_PROFILE,
     operationId: shortid.generate(),
     displayName,
-    emailAddress,
   };
 }
 
