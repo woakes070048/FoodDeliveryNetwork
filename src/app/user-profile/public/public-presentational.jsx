@@ -37,16 +37,15 @@ class PublicPresentational extends Component {
     return (
       <div>
         <h3>Public profile</h3>
+        <div className="form-divider" />
         <FormGroup>
           <InputGroup>
-            <div> Display name </div>
-            <div>
-              <FormControl
-                type="text"
-                value={this.state.displayName}
-                onChange={this.onDisplayNameChanged}
-              />
-            </div>
+            Display name
+            <FormControl
+              type="text"
+              value={this.state.displayName}
+              onChange={this.onDisplayNameChanged}
+            />
           </InputGroup>
         </FormGroup>
         <FormGroup>
