@@ -24,6 +24,9 @@ import {
   FIREBASE_RESET_PASSWORD,
   FIREBASE_RESET_PASSWORD_SUCCEEDED,
   FIREBASE_RESET_PASSWORD_FAILED,
+  FIREBASE_UPDATE_PASSWORD,
+  FIREBASE_UPDATE_PASSWORD_SUCCEEDED,
+  FIREBASE_UPDATE_PASSWORD_FAILED,
   FIREBASE_UPDATE_USER_PUBLIC_PROFILE,
   FIREBASE_UPDATE_USER_PUBLIC_PROFILE_SUCCEEDED,
   FIREBASE_UPDATE_USER_PUBLIC_PROFILE_FAILED,
@@ -203,6 +206,25 @@ export function resetPasswordSucceeded(operationId) {
 
 export function resetPasswordFailed(operationId, error) {
   return createGenericError(FIREBASE_RESET_PASSWORD_FAILED, operationId, error);
+}
+
+export function updatePassword(newPassword) {
+  return {
+    type: FIREBASE_UPDATE_PASSWORD,
+    operationId: shortid.generate(),
+    newPassword,
+  };
+}
+
+export function updatePasswordSucceeded(operationId) {
+  return {
+    type: FIREBASE_UPDATE_PASSWORD_SUCCEEDED,
+    operationId,
+  };
+}
+
+export function updatePasswordFailed(operationId, error) {
+  return createGenericError(FIREBASE_UPDATE_PASSWORD_FAILED, operationId, error);
 }
 
 export function updateUserPublicProfile(displayName) {

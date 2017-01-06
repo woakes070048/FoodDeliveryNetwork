@@ -16,6 +16,8 @@ import {
   FIREBASE_SIGNOUT_FAILED,
   FIREBASE_RESET_PASSWORD_SUCCEEDED,
   FIREBASE_RESET_PASSWORD_FAILED,
+  FIREBASE_UPDATE_PASSWORD_SUCCEEDED,
+  FIREBASE_UPDATE_PASSWORD_FAILED,
   FIREBASE_UPDATE_USER_PUBLIC_PROFILE_SUCCEEDED,
   FIREBASE_UPDATE_USER_PUBLIC_PROFILE_FAILED,
 } from './action-types';
@@ -156,6 +158,14 @@ function handleResetPasswordFailed(state, action) {
   return addFailedOperationToState(state, action.operationId, action.error);
 }
 
+function handleUpdatePasswordSucceeded(state, action) {
+  return addSucceededOperationToState(state, action.operationId);
+}
+
+function handleUpdatePasswordFailed(state, action) {
+  return addFailedOperationToState(state, action.operationId, action.error);
+}
+
 function handleUpdateUserPublicProfileSucceeded(state, action) {
   return addSucceededOperationToState(state, action.operationId);
 }
@@ -210,6 +220,12 @@ export default function (state = initialState.firebaseContext, action) {
 
   case FIREBASE_RESET_PASSWORD_FAILED:
     return handleResetPasswordFailed(state, action);
+
+  case FIREBASE_UPDATE_PASSWORD_SUCCEEDED:
+    return handleUpdatePasswordSucceeded(state, action);
+
+  case FIREBASE_UPDATE_PASSWORD_FAILED:
+    return handleUpdatePasswordFailed(state, action);
 
   case FIREBASE_UPDATE_USER_PUBLIC_PROFILE_SUCCEEDED:
     return handleUpdateUserPublicProfileSucceeded(state, action);

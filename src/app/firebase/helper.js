@@ -11,14 +11,19 @@ const firebaseHelper = {
     switch (provider) {
     case 'email':
       return new firebase.auth.EmailAuthProvider();
+
     case 'facebook':
       return new firebase.auth.FacebookAuthProvider();
+
     case 'github':
       return new firebase.auth.GithubAuthProvider();
+
     case 'google':
       return new firebase.auth.GoogleAuthProvider();
+
     case 'twitter':
       return new firebase.auth.TwitterAuthProvider();
+
     default:
       throw new Error('Provider is not supported!!!');
     }
@@ -49,6 +54,8 @@ const firebaseHelper = {
   updateUserPublicProfile: displayName => firebaseAuth.currentUser.updateProfile({
     displayName,
   }),
+
+  updatePassword: newPassword => firebaseAuth.currentUser.updatePassword(newPassword),
 
   fetchUser: () => new Promise((resolve, reject) => {
     const unsub = firebaseAuth.onAuthStateChanged((user) => {
