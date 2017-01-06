@@ -3,9 +3,9 @@ import React, {
 } from 'react';
 import {
   Col,
-  Grid,
   Nav,
   NavItem,
+  Panel,
 } from 'react-bootstrap';
 import {
   LinkContainer,
@@ -40,29 +40,33 @@ const UserProfilePresentational = ({
   }) => {
   const profileSubItem = getProfileSubItem(selectedProfileSubItem);
 
-  return (<Grid>
-    <Col
-      sm={2}
-      md={2}
-      lg={2}
-    >
-      <Nav bsStyle="pills" stacked activeKey={profileSubItem.activeKey}>
-        <LinkContainer to="/profile/public" >
-          <NavItem>Profile</NavItem>
-        </LinkContainer>
-        <LinkContainer to="/profile/account" >
-          <NavItem>Account</NavItem>
-        </LinkContainer>
-      </Nav>
-    </Col>
-    <Col
-      smOffset={2}
-      mdOffset={2}
-      lgOffset={2}
-    >
-      {profileSubItem.component}
-    </Col>
-  </Grid>);
+  return (
+    <div>
+      <Col
+        sm={2}
+        md={2}
+        lg={2}
+      >
+        <Panel>
+          <Nav bsStyle="pills" stacked activeKey={profileSubItem.activeKey}>
+            <LinkContainer to="/profile/public" >
+              <NavItem>Profile</NavItem>
+            </LinkContainer>
+            <LinkContainer to="/profile/account" >
+              <NavItem>Account</NavItem>
+            </LinkContainer>
+          </Nav>
+        </Panel>
+      </Col>
+      <Col
+        smOffset={2}
+        mdOffset={2}
+        lgOffset={2}
+      >
+        {profileSubItem.component}
+      </Col>
+    </div>
+  );
 };
 
 UserProfilePresentational.propTypes = {

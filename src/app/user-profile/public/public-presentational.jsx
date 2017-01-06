@@ -4,13 +4,9 @@ import React, {
 } from 'react';
 import {
   Button,
-  Col,
-  Form,
   FormControl,
   FormGroup,
   InputGroup,
-  Panel,
-  Row,
 } from 'react-bootstrap';
 
 class PublicPresentational extends Component {
@@ -39,37 +35,29 @@ class PublicPresentational extends Component {
 
   render() {
     return (
-      <Panel header="Public profile">
-        <Form horizontal>
-          <Col
-            xsOffset={1}
-            smOffset={1}
-            mdOffset={1}
-            lgOffset={1}
+      <div>
+        <h3>Public profile</h3>
+        <FormGroup>
+          <InputGroup>
+            <div> Display name </div>
+            <div>
+              <FormControl
+                type="text"
+                value={this.state.displayName}
+                onChange={this.onDisplayNameChanged}
+              />
+            </div>
+          </InputGroup>
+        </FormGroup>
+        <FormGroup>
+          <Button
+            bsStyle="primary"
+            onClick={this.onUpdateClicked}
           >
-            <FormGroup>
-              <InputGroup>
-                <Row> Display name </Row>
-                <Row>
-                  <FormControl
-                    type="text"
-                    value={this.state.displayName}
-                    onChange={this.onDisplayNameChanged}
-                  />
-                </Row>
-              </InputGroup>
-            </FormGroup>
-            <FormGroup>
-              <Button
-                bsStyle="primary"
-                onClick={this.onUpdateClicked}
-              >
-                Update
-              </Button>
-            </FormGroup>
-          </Col>
-        </Form>
-      </Panel>
+            Update
+          </Button>
+        </FormGroup>
+      </div>
     );
   }
 }
