@@ -157,7 +157,7 @@ function handleResetPasswordFailed(state, action) {
 }
 
 function handleUpdateUserPublicProfileSucceeded(state, action) {
-   return addSucceededOperationToState(state, action.operationId);
+  return addSucceededOperationToState(state, action.operationId);
 }
 
 function handleUpdateUserPublicProfileFailed(state, action) {
