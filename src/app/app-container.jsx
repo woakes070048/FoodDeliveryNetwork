@@ -58,7 +58,13 @@ AppContainer.propTypes = {
   notificationActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   children: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   loadingState: PropTypes.string,
-  notifications: PropTypes.array,
+  notifications: PropTypes.arrayOf(
+    React.PropTypes.shape({
+      message: PropTypes.string.isRequired,
+      level: PropTypes.string.isRequired,
+      position: PropTypes.string.isRequired,
+    }),
+  ),
 };
 
 function mapStateToProps(state) {

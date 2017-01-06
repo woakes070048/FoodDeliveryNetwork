@@ -38,7 +38,13 @@ class AppPresentational extends Component {
 
 AppPresentational.propTypes = {
   nestedChildren: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  notifications: PropTypes.array,
+  notifications: PropTypes.arrayOf(
+    React.PropTypes.shape({
+      message: PropTypes.string.isRequired,
+      level: PropTypes.string.isRequired,
+      position: PropTypes.string.isRequired,
+    }),
+  ),
   loadingState: PropTypes.string,
 };
 
