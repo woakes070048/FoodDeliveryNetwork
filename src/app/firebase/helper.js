@@ -46,6 +46,11 @@ const firebaseHelper = {
 
   resetPassword: emailAddress => firebaseAuth.sendPasswordResetEmail(emailAddress),
 
+  updateUserPublicProfile: (displayName, emailAddress) => firebaseAuth.currentUser.updateProfile({
+    displayName,
+    email: emailAddress,
+  }),
+
   fetchUser: () => new Promise((resolve, reject) => {
     const unsub = firebaseAuth.onAuthStateChanged((user) => {
       unsub();

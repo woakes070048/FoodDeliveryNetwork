@@ -24,6 +24,9 @@ import {
   FIREBASE_RESET_PASSWORD,
   FIREBASE_RESET_PASSWORD_SUCCEEDED,
   FIREBASE_RESET_PASSWORD_FAILED,
+  FIREBASE_UPDATE_USER_PUBLIC_PROFILE,
+  FIREBASE_UPDATE_USER_PUBLIC_PROFILE_SUCCEEDED,
+  FIREBASE_UPDATE_USER_PUBLIC_PROFILE_FAILED,
 } from './action-types';
 
 function getUserInfo(info) {
@@ -81,25 +84,6 @@ export function fetchUserSucceeded(operationId, response) {
 
 export function fetchUserFailed(operationId, error) {
   return createGenericError(FIREBASE_FETCH_USER_FAILED, operationId, error);
-}
-
-export function resetPassword(emailAddress) {
-  return {
-    type: FIREBASE_RESET_PASSWORD,
-    operationId: shortid.generate(),
-    emailAddress,
-  };
-}
-
-export function resetPasswordSucceeded(operationId) {
-  return {
-    type: FIREBASE_RESET_PASSWORD_SUCCEEDED,
-    operationId,
-  };
-}
-
-export function resetPasswordFailed(operationId, error) {
-  return createGenericError(FIREBASE_RESET_PASSWORD_FAILED, operationId, error);
 }
 
 export function signUpWithEmailAndPassword(emailAddress, password) {
@@ -200,4 +184,43 @@ export function signOutSucceeded(operationId) {
 
 export function signOutFailed(operationId, error) {
   return createGenericError(FIREBASE_SIGNOUT_FAILED, operationId, error);
+}
+
+export function resetPassword(emailAddress) {
+  return {
+    type: FIREBASE_RESET_PASSWORD,
+    operationId: shortid.generate(),
+    emailAddress,
+  };
+}
+
+export function resetPasswordSucceeded(operationId) {
+  return {
+    type: FIREBASE_RESET_PASSWORD_SUCCEEDED,
+    operationId,
+  };
+}
+
+export function resetPasswordFailed(operationId, error) {
+  return createGenericError(FIREBASE_RESET_PASSWORD_FAILED, operationId, error);
+}
+
+export function updateUserPublicProfile(displayName, emailAddress) {
+  return {
+    type: FIREBASE_UPDATE_USER_PUBLIC_PROFILE,
+    operationId: shortid.generate(),
+    displayName,
+    emailAddress,
+  };
+}
+
+export function updateUserPublicProfileSucceeded(operationId) {
+  return {
+    type: FIREBASE_UPDATE_USER_PUBLIC_PROFILE_SUCCEEDED,
+    operationId,
+  };
+}
+
+export function updateUserPublicProfileFailed(operationId, error) {
+  return createGenericError(FIREBASE_UPDATE_USER_PUBLIC_PROFILE_FAILED, operationId, error);
 }

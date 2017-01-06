@@ -7,6 +7,7 @@ import watchSignUpWithProvider from '../firebase/sagas/signup-with-provider';
 import watchSignInWithEmailAndPassword from '../firebase/sagas/signin-with-email-password';
 import watchSignInWithProvider from '../firebase/sagas/signin-with-provider';
 import watchSignOut from '../firebase/sagas/signout';
+import watchUpdateUserPublicProfile from '../firebase/sagas/update-user-public-profile';
 
 export default function* sagas() {
   yield [watchFetchUser(),
@@ -16,5 +17,6 @@ export default function* sagas() {
     watchSignInWithEmailAndPassword(),
     watchSignInWithProvider(),
     watchSignOut(),
+    watchUpdateUserPublicProfile(),
   ];
 }

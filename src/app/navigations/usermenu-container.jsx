@@ -37,6 +37,7 @@ class UserMenuContainer extends Component {
         if (lastOperation.failed) {
           this.props.notificationActions.addError(lastOperation.errorMessage);
         } else {
+          this.props.notificationActions.addSuccess('You are successfully signed out.');
           browserHistory.push('/');
         }
 
