@@ -68,7 +68,7 @@ export function fetchUser() {
   };
 }
 
-export function acknowledgeOperaation(operationId) {
+export function acknowledgeOperation(operationId) {
   return {
     type: FIREBASE_ACKNOWLEDGE_OPERATION,
     operationId,

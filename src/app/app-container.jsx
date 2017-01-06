@@ -31,7 +31,7 @@ class AppContainer extends Component {
         nextProps.operations.find(operation => operation.operationId === this.state.lastOperationId);
 
       if (lastOperation) {
-        this.props.firebaseActions.acknowledgeOperaation(lastOperation.operationId);
+        this.props.firebaseActions.acknowledgeOperation(lastOperation.operationId);
         this.props.loadingActions.stop();
       }
     }

@@ -81,7 +81,7 @@ class UserResetPasswordContainer extends Component {
           }));
         }
 
-        this.props.firebaseActions.acknowledgeOperaation(lastOperation.operationId);
+        this.props.firebaseActions.acknowledgeOperation(lastOperation.operationId);
         this.props.loadingActions.stop();
       }
     }

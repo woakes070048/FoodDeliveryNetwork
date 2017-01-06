@@ -68,16 +68,11 @@ class PublicPresentational extends Component {
 
   validateState() {
     const {
-      displayNameValidationResult,
-      displayNameValidationMessage,
       emailAddressValidationResult,
       emailAddressValidationMessage,
-    } = this.props.validateState(this.state.displayName, this.state.emailAddress);
+    } = this.props.validateState(this.state.emailAddress);
 
     this.setState(Object.assign(this.state, {
-      displayNameValidationResult: this.state.UpdateClicked || this.state.displayNameChanged ?
-        displayNameValidationResult : null,
-      displayNameValidationMessage,
       emailAddressValidationResult: this.state.UpdateClicked || this.state.emailAddressChanged ?
         emailAddressValidationResult : null,
       emailAddressValidationMessage,
@@ -85,9 +80,6 @@ class PublicPresentational extends Component {
   }
 
   render() {
-    const displayNameHelpBlock = this.state.displayNameValidationResult ?
-      <HelpBlock>{this.state.displayNameValidationMessage}</HelpBlock> :
-      <div />;
     const emailAddressHelpBlock = this.state.emailAddressValidationResult ?
       <HelpBlock>{this.state.emailAddressValidationMessage}</HelpBlock> :
       <div />;
@@ -112,8 +104,6 @@ class PublicPresentational extends Component {
                   />
                 </Row>
               </InputGroup>
-              <FormControl.Feedback />
-              {displayNameHelpBlock}
             </FormGroup>
             <FormGroup validationState={this.state.emailAddressValidationResult}>
               <InputGroup>

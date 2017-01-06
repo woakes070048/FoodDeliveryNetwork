@@ -42,7 +42,7 @@ class SocialSignInContainer extends Component {
           this.props.notificationActions.addError(lastOperation.errorMessage);
         }
 
-        this.props.firebaseActions.acknowledgeOperaation(lastOperation.operationId);
+        this.props.firebaseActions.acknowledgeOperation(lastOperation.operationId);
         this.props.loadingActions.stop();
       }
     }

@@ -41,7 +41,7 @@ class UserMenuContainer extends Component {
           browserHistory.push('/');
         }
 
-        this.props.firebaseActions.acknowledgeOperaation(lastOperation.operationId);
+        this.props.firebaseActions.acknowledgeOperation(lastOperation.operationId);
         this.props.loadingActions.stop();
       }
     }

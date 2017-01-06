@@ -149,9 +149,7 @@ function handleSignOutFailed(state, action) {
 }
 
 function handleResetPasswordSucceeded(state, action) {
-  const stateWithOperationInfo = addSucceededOperationToState(state, action.operationId);
-
-  return createStateWithoutUserInfo(stateWithOperationInfo);
+  return addSucceededOperationToState(state, action.operationId);
 }
 
 function handleResetPasswordFailed(state, action) {
@@ -159,9 +157,7 @@ function handleResetPasswordFailed(state, action) {
 }
 
 function handleUpdateUserPublicProfileSucceeded(state, action) {
-  const stateWithOperationInfo = addSucceededOperationToState(state, action.operationId);
-
-  return createStateWithoutUserInfo(stateWithOperationInfo);
+   return addSucceededOperationToState(state, action.operationId);
 }
 
 function handleUpdateUserPublicProfileFailed(state, action) {
