@@ -143,9 +143,7 @@ function handleSignOutSucceeded(state, action) {
 }
 
 function handleSignOutFailed(state, action) {
-  const stateWithOperationInfo = addFailedOperationToState(state, action.operationId, action.error);
-
-  return createStateWithoutUserInfo(stateWithOperationInfo);
+  return addFailedOperationToState(state, action.operationId, action.error);
 }
 
 function handleResetPasswordSucceeded(state, action) {
@@ -155,9 +153,7 @@ function handleResetPasswordSucceeded(state, action) {
 }
 
 function handleResetPasswordFailed(state, action) {
-  const stateWithOperationInfo = addFailedOperationToState(state, action.operationId, action.error);
-
-  return createStateWithoutUserInfo(stateWithOperationInfo);
+  return addFailedOperationToState(state, action.operationId, action.error);
 }
 
 export default function (state = initialState.firebaseContext, action) {
