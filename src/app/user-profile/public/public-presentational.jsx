@@ -93,85 +93,53 @@ class PublicPresentational extends Component {
       <div />;
 
     return (
-      <Col
-        sm={8}
-        md={8}
-        lg={8}
-      >
-        <Panel header="Public profile">
-          <Form horizontal>
-            <Row>
-              <Col
-                smOffset={1}
-                sm={10}
-                mdOffset={1}
-                md={10}
-                lgOffset={1}
-                lg={10}
+      <Panel header="Public profile">
+        <Form horizontal>
+          <Col
+            xsOffset={1}
+            smOffset={1}
+            mdOffset={1}
+            lgOffset={1}
+          >
+            <FormGroup validationState={this.state.displayNameValidationResult}>
+              <InputGroup>
+                <Row> Display name </Row>
+                <Row>
+                  <FormControl
+                    type="text"
+                    value={this.state.displayName}
+                    onChange={this.onDisplayNameChanged}
+                  />
+                </Row>
+              </InputGroup>
+              <FormControl.Feedback />
+              {displayNameHelpBlock}
+            </FormGroup>
+            <FormGroup validationState={this.state.emailAddressValidationResult}>
+              <InputGroup>
+                <Row> Email address </Row>
+                <Row>
+                  <FormControl
+                    type="email"
+                    value={this.state.emailAddress}
+                    onChange={this.onEmailAddressChanged}
+                  />
+                </Row>
+              </InputGroup>
+              <FormControl.Feedback />
+              {emailAddressHelpBlock}
+            </FormGroup>
+            <FormGroup>
+              <Button
+                bsStyle="primary"
+                onClick={this.onUpdateClicked}
               >
-                <FormGroup validationState={this.state.displayNameValidationResult}>
-                  <InputGroup>
-                    <InputGroup.Addon>
-                      <div>Display name</div>
-                    </InputGroup.Addon>
-                    <FormControl
-                      type="text"
-                      value={this.state.displayName}
-                      onChange={this.onDisplayNameChanged}
-                    />
-                  </InputGroup>
-                  <FormControl.Feedback />
-                  {displayNameHelpBlock}
-                </FormGroup>
-              </Col>
-            </Row>
-            <Row>
-              <Col
-                smOffset={1}
-                sm={10}
-                mdOffset={1}
-                md={10}
-                lgOffset={1}
-                lg={10}
-              >
-                <FormGroup validationState={this.state.emailAddressValidationResult}>
-                  <InputGroup>
-                    <InputGroup.Addon>
-                      <div>Email</div>
-                    </InputGroup.Addon>
-                    <FormControl
-                      type="email"
-                      value={this.state.emailAddress}
-                      onChange={this.onEmailAddressChanged}
-                    />
-                  </InputGroup>
-                  <FormControl.Feedback />
-                  {emailAddressHelpBlock}
-                </FormGroup>
-              </Col>
-            </Row>
-            <Row>
-              <Col
-                smOffset={1}
-                sm={1}
-                mdOffset={1}
-                md={1}
-                lgOffset={1}
-                lg={1}
-              >
-                <FormGroup>
-                  <Button
-                    bsStyle="primary"
-                    onClick={this.onUpdateClicked}
-                  >
-                    Update
-                  </Button>
-                </FormGroup>
-              </Col>
-            </Row>
-          </Form>
-        </Panel>
-      </Col>
+                Update
+              </Button>
+            </FormGroup>
+          </Col>
+        </Form>
+      </Panel>
     );
   }
 }
