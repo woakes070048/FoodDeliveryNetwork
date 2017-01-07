@@ -5,7 +5,6 @@ import React, {
 import {
   Button,
   HelpBlock,
-  Form,
   FormControl,
   FormGroup,
   Glyphicon,
@@ -31,10 +30,17 @@ class EmailPasswordPresentational extends Component {
       signInClicked: false,
     };
 
+    this.onKeyPressed = this.onKeyPressed.bind(this);
     this.onEmailAddressChanged = this.onEmailAddressChanged.bind(this);
     this.onPasswordChanged = this.onPasswordChanged.bind(this);
     this.validateState = this.validateState.bind(this);
     this.onSignInClicked = this.onSignInClicked.bind(this);
+  }
+
+  onKeyPressed(e) {
+    if (e.charCode === 13) {
+      this.onSignInClicked();
+    }
   }
 
   onEmailAddressChanged(e) {
@@ -94,7 +100,7 @@ class EmailPasswordPresentational extends Component {
       <div />;
 
     return (
-      <Form horizontal>
+      <div>
         <FormGroup validationState={this.state.emailAddressValidationResult}>
           <InputGroup>
             <InputGroup.Addon>
@@ -105,6 +111,7 @@ class EmailPasswordPresentational extends Component {
               placeholder="Email address"
               value={this.state.emailAddress}
               onChange={this.onEmailAddressChanged}
+              onKeyPress={this.onKeyPressed}
             />
           </InputGroup>
           <FormControl.Feedback />
@@ -120,6 +127,7 @@ class EmailPasswordPresentational extends Component {
               placeholder="Password"
               value={this.state.password}
               onChange={this.onPasswordChanged}
+              onKeyPress={this.onKeyPressed}
             />
           </InputGroup>
           <FormControl.Feedback />
@@ -145,7 +153,7 @@ class EmailPasswordPresentational extends Component {
           <a> Create an account. </a>
         </LinkContainer>
         </FormGroup>
-      </Form>
+      </div>
     );
   }
 }
