@@ -5,7 +5,6 @@ import React, {
 import {
   Button,
   Col,
-  Form,
   FormControl,
   FormGroup,
   Glyphicon,
@@ -27,12 +26,19 @@ class UserResetPasswordPresentational extends Component {
       resetPasswordClicked: false,
     };
 
+    this.onKeyPressed = this.onKeyPressed.bind(this);
     this.onEmailAddressChanged = this.onEmailAddressChanged.bind(this);
     this.validateState = this.validateState.bind(this);
     this.onResetPasswordClicked = this.onResetPasswordClicked.bind(this);
     this.onReturnToSignInClicked = this.onReturnToSignInClicked.bind(this);
     this.getResetPasswordUI = this.getResetPasswordUI.bind(this);
     this.getResetPasswordEmailSentUI = this.getResetPasswordEmailSentUI.bind(this);
+  }
+
+  onKeyPressed(e) {
+    if (e.charCode === 13) {
+      this.onResetPasswordClicked();
+    }
   }
 
   onEmailAddressChanged(e) {
@@ -66,7 +72,7 @@ class UserResetPasswordPresentational extends Component {
       <div />;
 
     return (
-      <Form horizontal>
+      <div>
         <FormGroup validationState={this.state.emailAddressValidationResult}>
           <InputGroup>
             <InputGroup.Addon>
@@ -77,6 +83,7 @@ class UserResetPasswordPresentational extends Component {
               placeholder="Email address"
               value={this.state.emailAddress}
               onChange={this.onEmailAddressChanged}
+              onKeyPress={this.onKeyPressed}
             />
           </InputGroup>
           <FormControl.Feedback />
@@ -91,7 +98,7 @@ class UserResetPasswordPresentational extends Component {
             Send password reset email
           </Button>
         </FormGroup>
-      </Form>
+      </div>
     );
   }
 

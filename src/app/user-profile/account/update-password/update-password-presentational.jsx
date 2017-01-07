@@ -6,7 +6,6 @@ import {
   Button,
   Col,
   HelpBlock,
-  Form,
   FormControl,
   FormGroup,
   Glyphicon,
@@ -105,56 +104,54 @@ class UpdatePasswordPresentational extends Component {
       <div />;
 
     return (
-      <Form horizontal>
-        <Col
-          sm={6}
-          md={4}
-          lg={4}
-        >
-          <h3>Change password</h3>
-          <div className="form-divider" />
-          <FormGroup validationState={this.state.newPasswordValidationResult}>
-            <InputGroup>
-              <InputGroup.Addon>
-                <Glyphicon glyph="lock" />
-              </InputGroup.Addon>
-              <FormControl
-                type="password"
-                placeholder="New password"
-                value={this.state.newPassword}
-                onChange={this.onNewPasswordChanged}
-                onKeyPress={this.onKeyPressed}
-              />
-            </InputGroup>
-            <FormControl.Feedback />
-            {newPasswordHelpBlock}
-          </FormGroup>
-          <FormGroup validationState={this.state.reEnteredPasswordValidationResult}>
-            <InputGroup>
-              <InputGroup.Addon>
-                <Glyphicon glyph="lock" />
-              </InputGroup.Addon>
-              <FormControl
-                type="password"
-                placeholder="Confirm new password"
-                value={this.state.reEnteredPassword}
-                onChange={this.onReEnteredPasswordChanged}
-                onKeyPress={this.onKeyPressed}
-              />
-            </InputGroup>
-            <FormControl.Feedback />
-            {reEnteredPasswordHelpBlock}
-          </FormGroup>
-          <FormGroup>
-            <Button
-              bsStyle="primary"
-              onClick={this.onUpdatePasswordClicked}
-            >
+      <Col
+        sm={6}
+        md={4}
+        lg={4}
+      >
+        <h3>Change password</h3>
+        <div className="form-divider" />
+        <FormGroup validationState={this.state.newPasswordValidationResult}>
+          <InputGroup>
+            <InputGroup.Addon>
+              <Glyphicon glyph="lock" />
+            </InputGroup.Addon>
+            <FormControl
+              type="password"
+              placeholder="New password"
+              value={this.state.newPassword}
+              onChange={this.onNewPasswordChanged}
+              onKeyPress={this.onKeyPressed}
+            />
+          </InputGroup>
+          <FormControl.Feedback />
+          {newPasswordHelpBlock}
+        </FormGroup>
+        <FormGroup validationState={this.state.reEnteredPasswordValidationResult}>
+          <InputGroup>
+            <InputGroup.Addon>
+              <Glyphicon glyph="lock" />
+            </InputGroup.Addon>
+            <FormControl
+              type="password"
+              placeholder="Confirm new password"
+              value={this.state.reEnteredPassword}
+              onChange={this.onReEnteredPasswordChanged}
+              onKeyPress={this.onKeyPressed}
+            />
+          </InputGroup>
+          <FormControl.Feedback />
+          {reEnteredPasswordHelpBlock}
+        </FormGroup>
+        <FormGroup>
+          <Button
+            bsStyle="primary"
+            onClick={this.onUpdatePasswordClicked}
+          >
             Update password
           </Button>
-          </FormGroup>
-        </Col>
-      </Form>
+        </FormGroup>
+      </Col>
     );
   }
 }
