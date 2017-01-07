@@ -31,12 +31,19 @@ class UpdatePasswordPresentational extends Component {
   constructor(props) {
     super(props);
 
+    this.onKeyPressed = this.onKeyPressed.bind(this);
     this.onNewPasswordChanged = this.onNewPasswordChanged.bind(this);
     this.onReEnteredPasswordChanged = this.onReEnteredPasswordChanged.bind(this);
     this.validateState = this.validateState.bind(this);
     this.onUpdatePasswordClicked = this.onUpdatePasswordClicked.bind(this);
 
     this.state = UpdatePasswordPresentational.getInitialState();
+  }
+
+  onKeyPressed(e) {
+    if (e.charCode === 13) {
+      this.onUpdatePasswordClicked();
+    }
   }
 
   onNewPasswordChanged(e) {
@@ -116,6 +123,7 @@ class UpdatePasswordPresentational extends Component {
                 placeholder="New password"
                 value={this.state.newPassword}
                 onChange={this.onNewPasswordChanged}
+                onKeyPress={this.onKeyPressed}
               />
             </InputGroup>
             <FormControl.Feedback />
@@ -131,6 +139,7 @@ class UpdatePasswordPresentational extends Component {
                 placeholder="Confirm new password"
                 value={this.state.reEnteredPassword}
                 onChange={this.onReEnteredPasswordChanged}
+                onKeyPress={this.onKeyPressed}
               />
             </InputGroup>
             <FormControl.Feedback />
