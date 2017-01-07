@@ -8,19 +8,19 @@
     "dev": "./node_modules/.bin/webpack-dev-server --config ./webpack/webpack-dev.config.js --watch --colors",
     "build": "./node_modules/.bin/webpack --config ./webpack/webpack-prod.config.js --colors",
     "start": "PORT=8080 pm2 start ./www.js",
-    "test": "./node_modules/.bin/mocha --compilers js:babel-core/register --require ./test/testHelper.js --recursive ./test",
+    "test": "mocha --reporter progress tools/testSetup.js \"src/**/*.test.js\" --recursive",
     "test:watch": "npm run test -- --watch",
     "lint": "./node_modules/.bin/eslint --ext .jsx --ext .js src",
-    "fixlint": "./node_modules/.bin/eslint --fix --ext .jsx --ext .js src"
+    "lint:watch": "npm run test -- --watch",
+    "fixlint": "./node_modules/.bin/eslint --fix --ext .jsx --ext .js src",
+    "all": "npm-run-all --parallel test:watch lint:watch"
   },
   "author": "Micro Business",
-  "contributors": [
-    {
-      "name": "Morteza Alizadeh",
-      "email": "morteza.alizadeh@gmail.com",
-      "url": "https://github.com/mortezaalizadeh"
-    }
-  ],
+  "contributors": [{
+    "name": "Morteza Alizadeh",
+    "email": "morteza.alizadeh@gmail.com",
+    "url": "https://github.com/mortezaalizadeh"
+  }],
   "license": "GPL-3.0",
   "keywords": [
     "Food",
@@ -52,6 +52,7 @@
     "less-loader": "^2.2.3",
     "mocha": "^3.2.0",
     "node-sass": "^4.1.1",
+    "npm-run-all": "^4.0.0",
     "react-addons-test-utils": "^15.4.1",
     "react-hot-loader": "^1.3.0",
     "sass-loader": "^4.0.0",
@@ -67,7 +68,6 @@
     "email-validator": "^1.0.7",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.0.0",
-    "express": "^4.14.0",
     "firebase": "^3.0.5",
     "font-awesome": "^4.7.0",
     "jquery": "^3.1.1",
