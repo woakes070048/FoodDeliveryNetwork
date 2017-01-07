@@ -11,6 +11,7 @@ import {
   LinkContainer,
 } from 'react-router-bootstrap';
 import AccountContainer from './account/account-container';
+import EmailsContainer from './emails/emails-container';
 import PublicContainer from './public/public-container';
 
 function getProfileSubItem(selectedProfileSubItem) {
@@ -25,6 +26,12 @@ function getProfileSubItem(selectedProfileSubItem) {
     return {
       activeKey: 2,
       component: <AccountContainer />,
+    };
+
+  case 'emails':
+    return {
+      activeKey: 3,
+      component: <EmailsContainer />,
     };
 
   default:
@@ -57,6 +64,9 @@ const UserProfilePresentational = ({
             </LinkContainer>
             <LinkContainer to="/profile/account" >
               <NavItem>Account</NavItem>
+            </LinkContainer>
+            <LinkContainer to="/profile/emails" >
+              <NavItem>Emails</NavItem>
             </LinkContainer>
           </Nav>
         </Panel>

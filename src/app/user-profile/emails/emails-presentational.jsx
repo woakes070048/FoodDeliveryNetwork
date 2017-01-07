@@ -5,13 +5,12 @@ import {
 
 const EmailsPresentational = () =>
   <Col
-        sm={6}
-        md={6}
-        lg={4}
-      >
-        <h3>Emails</h3>
-        <div className="form-divider" />
-        emails
+    sm={6}
+    md={6}
+    lg={4}
+  >
+    <h3>Emails</h3>
+    <div className="form-divider" />
   </Col>;
 
 export default EmailsPresentational;
