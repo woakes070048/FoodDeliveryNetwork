@@ -20,6 +20,8 @@ import {
   FIREBASE_UPDATE_PASSWORD_FAILED,
   FIREBASE_UPDATE_USER_PUBLIC_PROFILE_SUCCEEDED,
   FIREBASE_UPDATE_USER_PUBLIC_PROFILE_FAILED,
+  FIREBASE_SEND_EMAIL_VERIFICATION_SUCCEEDED,
+  FIREBASE_SEND_EMAIL_VERIFICATION_FAILED,
 } from './action-types';
 import initialState from '../store/initial-state';
 
@@ -175,6 +177,14 @@ function handleUpdateUserPublicProfileFailed(state, action) {
   return addFailedOperationToState(state, action.operationId, action.error);
 }
 
+function handleSendEmailVerificationSucceeded(state, action) {
+  return addSucceededOperationToState(state, action.operationId);
+}
+
+function handleSendEmailVerificationFailed(state, action) {
+  return addFailedOperationToState(state, action.operationId, action.error);
+}
+
 export default function (state = initialState.firebaseContext, action) {
   switch (action.type) {
   case FIREBASE_ACKNOWLEDGE_OPERATION:
@@ -233,6 +243,12 @@ export default function (state = initialState.firebaseContext, action) {
 
   case FIREBASE_UPDATE_USER_PUBLIC_PROFILE_FAILED:
     return handleUpdateUserPublicProfileFailed(state, action);
+
+  case FIREBASE_SEND_EMAIL_VERIFICATION_SUCCEEDED:
+    return handleSendEmailVerificationSucceeded(state, action);
+
+  case FIREBASE_SEND_EMAIL_VERIFICATION_FAILED:
+    return handleSendEmailVerificationFailed(state, action);
 
   default:
     return state;

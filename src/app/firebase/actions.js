@@ -30,6 +30,9 @@ import {
   FIREBASE_UPDATE_USER_PUBLIC_PROFILE,
   FIREBASE_UPDATE_USER_PUBLIC_PROFILE_SUCCEEDED,
   FIREBASE_UPDATE_USER_PUBLIC_PROFILE_FAILED,
+  FIREBASE_SEND_EMAIL_VERIFICATION,
+  FIREBASE_SEND_EMAIL_VERIFICATION_SUCCEEDED,
+  FIREBASE_SEND_EMAIL_VERIFICATION_FAILED,
 } from './action-types';
 
 function getUserInfo(info) {
@@ -245,4 +248,22 @@ export function updateUserPublicProfileSucceeded(operationId) {
 
 export function updateUserPublicProfileFailed(operationId, error) {
   return createGenericError(FIREBASE_UPDATE_USER_PUBLIC_PROFILE_FAILED, operationId, error);
+}
+
+export function sendVerificationEmail() {
+  return {
+    type: FIREBASE_SEND_EMAIL_VERIFICATION,
+    operationId: shortid.generate(),
+  };
+}
+
+export function sendVerificationEmailSucceeded(operationId) {
+  return {
+    type: FIREBASE_SEND_EMAIL_VERIFICATION_SUCCEEDED,
+    operationId,
+  };
+}
+
+export function sendVerificationEmailFailed(operationId, error) {
+  return createGenericError(FIREBASE_SEND_EMAIL_VERIFICATION_FAILED, operationId, error);
 }

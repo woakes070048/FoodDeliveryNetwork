@@ -49,6 +49,8 @@ const firebaseHelper = {
 
   signOut: () => firebaseAuth.signOut(),
 
+  sendEmailVerification: () => firebaseAuth.currentUser.sendEmailVerification(),
+
   resetPassword: emailAddress => firebaseAuth.sendPasswordResetEmail(emailAddress),
 
   updateUserPublicProfile: displayName => firebaseAuth.currentUser.updateProfile({
