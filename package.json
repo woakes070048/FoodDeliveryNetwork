@@ -8,7 +8,7 @@
     "dev": "./node_modules/.bin/webpack-dev-server --config ./webpack/webpack-dev.config.js --watch --colors",
     "build": "./node_modules/.bin/webpack --config ./webpack/webpack-prod.config.js --colors",
     "start": "PORT=8080 pm2 start ./www.js",
-    "test": "mocha --reporter progress tools/testSetup.js \"src/**/*.test.js\" --recursive",
+    "test": "mocha --reporter progress tools/test-setup.js \"src/**/*.test.js\" --recursive",
     "test:watch": "npm run test -- --watch",
     "lint": "./node_modules/.bin/eslint --ext .jsx --ext .js src",
     "lint:watch": "npm run test -- --watch",
@@ -16,11 +16,13 @@
     "all": "npm-run-all --parallel test:watch lint:watch"
   },
   "author": "Micro Business",
-  "contributors": [{
-    "name": "Morteza Alizadeh",
-    "email": "morteza.alizadeh@gmail.com",
-    "url": "https://github.com/mortezaalizadeh"
-  }],
+  "contributors": [
+    {
+      "name": "Morteza Alizadeh",
+      "email": "morteza.alizadeh@gmail.com",
+      "url": "https://github.com/mortezaalizadeh"
+    }
+  ],
   "license": "GPL-3.0",
   "keywords": [
     "Food",
@@ -42,6 +44,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.3.0",
+    "expect": "^1.20.2",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.21.0",

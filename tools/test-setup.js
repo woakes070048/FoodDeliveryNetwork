@@ -52,7 +52,7 @@ Object.keys(document.defaultView)
   });
 
 global.navigator = {
-  userAgent: 'node.js';
+  userAgent: 'node.js'
 };
 
 documentRef = document;
