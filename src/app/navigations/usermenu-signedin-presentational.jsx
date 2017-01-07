@@ -2,13 +2,10 @@ import React, {
   PropTypes,
 } from 'react';
 import {
-  Glyphicon,
   Image,
   MenuItem,
   Nav,
   NavDropdown,
-  OverlayTrigger,
-  Tooltip,
 } from 'react-bootstrap';
 import {
   LinkContainer,
@@ -18,44 +15,20 @@ function getUserDisplayName(userDisplayName) {
   return userDisplayName || 'Unknown';
 }
 
-function formatUserInfoToDisplay(userDisplayName, userEmailAddress) {
-  return userEmailAddress ?
-    (
-      <div>
+function formatUserInfoToDisplay(userDisplayName, userEmailAddress, userEmailAddressVerified) {
+  return (
+    <div>
       Signed in as
       <br />
-        <strong>
-          {getUserDisplayName(userDisplayName)} ({userEmailAddress})
+      <strong>
+        {getUserDisplayName(userDisplayName)}
+          ({userEmailAddress.concat(userEmailAddressVerified ? '' : ', Email address not verified')})
       </strong>
-      </div>
-    ) :
-    (
-      <div>
-      Signed in as
-      <br />
-        <strong>
-          {getUserDisplayName(userDisplayName)}
-        </strong>
-      </div>
-    );
+    </div>
+  );
 }
 
-function getEmailAddressVerifiedWarningIcon(userEmailAddressVerified) {
-  return userEmailAddressVerified ?
-    (<span />) :
-    (
-      <OverlayTrigger
-        placement="right"
-        overlay={<Tooltip id="emailAddressVerifiedWarningTooltip">Email address not verified.</Tooltip>}
-      >
-        <Glyphicon
-          glyph="warning-sign"
-          className="warning-icon"
-        />
-      </OverlayTrigger>);
-}
-
-function getUserImageOrDisplayName(userDisplayName, userPhotoUrl, userEmailAddressVerified) {
+function getUserImageOrDisplayName(userDisplayName, userPhotoUrl) {
   return userPhotoUrl ?
     (
       <span>
@@ -64,13 +37,11 @@ function getUserImageOrDisplayName(userDisplayName, userPhotoUrl, userEmailAddre
           className="navbar-user-photo"
           rounded
         />
-        {getEmailAddressVerifiedWarningIcon(userEmailAddressVerified)}
       </span>
     ) :
     (
       <span>
         {getUserDisplayName(userDisplayName)}
-        {getEmailAddressVerifiedWarningIcon(userEmailAddressVerified)}
       </span>
     );
 }
@@ -83,9 +54,9 @@ const UserMenuSignedInPresentational = ({
     onSignOutMenuItemClicked,
   }) =>
     <Nav collapseOnSelect pullRight>
-      <NavDropdown title={getUserImageOrDisplayName(userDisplayName, userPhotoUrl, userEmailAddressVerified)} >
+      <NavDropdown title={getUserImageOrDisplayName(userDisplayName, userPhotoUrl)} >
         <MenuItem disabled>
-          {formatUserInfoToDisplay(userDisplayName, userEmailAddress)}
+          {formatUserInfoToDisplay(userDisplayName, userEmailAddress, userEmailAddressVerified)}
         </MenuItem>
         <MenuItem divider />
         <LinkContainer to="/profile/public" >
@@ -94,6 +65,7 @@ const UserMenuSignedInPresentational = ({
         <MenuItem divider />
         <MenuItem onClick={() => onSignOutMenuItemClicked()}> Sign out </MenuItem>
       </NavDropdown>
+      <span />
     </Nav>;
 
 UserMenuSignedInPresentational.propTypes = {
