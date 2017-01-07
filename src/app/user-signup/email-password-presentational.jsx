@@ -1,4 +1,3 @@
-
 import React, {
   Component,
   PropTypes,
@@ -154,7 +153,7 @@ class EmailPasswordPresentational extends Component {
             </InputGroup.Addon>
             <FormControl
               type="password"
-              placeholder="Re-enter password"
+              placeholder="Confirm password"
               value={this.state.reEnteredPassword}
               onChange={this.onReEnteredPasswordChanged}
             />

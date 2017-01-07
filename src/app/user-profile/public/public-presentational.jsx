@@ -4,9 +4,12 @@ import React, {
 } from 'react';
 import {
   Button,
+  Col,
+  Form,
   FormControl,
   FormGroup,
   InputGroup,
+  Glyphicon,
 } from 'react-bootstrap';
 
 class PublicPresentational extends Component {
@@ -35,28 +38,37 @@ class PublicPresentational extends Component {
 
   render() {
     return (
-      <div>
-        <h3>Public profile</h3>
-        <div className="form-divider" />
-        <FormGroup>
-          <InputGroup>
-            Display name
-            <FormControl
-              type="text"
-              value={this.state.displayName}
-              onChange={this.onDisplayNameChanged}
-            />
-          </InputGroup>
-        </FormGroup>
-        <FormGroup>
-          <Button
-            bsStyle="primary"
-            onClick={this.onUpdateClicked}
-          >
+      <Form horizontal>
+        <Col
+          sm={6}
+          md={4}
+          lg={4}
+        >
+          <h3>Public profile</h3>
+          <div className="form-divider" />
+          <FormGroup>
+            <InputGroup>
+              <InputGroup.Addon>
+                <Glyphicon glyph="user" />
+              </InputGroup.Addon>
+              <FormControl
+                type="text"
+                placeholder="Display name"
+                value={this.state.displayName}
+                onChange={this.onDisplayNameChanged}
+              />
+            </InputGroup>
+          </FormGroup>
+          <FormGroup>
+            <Button
+              bsStyle="primary"
+              onClick={this.onUpdateClicked}
+            >
             Update
           </Button>
-        </FormGroup>
-      </div>
+          </FormGroup>
+        </Col>
+      </Form>
     );
   }
 }
