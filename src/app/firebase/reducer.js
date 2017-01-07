@@ -55,6 +55,7 @@ function createStateWithUserInfo(state, userInfo) {
       error: null,
       userId: userInfo.userId,
       emailAddress: userInfo.emailAddress,
+      emailAddressVerified: userInfo.emailAddressVerified,
       displayName: userInfo.displayName,
       photoUrl: userInfo.photoUrl,
     },

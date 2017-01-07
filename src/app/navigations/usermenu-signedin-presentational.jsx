@@ -2,10 +2,13 @@ import React, {
   PropTypes,
 } from 'react';
 import {
+  Glyphicon,
+  Image,
   MenuItem,
   Nav,
   NavDropdown,
-  Image,
+  OverlayTrigger,
+  Tooltip,
 } from 'react-bootstrap';
 import {
   LinkContainer,
@@ -37,26 +40,50 @@ function formatUserInfoToDisplay(userDisplayName, userEmailAddress) {
     );
 }
 
-function getUserImageOrDisplayName(userDisplayName, userPhotoUrl) {
+function getEmailAddressVerifiedWarningIcon(userEmailAddressVerified) {
+  return userEmailAddressVerified ?
+    (<span />) :
+    (
+      <OverlayTrigger
+        placement="right"
+        overlay={<Tooltip id="emailAddressVerifiedWarningTooltip">Email address not verified.</Tooltip>}
+      >
+        <Glyphicon
+          glyph="warning-sign"
+          className="warning-icon"
+        />
+      </OverlayTrigger>);
+}
+
+function getUserImageOrDisplayName(userDisplayName, userPhotoUrl, userEmailAddressVerified) {
   return userPhotoUrl ?
     (
-      <Image
-        src={userPhotoUrl}
-        className="navbar-user-photo"
-        rounded
-      />
+      <span>
+        <Image
+          src={userPhotoUrl}
+          className="navbar-user-photo"
+          rounded
+        />
+        {getEmailAddressVerifiedWarningIcon(userEmailAddressVerified)}
+      </span>
     ) :
-    (<span>{getUserDisplayName(userDisplayName)}</span>);
+    (
+      <span>
+        {getUserDisplayName(userDisplayName)}
+        {getEmailAddressVerifiedWarningIcon(userEmailAddressVerified)}
+      </span>
+    );
 }
 
 const UserMenuSignedInPresentational = ({
     userDisplayName,
     userEmailAddress,
+    userEmailAddressVerified,
     userPhotoUrl,
     onSignOutMenuItemClicked,
   }) =>
     <Nav collapseOnSelect pullRight>
-      <NavDropdown title={getUserImageOrDisplayName(userDisplayName, userPhotoUrl)} >
+      <NavDropdown title={getUserImageOrDisplayName(userDisplayName, userPhotoUrl, userEmailAddressVerified)} >
         <MenuItem disabled>
           {formatUserInfoToDisplay(userDisplayName, userEmailAddress)}
         </MenuItem>
@@ -72,6 +99,7 @@ const UserMenuSignedInPresentational = ({
 UserMenuSignedInPresentational.propTypes = {
   userDisplayName: PropTypes.string,
   userEmailAddress: PropTypes.string,
+  userEmailAddressVerified: PropTypes.bool.isRequired,
   userPhotoUrl: PropTypes.string,
   onSignOutMenuItemClicked: PropTypes.func.isRequired,
 };

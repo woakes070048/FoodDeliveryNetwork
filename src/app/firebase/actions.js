@@ -37,6 +37,7 @@ function getUserInfo(info) {
     userFetched: true,
     userId: info.uid,
     emailAddress: info.email,
+    emailAddressVerified: info.emailVerified,
     displayName: info.displayName,
     photoUrl: info.photoURL,
   };

@@ -62,6 +62,7 @@ class UserMenuContainer extends Component {
         <UserMenuSignedInPresentational
           userDisplayName={this.props.userDisplayName}
           userEmailAddress={this.props.userEmailAddress}
+          userEmailAddressVerified={this.props.userEmailAddressVerified}
           userPhotoUrl={this.props.userPhotoUrl}
           onSignOutMenuItemClicked={() => this.onSignOutMenuItemClicked()}
         />
@@ -76,6 +77,7 @@ UserMenuContainer.propTypes = {
   userExists: PropTypes.bool.isRequired,
   userDisplayName: PropTypes.string,
   userEmailAddress: PropTypes.string,
+  userEmailAddressVerified: PropTypes.bool.isRequired,
   userPhotoUrl: PropTypes.string,
 };
 
@@ -87,6 +89,7 @@ function mapStateToProps(state) {
     userExists: true,
     userDisplayName: userInfo.displayName,
     userEmailAddress: userInfo.emailAddress,
+    userEmailAddressVerified: userInfo.emailAddressVerified,
     userPhotoUrl: userInfo.photoUrl,
     operations,
   } : {
