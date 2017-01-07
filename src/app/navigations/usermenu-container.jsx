@@ -77,7 +77,7 @@ UserMenuContainer.propTypes = {
   userExists: PropTypes.bool.isRequired,
   userDisplayName: PropTypes.string,
   userEmailAddress: PropTypes.string,
-  userEmailAddressVerified: PropTypes.bool.isRequired,
+  userEmailAddressVerified: PropTypes.bool,
   userPhotoUrl: PropTypes.string,
 };
 

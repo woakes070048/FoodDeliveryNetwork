@@ -250,20 +250,20 @@ export function updateUserPublicProfileFailed(operationId, error) {
   return createGenericError(FIREBASE_UPDATE_USER_PUBLIC_PROFILE_FAILED, operationId, error);
 }
 
-export function sendVerificationEmail() {
+export function sendEmailVerification() {
   return {
     type: FIREBASE_SEND_EMAIL_VERIFICATION,
     operationId: shortid.generate(),
   };
 }
 
-export function sendVerificationEmailSucceeded(operationId) {
+export function sendEmailVerificationSucceeded(operationId) {
   return {
     type: FIREBASE_SEND_EMAIL_VERIFICATION_SUCCEEDED,
     operationId,
   };
 }
 
-export function sendVerificationEmailFailed(operationId, error) {
+export function sendEmailVerificationFailed(operationId, error) {
   return createGenericError(FIREBASE_SEND_EMAIL_VERIFICATION_FAILED, operationId, error);
 }
