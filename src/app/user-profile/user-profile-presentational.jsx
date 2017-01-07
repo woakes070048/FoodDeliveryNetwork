@@ -43,8 +43,11 @@ const UserProfilePresentational = ({
   return (
     <div>
       <Col
+        smOffset={1}
         sm={2}
+        mdOffset={1}
         md={2}
+        lgOffset={1}
         lg={2}
       >
         <Panel>
@@ -59,9 +62,9 @@ const UserProfilePresentational = ({
         </Panel>
       </Col>
       <Col
-        smOffset={2}
-        mdOffset={2}
-        lgOffset={2}
+        smOffset={3}
+        mdOffset={3}
+        lgOffset={3}
       >
         {profileSubItem.component}
       </Col>

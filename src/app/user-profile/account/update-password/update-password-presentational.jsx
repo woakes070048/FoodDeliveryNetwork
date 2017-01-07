@@ -106,7 +106,7 @@ class UpdatePasswordPresentational extends Component {
     return (
       <Col
         sm={6}
-        md={4}
+        md={6}
         lg={4}
       >
         <h3>Change password</h3>
