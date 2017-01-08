@@ -92,10 +92,8 @@ class PublicPasswordContainer extends Component {
   render() {
     return (
       <UpdatePasswordPresentational
-        onUpdatePasswordClicked={newPassword =>
-              this.onUpdatePasswordClicked(newPassword)}
-        validateState={(newPassword, reEnteredPassword) =>
-              PublicPasswordContainer.validateState(newPassword, reEnteredPassword)}
+        onUpdatePasswordClicked={this.onUpdatePasswordClicked}
+        validateState={PublicPasswordContainer.validateState}
       />
     );
   }

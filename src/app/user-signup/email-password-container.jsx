@@ -114,10 +114,8 @@ class EmailPasswordContainer extends Component {
   render() {
     return (
       <EmailPasswordPresentational
-        onSignUpClicked={(emailAddress, password) =>
-              this.onSignUpClicked(emailAddress, password)}
-        validateState={(emailAddress, password, reEnteredPassword) =>
-              EmailPasswordContainer.validateState(emailAddress, password, reEnteredPassword)}
+        onSignUpClicked={this.onSignUpClicked}
+        validateState={EmailPasswordContainer.validateState}
       />
     );
   }

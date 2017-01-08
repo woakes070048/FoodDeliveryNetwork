@@ -89,8 +89,7 @@ class PublicContainer extends Component {
   render() {
     return (
       <PublicPresentational
-        onUpdateClicked={displayName =>
-            this.onUpdateClicked(displayName)}
+        onUpdateClicked={this.onUpdateClicked}
         initialDisplayName={this.props.displayName}
       />
     );

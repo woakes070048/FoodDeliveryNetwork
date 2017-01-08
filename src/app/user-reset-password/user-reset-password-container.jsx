@@ -99,11 +99,9 @@ class UserResetPasswordContainer extends Component {
   render() {
     return (
       <UserResetPasswordPresentational
-        onResetPasswordClicked={emailAddress =>
-            this.onResetPasswordClicked(emailAddress)}
+        onResetPasswordClicked={this.onResetPasswordClicked}
         onReturnToSignInClicked={UserResetPasswordContainer.onReturnToSignInClicked}
-        validateState={emailAddress =>
-            UserResetPasswordContainer.validateState(emailAddress)}
+        validateState={UserResetPasswordContainer.validateState}
         resetPasswordEmailSent={this.state.resetPasswordEmailSent}
         initialEmailAddress={this.props.emailAddress}
       />

@@ -12,28 +12,28 @@ const SocialSignInPresentational = ({
     <div>
       <button
         className="btn btn-block btn-social btn-facebook"
-        onClick={() => onFacebookButtonClicked()}
+        onClick={onFacebookButtonClicked}
       >
         <span className="fa fa-facebook" />
             Sign in with Facebook
       </button>
       <button
         className="btn btn-block btn-social btn-twitter"
-        onClick={() => onTwitterButtonClicked()}
+        onClick={onTwitterButtonClicked}
       >
         <span className="fa fa-twitter" />
             Sign in with Twitter
       </button>
       <button
         className="btn btn-block btn-social btn-google"
-        onClick={() => onGoogleButtonClicked()}
+        onClick={onGoogleButtonClicked}
       >
         <span className="fa fa-google" />
             Sign in with Google
       </button>
       <button
         className="btn btn-block btn-social btn-github"
-        onClick={() => onGithubButtonClicked()}
+        onClick={onGithubButtonClicked}
       >
         <span className="fa fa-github" />
             Sign in with Github
