@@ -64,7 +64,7 @@ class UserMenuContainer extends Component {
           userEmailAddress={this.props.userEmailAddress}
           userEmailAddressVerified={this.props.userEmailAddressVerified}
           userPhotoUrl={this.props.userPhotoUrl}
-          onSignOutMenuItemClicked={() => this.onSignOutMenuItemClicked()}
+          onSignOutMenuItemClicked={this.onSignOutMenuItemClicked}
         />
       ) : (<UserMenuSignedOutPresentational />);
   }

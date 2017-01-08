@@ -54,7 +54,6 @@ function createStateWithUserInfo(state, userInfo) {
   return Object.assign({}, state, {
     userInfo: {
       userExists: true,
-      error: null,
       userId: userInfo.userId,
       emailAddress: userInfo.emailAddress,
       emailAddressVerified: userInfo.emailAddressVerified,

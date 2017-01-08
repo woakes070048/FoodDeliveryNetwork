@@ -63,7 +63,7 @@ const UserMenuSignedInPresentational = ({
           <MenuItem> My profile </MenuItem>
         </LinkContainer>
         <MenuItem divider />
-        <MenuItem onClick={() => onSignOutMenuItemClicked()}> Sign out </MenuItem>
+        <MenuItem onClick={onSignOutMenuItemClicked}> Sign out </MenuItem>
       </NavDropdown>
       <span />
     </Nav>;

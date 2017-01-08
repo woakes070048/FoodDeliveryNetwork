@@ -5,10 +5,10 @@ export default {
     operations: [],
     userInfo: {
       userExists: false,
-      error: null,
     },
   },
 
   notificationContext: [],
-  loadingContext: 'none',
+  loadingContext:
+    'none',
 };
