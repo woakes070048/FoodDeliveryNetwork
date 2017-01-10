@@ -12,7 +12,7 @@ import {
   updateUserPublicProfileSucceeded,
   updateUserPublicProfileFailed,
 } from '../actions';
-import helper from '../helper';
+import helper from '../../firebase/helper';
 
 function* updateUserPublicProfileAsync(action) {
   try {

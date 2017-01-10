@@ -1,6 +1,6 @@
 /* jshint esversion: 6 */
 
-import helper from './helper';
+import helper from '../firebase/helper';
 
 function redirectToSignInPage(nextState, replace) {
   replace({

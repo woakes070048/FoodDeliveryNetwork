@@ -12,7 +12,7 @@ import {
   signOutSucceeded,
   signOutFailed,
 } from '../actions';
-import helper from '../helper';
+import helper from '../../firebase/helper';
 
 function* signOutAsync(action) {
   try {

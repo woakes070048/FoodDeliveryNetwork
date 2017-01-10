@@ -12,7 +12,7 @@ import {
   updatePasswordSucceeded,
   updatePasswordFailed,
 } from '../actions';
-import helper from '../helper';
+import helper from '../../firebase/helper';
 
 function* updatePasswordAsync(action) {
   try {

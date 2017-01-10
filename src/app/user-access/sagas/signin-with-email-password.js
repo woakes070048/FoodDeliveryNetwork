@@ -12,7 +12,7 @@ import {
   signInWithEmailAndPasswordSucceeded,
   signInWithEmailAndPasswordFailed,
 } from '../actions';
-import helper from '../helper';
+import helper from '../../firebase/helper';
 
 function* signInWithEmailAndPasswordAsync(action) {
   try {

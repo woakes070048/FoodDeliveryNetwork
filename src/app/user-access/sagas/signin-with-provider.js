@@ -12,7 +12,7 @@ import {
   signInWithProviderSucceeded,
   signInWithProviderFailed,
 } from '../actions';
-import helper from '../helper';
+import helper from '../../firebase/helper';
 
 function* signInWithProviderAsync(action) {
   try {

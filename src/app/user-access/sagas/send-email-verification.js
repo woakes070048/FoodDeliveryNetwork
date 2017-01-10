@@ -12,7 +12,7 @@ import {
     sendEmailVerificationSucceeded,
     sendEmailVerificationFailed,
 } from '../actions';
-import helper from '../helper';
+import helper from '../../firebase/helper';
 
 function* sendEmailVerificationAsync(action) {
   try {
