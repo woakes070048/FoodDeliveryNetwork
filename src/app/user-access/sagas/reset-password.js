@@ -6,7 +6,7 @@ import {
     takeLatest,
 } from 'redux-saga/effects';
 import {
-    FIREBASE_RESET_PASSWORD,
+    USER_ACCESS_RESET_PASSWORD,
 } from '../action-types';
 import {
     resetPasswordSucceeded,
@@ -24,5 +24,5 @@ function* resetPasswordAsync(action) {
 }
 
 export default function* watchResetPassword() {
-  yield takeLatest(FIREBASE_RESET_PASSWORD, resetPasswordAsync);
+  yield takeLatest(USER_ACCESS_RESET_PASSWORD, resetPasswordAsync);
 }

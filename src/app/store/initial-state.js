@@ -1,7 +1,7 @@
 /* jshint esversion: 6 */
 
 export default {
-  firebaseContext: {
+  userAccessContext: {
     operations: [],
     userInfo: {
       userExists: false,

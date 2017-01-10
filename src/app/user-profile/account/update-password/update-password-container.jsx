@@ -8,7 +8,7 @@ import {
 import {
   connect,
 } from 'react-redux';
-import * as firebaseActions from '../../../firebase/actions';
+import * as userAccessActions from '../../../user-access/actions';
 import * as loadingActions from '../../../loading/actions';
 import * as notificationActions from '../../../notification/actions';
 import UpdatePasswordPresentational from './update-password-presentational';
@@ -74,7 +74,7 @@ class PublicPasswordContainer extends Component {
           this.props.notificationActions.addSuccess('Password successfully updated.');
         }
 
-        this.props.firebaseActions.acknowledgeOperation(lastOperation.operationId);
+        this.props.userAccessActions.acknowledgeOperation(lastOperation.operationId);
         this.props.loadingActions.stop();
       }
     }
@@ -82,7 +82,7 @@ class PublicPasswordContainer extends Component {
 
   onUpdatePasswordClicked(newPassword) {
     this.setState({
-      lastOperationId: this.props.firebaseActions.updatePassword(newPassword)
+      lastOperationId: this.props.userAccessActions.updatePassword(newPassword)
         .operationId,
     });
 
@@ -100,20 +100,20 @@ class PublicPasswordContainer extends Component {
 }
 
 PublicPasswordContainer.propTypes = {
-  firebaseActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  userAccessActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   loadingActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   notificationActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 function mapStateToProps(state) {
   return {
-    operations: state.firebase.operations,
+    operations: state.userAccess.operations,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    firebaseActions: bindActionCreators(firebaseActions, dispatch),
+    userAccessActions: bindActionCreators(userAccessActions, dispatch),
     loadingActions: bindActionCreators(loadingActions, dispatch),
     notificationActions: bindActionCreators(notificationActions, dispatch),
   };

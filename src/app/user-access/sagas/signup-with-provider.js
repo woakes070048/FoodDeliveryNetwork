@@ -6,7 +6,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects';
 import {
-  FIREBASE_SIGNUP_WITH_PROVIDER,
+  USER_ACCESS_SIGNUP_WITH_PROVIDER,
 } from '../action-types';
 import {
   signUpWithProviderSucceeded,
@@ -25,5 +25,5 @@ function* signUpWithProviderAsync(action) {
 }
 
 export default function* watchSignUpWithProvider() {
-  yield takeLatest(FIREBASE_SIGNUP_WITH_PROVIDER, signUpWithProviderAsync);
+  yield takeLatest(USER_ACCESS_SIGNUP_WITH_PROVIDER, signUpWithProviderAsync);
 }

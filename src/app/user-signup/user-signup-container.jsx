@@ -38,7 +38,7 @@ UserSignUpContainer.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    userExists: state.firebase.userInfo.userExists,
+    userExists: state.userAccess.userInfo.userExists,
   };
 }
 

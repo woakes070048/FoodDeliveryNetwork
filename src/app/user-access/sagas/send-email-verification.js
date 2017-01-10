@@ -6,7 +6,7 @@ import {
     takeLatest,
 } from 'redux-saga/effects';
 import {
-    FIREBASE_SEND_EMAIL_VERIFICATION,
+    USER_ACCESS_SEND_EMAIL_VERIFICATION,
 } from '../action-types';
 import {
     sendEmailVerificationSucceeded,
@@ -24,5 +24,5 @@ function* sendEmailVerificationAsync(action) {
 }
 
 export default function* watchSendEmailVerification() {
-  yield takeLatest(FIREBASE_SEND_EMAIL_VERIFICATION, sendEmailVerificationAsync);
+  yield takeLatest(USER_ACCESS_SEND_EMAIL_VERIFICATION, sendEmailVerificationAsync);
 }

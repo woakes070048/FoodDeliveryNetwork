@@ -9,7 +9,7 @@ import {
   connect,
 } from 'react-redux';
 import AppPresentational from './app-presentational';
-import * as firebaseActions from './firebase/actions';
+import * as userAccessActions from './user-access/actions';
 import * as loadingActions from './loading/actions';
 import * as notificationActions from './notification/actions';
 
@@ -18,7 +18,7 @@ class AppContainer extends Component {
     super(props);
 
     this.state = {
-      lastOperationId: this.props.firebaseActions.fetchUser()
+      lastOperationId: this.props.userAccessActions.fetchUser()
         .operationId,
     };
 
@@ -31,7 +31,7 @@ class AppContainer extends Component {
         nextProps.operations.find(operation => operation.operationId === this.state.lastOperationId);
 
       if (lastOperation) {
-        this.props.firebaseActions.acknowledgeOperation(lastOperation.operationId);
+        this.props.userAccessActions.acknowledgeOperation(lastOperation.operationId);
         this.props.loadingActions.stop();
       }
     }
@@ -53,7 +53,7 @@ class AppContainer extends Component {
 }
 
 AppContainer.propTypes = {
-  firebaseActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  userAccessActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   loadingActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   notificationActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   children: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
@@ -70,14 +70,14 @@ AppContainer.propTypes = {
 function mapStateToProps(state) {
   return {
     notifications: state.notification,
-    operations: state.firebase.operations,
+    operations: state.userAccess.operations,
     loadingState: state.loading,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    firebaseActions: bindActionCreators(firebaseActions, dispatch),
+    userAccessActions: bindActionCreators(userAccessActions, dispatch),
     loadingActions: bindActionCreators(loadingActions, dispatch),
     notificationActions: bindActionCreators(notificationActions, dispatch),
   };

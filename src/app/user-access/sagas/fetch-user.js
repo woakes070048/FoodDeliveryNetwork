@@ -6,7 +6,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects';
 import {
-  FIREBASE_FETCH_USER,
+  USER_ACCESS_FETCH_USER,
 } from '../action-types';
 import {
   fetchUserSucceeded,
@@ -25,5 +25,5 @@ function* fetchUserAsync(action) {
 }
 
 export default function* watchFetchUser() {
-  yield takeLatest(FIREBASE_FETCH_USER, fetchUserAsync);
+  yield takeLatest(USER_ACCESS_FETCH_USER, fetchUserAsync);
 }

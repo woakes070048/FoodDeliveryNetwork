@@ -6,7 +6,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects';
 import {
-  FIREBASE_UPDATE_USER_PUBLIC_PROFILE,
+  USER_ACCESS_UPDATE_USER_PUBLIC_PROFILE,
 } from '../action-types';
 import {
   updateUserPublicProfileSucceeded,
@@ -24,5 +24,5 @@ function* updateUserPublicProfileAsync(action) {
 }
 
 export default function* watchUpdateUserPublicProfile() {
-  yield takeLatest(FIREBASE_UPDATE_USER_PUBLIC_PROFILE, updateUserPublicProfileAsync);
+  yield takeLatest(USER_ACCESS_UPDATE_USER_PUBLIC_PROFILE, updateUserPublicProfileAsync);
 }

@@ -5,7 +5,7 @@ import {
 } from 'react-router';
 import AppContainer from './app-container';
 import HomeContainer from './home/home-container';
-import requireAuthentication from './firebase/require-authentication';
+import requireAuthentication from './user-access/require-authentication';
 import UserProfileContainer from './user-profile/user-profile-container';
 import UserResetPasswordContainer from './user-reset-password/user-reset-password-container';
 import UserSignInContainer from './user-signin/user-signin-container';

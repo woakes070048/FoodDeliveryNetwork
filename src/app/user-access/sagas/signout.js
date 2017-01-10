@@ -6,7 +6,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects';
 import {
-  FIREBASE_SIGNOUT,
+  USER_ACCESS_SIGNOUT,
 } from '../action-types';
 import {
   signOutSucceeded,
@@ -24,5 +24,5 @@ function* signOutAsync(action) {
 }
 
 export default function* watchSignOut() {
-  yield takeLatest(FIREBASE_SIGNOUT, signOutAsync);
+  yield takeLatest(USER_ACCESS_SIGNOUT, signOutAsync);
 }

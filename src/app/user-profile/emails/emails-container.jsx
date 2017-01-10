@@ -8,7 +8,7 @@ import {
 import {
   connect,
 } from 'react-redux';
-import * as firebaseActions from '../../firebase/actions';
+import * as userAccessActions from '../../user-access/actions';
 import * as loadingActions from '../../loading/actions';
 import * as notificationActions from '../../notification/actions';
 import EmailsPresentational from './emails-presentational';
@@ -36,7 +36,7 @@ class EmailsContainer extends Component {
           this.props.notificationActions.addSuccess('Verification email sent.');
         }
 
-        this.props.firebaseActions.acknowledgeOperation(lastOperation.operationId);
+        this.props.userAccessActions.acknowledgeOperation(lastOperation.operationId);
         this.props.loadingActions.stop();
       }
     }
@@ -44,7 +44,7 @@ class EmailsContainer extends Component {
 
   sendEmailVerification() {
     this.setState({
-      lastOperationId: this.props.firebaseActions.sendEmailVerification()
+      lastOperationId: this.props.userAccessActions.sendEmailVerification()
         .operationId,
     });
 
@@ -62,7 +62,7 @@ class EmailsContainer extends Component {
   }
 }
 EmailsContainer.propTypes = {
-  firebaseActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  userAccessActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   loadingActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   notificationActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   emails: PropTypes.arrayOf(
@@ -75,17 +75,17 @@ EmailsContainer.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    operations: state.firebase.operations,
+    operations: state.userAccess.operations,
     emails: [{
-      emailAddress: state.firebase.userInfo.emailAddress,
-      emailAddressVerified: state.firebase.userInfo.emailAddressVerified,
+      emailAddress: state.userAccess.userInfo.emailAddress,
+      emailAddressVerified: state.userAccess.userInfo.emailAddressVerified,
     }],
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    firebaseActions: bindActionCreators(firebaseActions, dispatch),
+    userAccessActions: bindActionCreators(userAccessActions, dispatch),
     loadingActions: bindActionCreators(loadingActions, dispatch),
     notificationActions: bindActionCreators(notificationActions, dispatch),
   };

@@ -8,7 +8,7 @@ import {
 import {
   connect,
 } from 'react-redux';
-import * as firebaseActions from '../../firebase/actions';
+import * as userAccessActions from '../../user-access/actions';
 import * as loadingActions from '../../loading/actions';
 import * as notificationActions from '../../notification/actions';
 import PublicPresentational from './public-presentational';
@@ -35,7 +35,7 @@ class PublicContainer extends Component {
 
   onUpdateClicked(displayName) {
     this.setState(Object.assign(this.state, {
-      lastUpdateOperationId: this.props.firebaseActions.updateUserPublicProfile(displayName)
+      lastUpdateOperationId: this.props.userAccessActions.updateUserPublicProfile(displayName)
         .operationId,
     }));
 
@@ -55,7 +55,7 @@ class PublicContainer extends Component {
           this.fetchUser();
         }
 
-        this.props.firebaseActions.acknowledgeOperation(lastOperation.operationId);
+        this.props.userAccessActions.acknowledgeOperation(lastOperation.operationId);
         this.props.loadingActions.stop();
       }
     }
@@ -71,7 +71,7 @@ class PublicContainer extends Component {
           this.props.notificationActions.addError(lastOperation.errorMessage);
         }
 
-        this.props.firebaseActions.acknowledgeOperation(lastOperation.operationId);
+        this.props.userAccessActions.acknowledgeOperation(lastOperation.operationId);
         this.props.loadingActions.stop();
       }
     }
@@ -79,7 +79,7 @@ class PublicContainer extends Component {
 
   fetchUser() {
     this.setState(Object.assign(this.state, {
-      lastFetchUserOperationId: this.props.firebaseActions.fetchUser()
+      lastFetchUserOperationId: this.props.userAccessActions.fetchUser()
         .operationId,
     }));
 
@@ -97,7 +97,7 @@ class PublicContainer extends Component {
 }
 
 PublicContainer.propTypes = {
-  firebaseActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  userAccessActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   loadingActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   notificationActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   displayName: PropTypes.string,
@@ -105,14 +105,14 @@ PublicContainer.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    operations: state.firebase.operations,
-    displayName: state.firebase.userInfo.displayName || '',
+    operations: state.userAccess.operations,
+    displayName: state.userAccess.userInfo.displayName || '',
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    firebaseActions: bindActionCreators(firebaseActions, dispatch),
+    userAccessActions: bindActionCreators(userAccessActions, dispatch),
     loadingActions: bindActionCreators(loadingActions, dispatch),
     notificationActions: bindActionCreators(notificationActions, dispatch),
   };

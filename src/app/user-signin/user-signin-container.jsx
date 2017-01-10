@@ -41,7 +41,7 @@ UserSignInContainer.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    userExists: state.firebase.userInfo.userExists,
+    userExists: state.userAccess.userInfo.userExists,
     redirectPath: getRedirectPath(ownProps),
   };
 }

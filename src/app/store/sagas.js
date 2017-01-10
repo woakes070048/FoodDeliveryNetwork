@@ -1,15 +1,15 @@
 /* jshint esversion: 6 */
 
-import watchFetchUser from '../firebase/sagas/fetch-user';
-import watchResetPassword from '../firebase/sagas/reset-password';
-import watchSendEmailVerification from '../firebase/sagas/send-email-verification';
-import watchSignUpWithEmailAndPassword from '../firebase/sagas/signup-with-email-password';
-import watchSignUpWithProvider from '../firebase/sagas/signup-with-provider';
-import watchSignInWithEmailAndPassword from '../firebase/sagas/signin-with-email-password';
-import watchSignInWithProvider from '../firebase/sagas/signin-with-provider';
-import watchSignOut from '../firebase/sagas/signout';
-import watchUpdateUserPublicProfile from '../firebase/sagas/update-user-public-profile';
-import watchUpdatePassword from '../firebase/sagas/update-password';
+import watchFetchUser from '../user-access/sagas/fetch-user';
+import watchResetPassword from '../user-access/sagas/reset-password';
+import watchSendEmailVerification from '../user-access/sagas/send-email-verification';
+import watchSignUpWithEmailAndPassword from '../user-access/sagas/signup-with-email-password';
+import watchSignUpWithProvider from '../user-access/sagas/signup-with-provider';
+import watchSignInWithEmailAndPassword from '../user-access/sagas/signin-with-email-password';
+import watchSignInWithProvider from '../user-access/sagas/signin-with-provider';
+import watchSignOut from '../user-access/sagas/signout';
+import watchUpdateUserPublicProfile from '../user-access/sagas/update-user-public-profile';
+import watchUpdatePassword from '../user-access/sagas/update-password';
 
 export default function* sagas() {
   yield [watchFetchUser(),

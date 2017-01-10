@@ -9,7 +9,7 @@ import {
   connect,
 } from 'react-redux';
 import SocialSignInPresentational from './social-signin-presentational';
-import * as firebaseActions from '../firebase/actions';
+import * as userAccessActions from '../user-access/actions';
 import * as loadingActions from '../loading/actions';
 import * as notificationActions from '../notification/actions';
 
@@ -42,7 +42,7 @@ class SocialSignInContainer extends Component {
           this.props.notificationActions.addError(lastOperation.errorMessage);
         }
 
-        this.props.firebaseActions.acknowledgeOperation(lastOperation.operationId);
+        this.props.userAccessActions.acknowledgeOperation(lastOperation.operationId);
         this.props.loadingActions.stop();
       }
     }
@@ -50,8 +50,8 @@ class SocialSignInContainer extends Component {
 
   signUpOrSignInWithProvider(provider) {
     this.setState({
-      lastOperationId: this.props.signup ? this.props.firebaseActions.signUpWithProvider(provider)
-        .operationId : this.props.firebaseActions.signInWithProvider(provider)
+      lastOperationId: this.props.signup ? this.props.userAccessActions.signUpWithProvider(provider)
+        .operationId : this.props.userAccessActions.signInWithProvider(provider)
         .operationId,
     });
 
@@ -71,7 +71,7 @@ class SocialSignInContainer extends Component {
 }
 
 SocialSignInContainer.propTypes = {
-  firebaseActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  userAccessActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   loadingActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   notificationActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   signin: PropTypes.bool,
@@ -85,13 +85,13 @@ SocialSignInContainer.defaultProps = {
 
 function mapStateToProps(state) {
   return {
-    operations: state.firebase.operations,
+    operations: state.userAccess.operations,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    firebaseActions: bindActionCreators(firebaseActions, dispatch),
+    userAccessActions: bindActionCreators(userAccessActions, dispatch),
     loadingActions: bindActionCreators(loadingActions, dispatch),
     notificationActions: bindActionCreators(notificationActions, dispatch),
   };

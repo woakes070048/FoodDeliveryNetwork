@@ -12,7 +12,7 @@ import {
 import {
   browserHistory,
 } from 'react-router';
-import * as firebaseActions from '../firebase/actions';
+import * as userAccessActions from '../user-access/actions';
 import * as loadingActions from '../loading/actions';
 import * as notificationActions from '../notification/actions';
 import UserResetPasswordPresentational from './user-reset-password-presentational';
@@ -81,7 +81,7 @@ class UserResetPasswordContainer extends Component {
           }));
         }
 
-        this.props.firebaseActions.acknowledgeOperation(lastOperation.operationId);
+        this.props.userAccessActions.acknowledgeOperation(lastOperation.operationId);
         this.props.loadingActions.stop();
       }
     }
@@ -89,7 +89,7 @@ class UserResetPasswordContainer extends Component {
 
   onResetPasswordClicked(emailAddress) {
     this.setState(Object.assign(this.state, {
-      lastOperationId: this.props.firebaseActions.resetPassword(emailAddress)
+      lastOperationId: this.props.userAccessActions.resetPassword(emailAddress)
         .operationId,
     }));
 
@@ -110,7 +110,7 @@ class UserResetPasswordContainer extends Component {
 }
 
 UserResetPasswordContainer.propTypes = {
-  firebaseActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  userAccessActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   loadingActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   notificationActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   emailAddress: PropTypes.string,
@@ -118,14 +118,14 @@ UserResetPasswordContainer.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    operations: state.firebase.operations,
-    emailAddress: state.firebase.userInfo.userExists ? state.firebase.userInfo.emailAddress : '',
+    operations: state.userAccess.operations,
+    emailAddress: state.userAccess.userInfo.userExists ? state.userAccess.userInfo.emailAddress : '',
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    firebaseActions: bindActionCreators(firebaseActions, dispatch),
+    userAccessActions: bindActionCreators(userAccessActions, dispatch),
     loadingActions: bindActionCreators(loadingActions, dispatch),
     notificationActions: bindActionCreators(notificationActions, dispatch),
   };

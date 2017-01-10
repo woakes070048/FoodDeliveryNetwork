@@ -6,7 +6,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects';
 import {
-  FIREBASE_UPDATE_PASSWORD,
+  USER_ACCESS_UPDATE_PASSWORD,
 } from '../action-types';
 import {
   updatePasswordSucceeded,
@@ -24,5 +24,5 @@ function* updatePasswordAsync(action) {
 }
 
 export default function* watchUpdatePassword() {
-  yield takeLatest(FIREBASE_UPDATE_PASSWORD, updatePasswordAsync);
+  yield takeLatest(USER_ACCESS_UPDATE_PASSWORD, updatePasswordAsync);
 }

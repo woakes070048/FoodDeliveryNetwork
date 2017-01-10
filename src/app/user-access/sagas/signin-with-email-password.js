@@ -6,7 +6,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects';
 import {
-  FIREBASE_SIGNIN_WITH_EMAIL_AND_PASSWORD,
+  USER_ACCESS_SIGNIN_WITH_EMAIL_AND_PASSWORD,
 } from '../action-types';
 import {
   signInWithEmailAndPasswordSucceeded,
@@ -25,5 +25,5 @@ function* signInWithEmailAndPasswordAsync(action) {
 }
 
 export default function* watchSignInWithEmailAndPassword() {
-  yield takeLatest(FIREBASE_SIGNIN_WITH_EMAIL_AND_PASSWORD, signInWithEmailAndPasswordAsync);
+  yield takeLatest(USER_ACCESS_SIGNIN_WITH_EMAIL_AND_PASSWORD, signInWithEmailAndPasswordAsync);
 }

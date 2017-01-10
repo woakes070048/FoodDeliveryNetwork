@@ -13,7 +13,7 @@ import {
 } from 'redux';
 import UserMenuSignedInPresentational from './usermenu-signedin-presentational';
 import UserMenuSignedOutPresentational from './usermenu-signedout-presentational';
-import * as firebaseActions from '../firebase/actions';
+import * as userAccessActions from '../user-access/actions';
 import * as loadingActions from '../loading/actions';
 import * as notificationActions from '../notification/actions';
 
@@ -41,7 +41,7 @@ class UserMenuContainer extends Component {
           browserHistory.push('/');
         }
 
-        this.props.firebaseActions.acknowledgeOperation(lastOperation.operationId);
+        this.props.userAccessActions.acknowledgeOperation(lastOperation.operationId);
         this.props.loadingActions.stop();
       }
     }
@@ -49,7 +49,7 @@ class UserMenuContainer extends Component {
 
   onSignOutMenuItemClicked() {
     this.setState({
-      lastOperationId: this.props.firebaseActions.signOut()
+      lastOperationId: this.props.userAccessActions.signOut()
         .operationId,
     });
 
@@ -71,7 +71,7 @@ class UserMenuContainer extends Component {
 }
 
 UserMenuContainer.propTypes = {
-  firebaseActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  userAccessActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   loadingActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   notificationActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   userExists: PropTypes.bool.isRequired,
@@ -82,8 +82,8 @@ UserMenuContainer.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const operations = state.firebase.operations;
-  const userInfo = state.firebase.userInfo;
+  const operations = state.userAccess.operations;
+  const userInfo = state.userAccess.userInfo;
 
   return userInfo.userExists ? {
     userExists: true,
@@ -100,7 +100,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    firebaseActions: bindActionCreators(firebaseActions, dispatch),
+    userAccessActions: bindActionCreators(userAccessActions, dispatch),
     loadingActions: bindActionCreators(loadingActions, dispatch),
     notificationActions: bindActionCreators(notificationActions, dispatch),
   };
