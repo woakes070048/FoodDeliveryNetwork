@@ -81,6 +81,13 @@ UserMenuContainer.propTypes = {
   userPhotoUrl: PropTypes.string,
 };
 
+UserMenuContainer.defaultProps = {
+  userDisplayName: '',
+  userEmailAddress: '',
+  userEmailAddressVerified: false,
+  userPhotoUrl: '',
+};
+
 function mapStateToProps(state) {
   const operations = state.userAccess.operations;
   const userInfo = state.userAccess.userInfo;

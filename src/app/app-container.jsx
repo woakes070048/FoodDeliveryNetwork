@@ -67,6 +67,11 @@ AppContainer.propTypes = {
   ),
 };
 
+AppContainer.defaultProps = {
+  loadingState: 'none',
+  notifications: [],
+};
+
 function mapStateToProps(state) {
   return {
     notifications: state.notification,

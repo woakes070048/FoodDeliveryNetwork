@@ -19,4 +19,8 @@ UserProfileContainer.propTypes = {
   profileSubItem: PropTypes.string,
 };
 
+UserProfileContainer.defaultProps = {
+  profileSubItem: 'public',
+};
+
 export default connect(mapStateToProps)(UserProfileContainer);

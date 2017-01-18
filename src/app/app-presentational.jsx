@@ -50,6 +50,7 @@ AppPresentational.propTypes = {
 
 AppPresentational.defaultProps = {
   loadingState: 'none',
+  notifications: [],
 };
 
 export default AppPresentational;

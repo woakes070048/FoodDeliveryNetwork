@@ -103,6 +103,10 @@ PublicContainer.propTypes = {
   displayName: PropTypes.string,
 };
 
+PublicContainer.defaultProps = {
+  displayName: '',
+};
+
 function mapStateToProps(state) {
   return {
     operations: state.userAccess.operations,

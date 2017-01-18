@@ -39,6 +39,11 @@ UserSignInContainer.propTypes = {
   redirectPath: PropTypes.string,
 };
 
+UserSignInContainer.defaultProps = {
+  userExists: false,
+  redirectPath: '',
+};
+
 function mapStateToProps(state, ownProps) {
   return {
     userExists: state.userAccess.userInfo.userExists,

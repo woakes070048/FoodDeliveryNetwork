@@ -116,6 +116,10 @@ UserResetPasswordContainer.propTypes = {
   emailAddress: PropTypes.string,
 };
 
+UserResetPasswordContainer.defaultProps = {
+  emailAddress: '',
+};
+
 function mapStateToProps(state) {
   return {
     operations: state.userAccess.operations,

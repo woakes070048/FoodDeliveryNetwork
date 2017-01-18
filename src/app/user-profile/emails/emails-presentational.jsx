@@ -34,4 +34,8 @@ EmailsPresentational.propTypes = {
   sendEmailVerification: PropTypes.func.isRequired,
 };
 
+EmailsPresentational.defaultProps = {
+  emails: [],
+};
+
 export default EmailsPresentational;

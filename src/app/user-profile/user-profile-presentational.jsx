@@ -86,4 +86,8 @@ UserProfilePresentational.propTypes = {
   selectedProfileSubItem: PropTypes.string,
 };
 
+UserProfilePresentational.defaultProps = {
+  selectedProfileSubItem: 'public',
+};
+
 export default UserProfilePresentational;

@@ -36,6 +36,10 @@ UserSignUpContainer.propTypes = {
   userExists: PropTypes.bool,
 };
 
+UserSignUpContainer.defaultProps = {
+  userExists: false,
+};
+
 function mapStateToProps(state) {
   return {
     userExists: state.userAccess.userInfo.userExists,

@@ -73,6 +73,11 @@ EmailsContainer.propTypes = {
   ),
 };
 
+EmailsContainer.defaultProps = {
+  emails: [],
+};
+
+function mapStateToProps(state) {
 function mapStateToProps(state) {
   return {
     operations: state.userAccess.operations,
