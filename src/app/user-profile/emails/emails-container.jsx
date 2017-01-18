@@ -78,7 +78,6 @@ EmailsContainer.defaultProps = {
 };
 
 function mapStateToProps(state) {
-function mapStateToProps(state) {
   return {
     operations: state.userAccess.operations,
     emails: [{
