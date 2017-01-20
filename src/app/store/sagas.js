@@ -6,14 +6,14 @@ import {
   watchSignInWithEmailAndPassword,
   watchSignOut,
   watchUpdateUserPublicProfile,
+  watchSendEmailVerification,
+  watchResetPassword,
+  watchUpdatePassword,
 } from '../parse-server/sagas';
 
 import {
-  watchResetPassword,
-  watchSendEmailVerification,
   watchSignUpWithProvider,
   watchSignInWithProvider,
-  watchUpdatePassword,
 } from '../firebase/sagas';
 
 export default function* sagas() {

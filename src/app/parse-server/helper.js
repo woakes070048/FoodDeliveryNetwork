@@ -34,17 +34,40 @@ const parseServerHelper = {
   signOut: () => new Promise((resolve, reject) => {
     parse.User.logOut()
       .then(() =>
-        resolve(),
-      )
+        resolve())
       .catch(error =>
-        reject(error),
-      );
+        reject(error));
   }),
 
   updateUserPublicProfile: (displayName) => {
     const user = parse.User.current();
 
     user.set('displayName', displayName);
+
+    return user.save();
+  },
+
+  sendEmailVerification: () => {
+    const user = parse.User.current();
+
+    // Re-saving the email address triggers the logic in parse server back-end to re-send the verification email
+    user.set('email', user.getEmail());
+
+    return user.save();
+  },
+
+  resetPassword: emailAddress => new Promise((resolve, reject) => {
+    parse.User.requestPasswordReset(emailAddress)
+      .then(() =>
+        resolve())
+      .catch(error =>
+        reject(error));
+  }),
+
+  updatePassword: (newPassword) => {
+    const user = parse.User.current();
+
+    user.set('password', newPassword);
 
     return user.save();
   },

@@ -1,7 +1,7 @@
 /* jshint esversion: 6 */
 
 export default {
-  applicationId: 'Sj9tSsqQV8nCk61u49NXxx5EgiT2Veo5hYGDdmmp',
-  javascriptKey: 'xW2Finq2h3vQTZKaEbFEcxL8lRJm9yAKV5USLlos',
+  applicationId: 'LRccyiBRSQCTQZ4CLizOPV9Tsgr7pssiG4Rsq4bM',
+  javascriptKey: 'jT6DxaPTjB6zaeIGCd1zx0B2MFKfWljmPSnQ8xGu',
   serverUrl: 'https://parseapi.back4app.com/',
 };
