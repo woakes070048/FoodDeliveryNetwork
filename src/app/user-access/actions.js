@@ -38,11 +38,11 @@ import {
 function getUserInfo(info) {
   return {
     userFetched: true,
-    userId: info.uid,
-    emailAddress: info.email,
-    emailAddressVerified: info.emailVerified,
-    displayName: info.displayName,
-    photoUrl: info.photoURL,
+    userId: info.id,
+    emailAddress: info.getEmail(),
+    emailAddressVerified: info.get('emailVerified'),
+    displayName: info.get('displayName'),
+    photoUrl: '', //info.photoURL,
   };
 }
 
@@ -83,7 +83,7 @@ export function acknowledgeOperation(operationId) {
 }
 
 export function fetchUserSucceeded(operationId, response) {
-  const userFetched = response && response.uid;
+  const userFetched = response && response.id;
 
   return userFetched ? createReplyWithUserInfo(USER_ACCESS_FETCH_USER_SUCCEEDED, operationId, getUserInfo(response)) :
     createReplyWithUserInfo(USER_ACCESS_FETCH_USER_SUCCEEDED, operationId, getEmptyUserInfo());
@@ -104,7 +104,7 @@ export function signUpWithEmailAndPassword(emailAddress, password) {
 }
 
 export function signUpWithEmailAndPasswordSucceeded(operationId, response) {
-  const userFetched = response && response.uid;
+  const userFetched = response && response.id;
 
   return userFetched ? createReplyWithUserInfo(USER_ACCESS_SIGNUP_WITH_EMAIL_AND_PASSWORD_SUCCEEDED, operationId,
       getUserInfo(response)) :
@@ -145,7 +145,7 @@ export function signInWithEmailAndPassword(emailAddress, password) {
 }
 
 export function signInWithEmailAndPasswordSucceeded(operationId, response) {
-  const userFetched = response && response.uid;
+  const userFetched = response && response.id;
 
   return userFetched ? createReplyWithUserInfo(USER_ACCESS_SIGNIN_WITH_EMAIL_AND_PASSWORD_SUCCEEDED, operationId,
       getUserInfo(response)) :

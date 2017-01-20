@@ -16,7 +16,7 @@ import {
   USER_ACCESS_UPDATE_PASSWORD,
   USER_ACCESS_UPDATE_USER_PUBLIC_PROFILE,
   USER_ACCESS_SEND_EMAIL_VERIFICATION,
-} from './action-types';
+} from '../user-access/action-types';
 import {
   fetchUserSucceeded,
   fetchUserFailed,
@@ -38,8 +38,8 @@ import {
   updatePasswordFailed,
   updateUserPublicProfileSucceeded,
   updateUserPublicProfileFailed,
-} from './actions';
-import helper from '../firebase/helper';
+} from '../user-access/actions';
+import helper from './helper';
 
 function* fetchUserAsync(action) {
   try {
