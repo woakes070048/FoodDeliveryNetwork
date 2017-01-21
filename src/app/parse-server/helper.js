@@ -39,10 +39,24 @@ const parseServerHelper = {
         reject(error));
   }),
 
-  updateUserPublicProfile: (displayName) => {
+  updateUserPublicProfile: ({
+    salutation,
+    firstName,
+    middleName,
+    lastName,
+    preferredName,
+    phone,
+    mobile,
+  }) => {
     const user = parse.User.current();
 
-    user.set('displayName', displayName);
+    user.set('salutation', salutation);
+    user.set('firstName', firstName);
+    user.set('middleName', middleName);
+    user.set('lastName', lastName);
+    user.set('preferredName', preferredName);
+    user.set('phone', phone);
+    user.set('mobile', mobile);
 
     return user.save();
   },

@@ -33,9 +33,9 @@ class PublicContainer extends Component {
     this.handleFetchUserOperation(nextProps);
   }
 
-  onUpdateClicked(displayName) {
+  onUpdateClicked(details) {
     this.setState(Object.assign(this.state, {
-      lastUpdateOperationId: this.props.userAccessActions.updateUserPublicProfile(displayName)
+      lastUpdateOperationId: this.props.userAccessActions.updateUserPublicProfile(details)
         .operationId,
     }));
 
@@ -90,7 +90,7 @@ class PublicContainer extends Component {
     return (
       <PublicPresentational
         onUpdateClicked={this.onUpdateClicked}
-        initialDisplayName={this.props.displayName}
+        publicProfileDetails={this.props.publicProfileDetails}
       />
     );
   }
@@ -100,17 +100,33 @@ PublicContainer.propTypes = {
   userAccessActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   loadingActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   notificationActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  displayName: PropTypes.string,
+  publicProfileDetails: React.PropTypes.shape({
+    salutation: PropTypes.string,
+    firstName: PropTypes.string,
+    middleName: PropTypes.string,
+    lastName: PropTypes.string,
+    preferredName: PropTypes.string,
+    phone: PropTypes.string,
+    mobile: PropTypes.string,
+  }),
 };
 
 PublicContainer.defaultProps = {
-  displayName: '',
+  publicProfileDetails: {
+    salutation: '',
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    preferredName: '',
+    phone: '',
+    mobile: '',
+  },
 };
 
 function mapStateToProps(state) {
   return {
     operations: state.userAccess.operations,
-    displayName: state.userAccess.userInfo.displayName || '',
+    publicProfileDetails: state.userAccess.userInfo.publicProfileDetails || {},
   };
 }
 

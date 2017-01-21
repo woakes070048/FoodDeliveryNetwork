@@ -52,14 +52,7 @@ function addFailedOperationToState(state, operationId, error) {
 
 function createStateWithUserInfo(state, userInfo) {
   return Object.assign({}, state, {
-    userInfo: {
-      userExists: true,
-      userId: userInfo.userId,
-      emailAddress: userInfo.emailAddress,
-      emailAddressVerified: userInfo.emailAddressVerified,
-      displayName: userInfo.displayName,
-      photoUrl: userInfo.photoUrl,
-    },
+    userInfo,
   });
 }
 
@@ -80,7 +73,7 @@ function handleAcknowledgeOperation(state, action) {
 function handleFetchUserSucceeded(state, action) {
   const stateWithOperationInfo = addSucceededOperationToState(state, action.operationId);
 
-  return action.userInfo.userFetched ? createStateWithUserInfo(stateWithOperationInfo, action.userInfo) :
+  return action.userInfo.userExists ? createStateWithUserInfo(stateWithOperationInfo, action.userInfo) :
     createStateWithoutUserInfo(stateWithOperationInfo);
 }
 
@@ -93,7 +86,7 @@ function handleFetchUserFailed(state, action) {
 function handleSignUpWithEmailAndPasswordSucceeded(state, action) {
   const stateWithOperationInfo = addSucceededOperationToState(state, action.operationId);
 
-  return action.userInfo.userFetched ? createStateWithUserInfo(stateWithOperationInfo, action.userInfo) :
+  return action.userInfo.userExists ? createStateWithUserInfo(stateWithOperationInfo, action.userInfo) :
     createStateWithoutUserInfo(stateWithOperationInfo);
 }
 
@@ -106,7 +99,7 @@ function handleSignUpWithEmailAndPasswordFailed(state, action) {
 function handleSignUpWithProviderSucceeded(state, action) {
   const stateWithOperationInfo = addSucceededOperationToState(state, action.operationId);
 
-  return action.userInfo.userFetched ? createStateWithUserInfo(stateWithOperationInfo, action.userInfo) :
+  return action.userInfo.userExists ? createStateWithUserInfo(stateWithOperationInfo, action.userInfo) :
     createStateWithoutUserInfo(stateWithOperationInfo);
 }
 
@@ -119,7 +112,7 @@ function handleSignUpWithProviderFailed(state, action) {
 function handleSignInWithEmailAndPasswordSucceeded(state, action) {
   const stateWithOperationInfo = addSucceededOperationToState(state, action.operationId);
 
-  return action.userInfo.userFetched ? createStateWithUserInfo(stateWithOperationInfo, action.userInfo) :
+  return action.userInfo.userExists ? createStateWithUserInfo(stateWithOperationInfo, action.userInfo) :
     createStateWithoutUserInfo(stateWithOperationInfo);
 }
 
@@ -132,7 +125,7 @@ function handleSignInWithEmailAndPasswordFailed(state, action) {
 function handleSignInWithProviderSucceeded(state, action) {
   const stateWithOperationInfo = addSucceededOperationToState(state, action.operationId);
 
-  return action.userInfo.userFetched ? createStateWithUserInfo(stateWithOperationInfo, action.userInfo) :
+  return action.userInfo.userExists ? createStateWithUserInfo(stateWithOperationInfo, action.userInfo) :
     createStateWithoutUserInfo(stateWithOperationInfo);
 }
 

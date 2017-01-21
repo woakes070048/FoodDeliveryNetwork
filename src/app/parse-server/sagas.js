@@ -37,25 +37,33 @@ import helper from './helper';
 
 function getUserInfo(response) {
   return {
-    userFetched: true,
+    userExists: true,
     userId: response.id,
     emailAddress: response.getEmail(),
     emailAddressVerified: response.get('emailVerified'),
-    displayName: response.get('displayName'),
+    publicProfileDetails: {
+      salutation: response.get('salutation'),
+      firstName: response.get('firstName'),
+      middleName: response.get('middleName'),
+      lastName: response.get('lastName'),
+      preferredName: response.get('preferredName'),
+      phone: response.get('phone'),
+      mobile: response.get('mobile'),
+    },
   };
 }
 
 function getEmptyUserInfo() {
   return {
-    userFetched: false,
+    userExists: false,
   };
 }
 
 function* fetchUserAsync(action) {
   try {
     const response = yield call(helper.fetchUser);
-    const userFetched = response && response.id;
-    const userInfo = userFetched ? getUserInfo(response) : getEmptyUserInfo();
+    const userExists = response && response.id;
+    const userInfo = userExists ? getUserInfo(response) : getEmptyUserInfo();
 
     yield put(fetchUserSucceeded(action.operationId, userInfo));
   } catch (exception) {
@@ -96,8 +104,8 @@ export function* watchSendEmailVerification() {
 function* signInWithEmailAndPasswordAsync(action) {
   try {
     const response = yield call(helper.signInWithEmailAndPassword, action.emailAddress, action.password);
-    const userFetched = response && response.id;
-    const userInfo = userFetched ? getUserInfo(response) : getEmptyUserInfo();
+    const userExists = response && response.id;
+    const userInfo = userExists ? getUserInfo(response) : getEmptyUserInfo();
 
     yield put(signInWithEmailAndPasswordSucceeded(action.operationId, userInfo));
   } catch (exception) {
@@ -125,8 +133,8 @@ export function* watchSignOut() {
 function* signUpWithEmailAndPasswordAsync(action) {
   try {
     const response = yield call(helper.signUpWithEmailAndPassword, action.emailAddress, action.password);
-    const userFetched = response && response.id;
-    const userInfo = userFetched ? getUserInfo(response) : getEmptyUserInfo();
+    const userExists = response && response.id;
+    const userInfo = userExists ? getUserInfo(response) : getEmptyUserInfo();
 
     yield put(signUpWithEmailAndPasswordSucceeded(action.operationId, userInfo));
   } catch (exception) {
@@ -153,7 +161,7 @@ export function* watchUpdatePassword() {
 
 function* updateUserPublicProfileAsync(action) {
   try {
-    yield call(helper.updateUserPublicProfile, action.displayName);
+    yield call(helper.updateUserPublicProfile, action.publicProfileDetails);
     yield put(updateUserPublicProfileSucceeded(action.operationId));
   } catch (exception) {
     yield put(updateUserPublicProfileFailed(action.operationId, exception.message));

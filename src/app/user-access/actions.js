@@ -195,11 +195,11 @@ export function updatePasswordFailed(operationId, error) {
   return createGenericError(USER_ACCESS_UPDATE_PASSWORD_FAILED, operationId, error);
 }
 
-export function updateUserPublicProfile(displayName) {
+export function updateUserPublicProfile(publicProfileDetails) {
   return {
     type: USER_ACCESS_UPDATE_USER_PUBLIC_PROFILE,
     operationId: shortid.generate(),
-    displayName,
+    publicProfileDetails,
   };
 }
 

@@ -17,25 +17,93 @@ class PublicPresentational extends Component {
     super(props);
 
     this.state = {
-      displayName: this.props.initialDisplayName,
-      displayNameChanged: false,
+      salutation: this.props.publicProfileDetails.salutation,
+      salutationChanged: false,
+      firstName: this.props.publicProfileDetails.firstName,
+      firstNameChanged: false,
+      middleName: this.props.publicProfileDetails.middleName,
+      middleNameChanged: false,
+      lastName: this.props.publicProfileDetails.lastName,
+      lastNameChanged: false,
+      preferredName: this.props.publicProfileDetails.preferredName,
+      preferredNameChanged: false,
+      phone: this.props.publicProfileDetails.phone,
+      phoneChanged: false,
+      mobile: this.props.publicProfileDetails.mobile,
+      mobileChanged: false,
     };
 
-    this.onDisplayNameChanged = this.onDisplayNameChanged.bind(this);
+    this.onSalutationChanged = this.onSalutationChanged.bind(this);
+    this.onFirstNameChanged = this.onFirstNameChanged.bind(this);
+    this.onMiddleNameChanged = this.onMiddleNameChanged.bind(this);
+    this.onLastNameChanged = this.onLastNameChanged.bind(this);
+    this.onPreferredNameChanged = this.onPreferredNameChanged.bind(this);
+    this.onPhoneChanged = this.onPhoneChanged.bind(this);
+    this.onMobileChanged = this.onMobileChanged.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  onDisplayNameChanged(e) {
+  onSalutationChanged(e) {
     this.setState(Object.assign(this.state, {
-      displayName: e.target.value,
-      displayNameChanged: true,
+      salutation: e.target.value,
+      salutationChanged: true,
+    }));
+  }
+
+  onFirstNameChanged(e) {
+    this.setState(Object.assign(this.state, {
+      firstName: e.target.value,
+      firstNameChanged: true,
+    }));
+  }
+
+  onMiddleNameChanged(e) {
+    this.setState(Object.assign(this.state, {
+      middleName: e.target.value,
+      middleNameChanged: true,
+    }));
+  }
+
+  onLastNameChanged(e) {
+    this.setState(Object.assign(this.state, {
+      lastName: e.target.value,
+      lastNameChanged: true,
+    }));
+  }
+
+  onPreferredNameChanged(e) {
+    this.setState(Object.assign(this.state, {
+      preferredName: e.target.value,
+      preferredNameChanged: true,
+    }));
+  }
+
+  onPhoneChanged(e) {
+    this.setState(Object.assign(this.state, {
+      phone: e.target.value,
+      phoneChanged: true,
+    }));
+  }
+
+  onMobileChanged(e) {
+    this.setState(Object.assign(this.state, {
+      mobile: e.target.value,
+      mobileChanged: true,
     }));
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
-    this.props.onUpdateClicked(this.state.displayName);
+    this.props.onUpdateClicked({
+      salutation: this.state.salutation,
+      firstName: this.state.firstName,
+      middleName: this.state.middleName,
+      lastName: this.state.lastName,
+      preferredName: this.state.preferredName,
+      phone: this.state.phone,
+      mobile: this.state.mobile,
+    });
   }
 
   render() {
@@ -55,9 +123,87 @@ class PublicPresentational extends Component {
               </InputGroup.Addon>
               <FormControl
                 type="text"
-                placeholder="Display name"
-                value={this.state.displayName}
-                onChange={this.onDisplayNameChanged}
+                placeholder="Salutation"
+                value={this.state.salutation}
+                onChange={this.onSalutationChanged}
+              />
+            </InputGroup>
+          </FormGroup>
+          <FormGroup>
+            <InputGroup>
+              <InputGroup.Addon>
+                <Glyphicon glyph="user" />
+              </InputGroup.Addon>
+              <FormControl
+                type="text"
+                placeholder="First name"
+                value={this.state.firstName}
+                onChange={this.onFirstNameChanged}
+              />
+            </InputGroup>
+          </FormGroup>
+          <FormGroup>
+            <InputGroup>
+              <InputGroup.Addon>
+                <Glyphicon glyph="user" />
+              </InputGroup.Addon>
+              <FormControl
+                type="text"
+                placeholder="Middle name"
+                value={this.state.middleName}
+                onChange={this.onMiddleNameChanged}
+              />
+            </InputGroup>
+          </FormGroup>
+          <FormGroup>
+            <InputGroup>
+              <InputGroup.Addon>
+                <Glyphicon glyph="user" />
+              </InputGroup.Addon>
+              <FormControl
+                type="text"
+                placeholder="Last name"
+                value={this.state.lastName}
+                onChange={this.onLastNameChanged}
+              />
+            </InputGroup>
+          </FormGroup>
+          <FormGroup>
+            <InputGroup>
+              <InputGroup.Addon>
+                <Glyphicon glyph="user" />
+              </InputGroup.Addon>
+              <FormControl
+                type="text"
+                placeholder="Preferred name"
+                value={this.state.preferredName}
+                onChange={this.onPreferredNameChanged}
+              />
+            </InputGroup>
+          </FormGroup>
+          <FormGroup>
+            <InputGroup>
+              <InputGroup.Addon>
+                <Glyphicon glyph="phone-alt" />
+              </InputGroup.Addon>
+              <FormControl
+                type="tel"
+                placeholder="Phone"
+                value={this.state.phone}
+                onChange={this.onPhoneChanged}
+              />
+            </InputGroup>
+          </FormGroup>
+          <FormGroup>
+            <InputGroup>
+              <InputGroup.Addon>
+                <Glyphicon glyph="phone" />
+              </InputGroup.Addon>
+              <FormControl
+                type="tel"
+                placeholder="Mobile"
+                value={this.state.mobile}
+                onChange={this.onMobileChanged}
               />
             </InputGroup>
           </FormGroup>
@@ -76,12 +222,28 @@ class PublicPresentational extends Component {
 }
 
 PublicPresentational.propTypes = {
-  initialDisplayName: PropTypes.string,
+  publicProfileDetails: React.PropTypes.shape({
+    salutation: PropTypes.string,
+    firstName: PropTypes.string,
+    middleName: PropTypes.string,
+    lastName: PropTypes.string,
+    preferredName: PropTypes.string,
+    phone: PropTypes.string,
+    mobile: PropTypes.string,
+  }),
   onUpdateClicked: PropTypes.func.isRequired,
 };
 
 PublicPresentational.defaultProps = {
-  initialDisplayName: '',
+  publicProfileDetails: {
+    salutation: '',
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    preferredName: '',
+    phone: '',
+    mobile: '',
+  },
 };
 
 export default PublicPresentational;

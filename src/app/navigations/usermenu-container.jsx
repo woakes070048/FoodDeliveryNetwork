@@ -88,16 +88,33 @@ UserMenuContainer.defaultProps = {
   userPhotoUrl: '',
 };
 
+function getDisplayName(publicProfileDetails) {
+  if (!publicProfileDetails) {
+    return 'Unknown';
+  }
+
+  if (publicProfileDetails.preferredName) {
+    return publicProfileDetails.preferredName;
+  }
+
+  const displayName = (
+      `${publicProfileDetails.firstName} ${publicProfileDetails.middleName} ${publicProfileDetails.lastName}`)
+    .trim();
+
+  return displayName || 'Unknown';
+}
+
 function mapStateToProps(state) {
   const operations = state.userAccess.operations;
   const userInfo = state.userAccess.userInfo;
+  const publicProfileDetails = state.userAccess.userInfo.publicProfileDetails;
 
   return userInfo.userExists ? {
     userExists: true,
-    userDisplayName: userInfo.displayName,
     userEmailAddress: userInfo.emailAddress,
     userEmailAddressVerified: userInfo.emailAddressVerified,
-    userPhotoUrl: userInfo.photoUrl,
+    userDisplayName: getDisplayName(publicProfileDetails),
+    userPhotoUrl: publicProfileDetails ? publicProfileDetails.photoUrl : '',
     operations,
   } : {
     userExists: false,

@@ -11,17 +11,13 @@ import {
   LinkContainer,
 } from 'react-router-bootstrap';
 
-function getUserDisplayName(userDisplayName) {
-  return userDisplayName || 'Unknown';
-}
-
 function formatUserInfoToDisplay(userDisplayName, userEmailAddress, userEmailAddressVerified) {
   return (
     <div>
       Signed in as
       <br />
       <strong>
-        {getUserDisplayName(userDisplayName)}
+        {userDisplayName}
           ({userEmailAddress.concat(userEmailAddressVerified ? '' : ', Email address not verified')})
       </strong>
     </div>
@@ -41,7 +37,7 @@ function getUserImageOrDisplayName(userDisplayName, userPhotoUrl) {
     ) :
     (
       <span>
-        {getUserDisplayName(userDisplayName)}
+        {userDisplayName}
       </span>
     );
 }
