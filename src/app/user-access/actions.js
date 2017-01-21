@@ -35,23 +35,6 @@ import {
   USER_ACCESS_SEND_EMAIL_VERIFICATION_FAILED,
 } from './action-types';
 
-function getUserInfo(info) {
-  return {
-    userFetched: true,
-    userId: info.id,
-    emailAddress: info.getEmail(),
-    emailAddressVerified: info.get('emailVerified'),
-    displayName: info.get('displayName'),
-    photoUrl: '', //info.photoURL,
-  };
-}
-
-function getEmptyUserInfo() {
-  return {
-    userFetched: false,
-  };
-}
-
 function createReplyWithUserInfo(type, operationId, userInfo) {
   return {
     type,
@@ -82,11 +65,8 @@ export function acknowledgeOperation(operationId) {
   };
 }
 
-export function fetchUserSucceeded(operationId, response) {
-  const userFetched = response && response.id;
-
-  return userFetched ? createReplyWithUserInfo(USER_ACCESS_FETCH_USER_SUCCEEDED, operationId, getUserInfo(response)) :
-    createReplyWithUserInfo(USER_ACCESS_FETCH_USER_SUCCEEDED, operationId, getEmptyUserInfo());
+export function fetchUserSucceeded(operationId, userInfo) {
+  return createReplyWithUserInfo(USER_ACCESS_FETCH_USER_SUCCEEDED, operationId, userInfo);
 }
 
 export function fetchUserFailed(operationId, error) {
@@ -99,16 +79,11 @@ export function signUpWithEmailAndPassword(emailAddress, password) {
     operationId: shortid.generate(),
     emailAddress,
     password,
-
   };
 }
 
-export function signUpWithEmailAndPasswordSucceeded(operationId, response) {
-  const userFetched = response && response.id;
-
-  return userFetched ? createReplyWithUserInfo(USER_ACCESS_SIGNUP_WITH_EMAIL_AND_PASSWORD_SUCCEEDED, operationId,
-      getUserInfo(response)) :
-    createReplyWithUserInfo(USER_ACCESS_SIGNUP_WITH_EMAIL_AND_PASSWORD_SUCCEEDED, operationId, getEmptyUserInfo());
+export function signUpWithEmailAndPasswordSucceeded(operationId, userInfo) {
+  return createReplyWithUserInfo(USER_ACCESS_SIGNUP_WITH_EMAIL_AND_PASSWORD_SUCCEEDED, operationId, userInfo);
 }
 
 export function signUpWithEmailAndPasswordFailed(operationId, error) {
@@ -123,12 +98,8 @@ export function signUpWithProvider(providerName) {
   };
 }
 
-export function signUpWithProviderSucceeded(operationId, response) {
-  const userFetched = response && response.user && response.user.uid;
-
-  return userFetched ?
-    createReplyWithUserInfo(USER_ACCESS_SIGNUP_WITH_PROVIDER_SUCCEEDED, operationId, getUserInfo(response.user)) :
-    createReplyWithUserInfo(USER_ACCESS_SIGNUP_WITH_PROVIDER_SUCCEEDED, operationId, getEmptyUserInfo());
+export function signUpWithProviderSucceeded(operationId, userInfo) {
+  return createReplyWithUserInfo(USER_ACCESS_SIGNUP_WITH_PROVIDER_SUCCEEDED, operationId, userInfo);
 }
 
 export function signUpWithProviderFailed(operationId, error) {
@@ -144,12 +115,8 @@ export function signInWithEmailAndPassword(emailAddress, password) {
   };
 }
 
-export function signInWithEmailAndPasswordSucceeded(operationId, response) {
-  const userFetched = response && response.id;
-
-  return userFetched ? createReplyWithUserInfo(USER_ACCESS_SIGNIN_WITH_EMAIL_AND_PASSWORD_SUCCEEDED, operationId,
-      getUserInfo(response)) :
-    createReplyWithUserInfo(USER_ACCESS_SIGNIN_WITH_EMAIL_AND_PASSWORD_SUCCEEDED, operationId, getEmptyUserInfo());
+export function signInWithEmailAndPasswordSucceeded(operationId, userInfo) {
+  return createReplyWithUserInfo(USER_ACCESS_SIGNIN_WITH_EMAIL_AND_PASSWORD_SUCCEEDED, operationId, userInfo);
 }
 
 export function signInWithEmailAndPasswordFailed(operationId, error) {
@@ -164,12 +131,8 @@ export function signInWithProvider(providerName) {
   };
 }
 
-export function signInWithProviderSucceeded(operationId, response) {
-  const userFetched = response && response.user && response.user.uid;
-
-  return userFetched ? createReplyWithUserInfo(USER_ACCESS_SIGNIN_WITH_PROVIDER_SUCCEEDED, operationId, getUserInfo(
-    response.user)) : createReplyWithUserInfo(USER_ACCESS_SIGNIN_WITH_PROVIDER_SUCCEEDED, operationId,
-    getEmptyUserInfo());
+export function signInWithProviderSucceeded(operationId, userInfo) {
+  return createReplyWithUserInfo(USER_ACCESS_SIGNIN_WITH_PROVIDER_SUCCEEDED, operationId, userInfo);
 }
 
 export function signInWithProviderFailed(operationId, error) {

@@ -8,9 +8,7 @@ import {
 import {
   USER_ACCESS_FETCH_USER,
   USER_ACCESS_SIGNUP_WITH_EMAIL_AND_PASSWORD,
-  USER_ACCESS_SIGNUP_WITH_PROVIDER,
   USER_ACCESS_SIGNIN_WITH_EMAIL_AND_PASSWORD,
-  USER_ACCESS_SIGNIN_WITH_PROVIDER,
   USER_ACCESS_SIGNOUT,
   USER_ACCESS_RESET_PASSWORD,
   USER_ACCESS_UPDATE_PASSWORD,
@@ -26,14 +24,10 @@ import {
   sendEmailVerificationFailed,
   signInWithEmailAndPasswordSucceeded,
   signInWithEmailAndPasswordFailed,
-  signInWithProviderSucceeded,
-  signInWithProviderFailed,
   signOutSucceeded,
   signOutFailed,
   signUpWithEmailAndPasswordSucceeded,
   signUpWithEmailAndPasswordFailed,
-  signUpWithProviderSucceeded,
-  signUpWithProviderFailed,
   updatePasswordSucceeded,
   updatePasswordFailed,
   updateUserPublicProfileSucceeded,
@@ -41,11 +35,29 @@ import {
 } from '../user-access/actions';
 import helper from './helper';
 
+function getUserInfo(response) {
+  return {
+    userFetched: true,
+    userId: response.id,
+    emailAddress: response.getEmail(),
+    emailAddressVerified: response.get('emailVerified'),
+    displayName: response.get('displayName'),
+  };
+}
+
+function getEmptyUserInfo() {
+  return {
+    userFetched: false,
+  };
+}
+
 function* fetchUserAsync(action) {
   try {
     const response = yield call(helper.fetchUser);
+    const userFetched = response && response.id;
+    const userInfo = userFetched ? getUserInfo(response) : getEmptyUserInfo();
 
-    yield put(fetchUserSucceeded(action.operationId, response));
+    yield put(fetchUserSucceeded(action.operationId, userInfo));
   } catch (exception) {
     yield put(fetchUserFailed(action.operationId, exception.message));
   }
@@ -84,8 +96,10 @@ export function* watchSendEmailVerification() {
 function* signInWithEmailAndPasswordAsync(action) {
   try {
     const response = yield call(helper.signInWithEmailAndPassword, action.emailAddress, action.password);
+    const userFetched = response && response.id;
+    const userInfo = userFetched ? getUserInfo(response) : getEmptyUserInfo();
 
-    yield put(signInWithEmailAndPasswordSucceeded(action.operationId, response));
+    yield put(signInWithEmailAndPasswordSucceeded(action.operationId, userInfo));
   } catch (exception) {
     yield put(signInWithEmailAndPasswordFailed(action.operationId, exception.message));
   }
@@ -93,20 +107,6 @@ function* signInWithEmailAndPasswordAsync(action) {
 
 export function* watchSignInWithEmailAndPassword() {
   yield takeLatest(USER_ACCESS_SIGNIN_WITH_EMAIL_AND_PASSWORD, signInWithEmailAndPasswordAsync);
-}
-
-function* signInWithProviderAsync(action) {
-  try {
-    const response = yield call(helper.signInWithProvider, action.providerName);
-
-    yield put(signInWithProviderSucceeded(action.operationId, response));
-  } catch (exception) {
-    yield put(signInWithProviderFailed(action.operationId, exception.message));
-  }
-}
-
-export function* watchSignInWithProvider() {
-  yield takeLatest(USER_ACCESS_SIGNIN_WITH_PROVIDER, signInWithProviderAsync);
 }
 
 function* signOutAsync(action) {
@@ -125,8 +125,10 @@ export function* watchSignOut() {
 function* signUpWithEmailAndPasswordAsync(action) {
   try {
     const response = yield call(helper.signUpWithEmailAndPassword, action.emailAddress, action.password);
+    const userFetched = response && response.id;
+    const userInfo = userFetched ? getUserInfo(response) : getEmptyUserInfo();
 
-    yield put(signUpWithEmailAndPasswordSucceeded(action.operationId, response));
+    yield put(signUpWithEmailAndPasswordSucceeded(action.operationId, userInfo));
   } catch (exception) {
     yield put(signUpWithEmailAndPasswordFailed(action.operationId, exception.message));
   }
@@ -134,20 +136,6 @@ function* signUpWithEmailAndPasswordAsync(action) {
 
 export function* watchSignUpWithEmailAndPassword() {
   yield takeLatest(USER_ACCESS_SIGNUP_WITH_EMAIL_AND_PASSWORD, signUpWithEmailAndPasswordAsync);
-}
-
-function* signUpWithProviderAsync(action) {
-  try {
-    const response = yield call(helper.signUpWithProvider, action.providerName);
-
-    yield put(signUpWithProviderSucceeded(action.operationId, response));
-  } catch (exception) {
-    yield put(signUpWithProviderFailed(action.operationId, exception.message));
-  }
-}
-
-export function* watchSignUpWithProvider() {
-  yield takeLatest(USER_ACCESS_SIGNUP_WITH_PROVIDER, signUpWithProviderAsync);
 }
 
 function* updatePasswordAsync(action) {
