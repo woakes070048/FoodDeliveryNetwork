@@ -41,11 +41,30 @@ import {
 } from '../user-access/actions';
 import helper from './helper';
 
+function getUserInfo(response) {
+  return {
+    userFetched: true,
+    userId: response.uid,
+    emailAddress: response.email,
+    emailAddressVerified: response.emailVerified,
+    displayName: response.displayName,
+    photoUrl: response.photoURL,
+  };
+}
+
+function getEmptyUserInfo() {
+  return {
+    userFetched: false,
+  };
+}
+
 function* fetchUserAsync(action) {
   try {
     const response = yield call(helper.fetchUser);
+    const userFetched = response && response.uid;
+    const userInfo = userFetched ? getUserInfo(response) : getEmptyUserInfo();
 
-    yield put(fetchUserSucceeded(action.operationId, response));
+    yield put(fetchUserSucceeded(action.operationId, userInfo));
   } catch (exception) {
     yield put(fetchUserFailed(action.operationId, exception.message));
   }
@@ -84,8 +103,10 @@ export function* watchSendEmailVerification() {
 function* signInWithEmailAndPasswordAsync(action) {
   try {
     const response = yield call(helper.signInWithEmailAndPassword, action.emailAddress, action.password);
+    const userFetched = response && response.uid;
+    const userInfo = userFetched ? getUserInfo(response) : getEmptyUserInfo();
 
-    yield put(signInWithEmailAndPasswordSucceeded(action.operationId, response));
+    yield put(signInWithEmailAndPasswordSucceeded(action.operationId, userInfo));
   } catch (exception) {
     yield put(signInWithEmailAndPasswordFailed(action.operationId, exception.message));
   }
@@ -98,8 +119,10 @@ export function* watchSignInWithEmailAndPassword() {
 function* signInWithProviderAsync(action) {
   try {
     const response = yield call(helper.signInWithProvider, action.providerName);
+    const userFetched = response && response.user && response.user.uid;
+    const userInfo = userFetched ? getUserInfo(response.user) : getEmptyUserInfo();
 
-    yield put(signInWithProviderSucceeded(action.operationId, response));
+    yield put(signInWithProviderSucceeded(action.operationId, userInfo));
   } catch (exception) {
     yield put(signInWithProviderFailed(action.operationId, exception.message));
   }
@@ -125,8 +148,10 @@ export function* watchSignOut() {
 function* signUpWithEmailAndPasswordAsync(action) {
   try {
     const response = yield call(helper.signUpWithEmailAndPassword, action.emailAddress, action.password);
+    const userFetched = response && response.uid;
+    const userInfo = userFetched ? getUserInfo(response) : getEmptyUserInfo();
 
-    yield put(signUpWithEmailAndPasswordSucceeded(action.operationId, response));
+    yield put(signUpWithEmailAndPasswordSucceeded(action.operationId, userInfo));
   } catch (exception) {
     yield put(signUpWithEmailAndPasswordFailed(action.operationId, exception.message));
   }
@@ -139,8 +164,10 @@ export function* watchSignUpWithEmailAndPassword() {
 function* signUpWithProviderAsync(action) {
   try {
     const response = yield call(helper.signUpWithProvider, action.providerName);
+    const userFetched = response && response.user && response.user.uid;
+    const userInfo = userFetched ? getUserInfo(response.user) : getEmptyUserInfo();
 
-    yield put(signUpWithProviderSucceeded(action.operationId, response));
+    yield put(signUpWithProviderSucceeded(action.operationId, userInfo));
   } catch (exception) {
     yield put(signUpWithProviderFailed(action.operationId, exception.message));
   }
