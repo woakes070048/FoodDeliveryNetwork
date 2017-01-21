@@ -5,6 +5,7 @@ import React, {
 import {
   Button,
   Col,
+  Form,
   FormControl,
   FormGroup,
   InputGroup,
@@ -20,15 +21,8 @@ class PublicPresentational extends Component {
       displayNameChanged: false,
     };
 
-    this.onKeyPressed = this.onKeyPressed.bind(this);
     this.onDisplayNameChanged = this.onDisplayNameChanged.bind(this);
-    this.onUpdateClicked = this.onUpdateClicked.bind(this);
-  }
-
-  onKeyPressed(e) {
-    if (e.charCode === 13) {
-      this.onUpdateClicked();
-    }
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   onDisplayNameChanged(e) {
@@ -38,7 +32,9 @@ class PublicPresentational extends Component {
     }));
   }
 
-  onUpdateClicked() {
+  handleSubmit(e) {
+    e.preventDefault();
+
     this.props.onUpdateClicked(this.state.displayName);
   }
 
@@ -51,28 +47,29 @@ class PublicPresentational extends Component {
       >
         <h3>Public profile</h3>
         <div className="form-divider" />
-        <FormGroup>
-          <InputGroup>
-            <InputGroup.Addon>
-              <Glyphicon glyph="user" />
-            </InputGroup.Addon>
-            <FormControl
-              type="text"
-              placeholder="Display name"
-              value={this.state.displayName}
-              onChange={this.onDisplayNameChanged}
-              onKeyPress={this.onKeyPressed}
-            />
-          </InputGroup>
-        </FormGroup>
-        <FormGroup>
-          <Button
-            bsStyle="primary"
-            onClick={this.onUpdateClicked}
-          >
+        <Form onSubmit={this.handleSubmit} horizontal>
+          <FormGroup>
+            <InputGroup>
+              <InputGroup.Addon>
+                <Glyphicon glyph="user" />
+              </InputGroup.Addon>
+              <FormControl
+                type="text"
+                placeholder="Display name"
+                value={this.state.displayName}
+                onChange={this.onDisplayNameChanged}
+              />
+            </InputGroup>
+          </FormGroup>
+          <FormGroup>
+            <Button
+              bsStyle="primary"
+              type="submit"
+            >
             Update
           </Button>
-        </FormGroup>
+          </FormGroup>
+        </Form>
       </Col>
     );
   }

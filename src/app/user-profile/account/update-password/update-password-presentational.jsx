@@ -6,6 +6,7 @@ import {
   Button,
   Col,
   HelpBlock,
+  Form,
   FormControl,
   FormGroup,
   Glyphicon,
@@ -30,19 +31,12 @@ class UpdatePasswordPresentational extends Component {
   constructor(props) {
     super(props);
 
-    this.onKeyPressed = this.onKeyPressed.bind(this);
     this.onNewPasswordChanged = this.onNewPasswordChanged.bind(this);
     this.onReEnteredPasswordChanged = this.onReEnteredPasswordChanged.bind(this);
     this.validateState = this.validateState.bind(this);
-    this.onUpdatePasswordClicked = this.onUpdatePasswordClicked.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = UpdatePasswordPresentational.getInitialState();
-  }
-
-  onKeyPressed(e) {
-    if (e.charCode === 13) {
-      this.onUpdatePasswordClicked();
-    }
   }
 
   onNewPasswordChanged(e) {
@@ -63,7 +57,9 @@ class UpdatePasswordPresentational extends Component {
     this.validateState();
   }
 
-  onUpdatePasswordClicked() {
+  handleSubmit(e) {
+    e.preventDefault();
+
     this.setState(Object.assign(this.state, {
       updatePasswordClicked: true,
     }));
@@ -111,46 +107,46 @@ class UpdatePasswordPresentational extends Component {
       >
         <h3>Change password</h3>
         <div className="form-divider" />
-        <FormGroup validationState={this.state.newPasswordValidationResult}>
-          <InputGroup>
-            <InputGroup.Addon>
-              <Glyphicon glyph="lock" />
-            </InputGroup.Addon>
-            <FormControl
-              type="password"
-              placeholder="New password"
-              value={this.state.newPassword}
-              onChange={this.onNewPasswordChanged}
-              onKeyPress={this.onKeyPressed}
-            />
-          </InputGroup>
-          <FormControl.Feedback />
-          {newPasswordHelpBlock}
-        </FormGroup>
-        <FormGroup validationState={this.state.reEnteredPasswordValidationResult}>
-          <InputGroup>
-            <InputGroup.Addon>
-              <Glyphicon glyph="lock" />
-            </InputGroup.Addon>
-            <FormControl
-              type="password"
-              placeholder="Confirm new password"
-              value={this.state.reEnteredPassword}
-              onChange={this.onReEnteredPasswordChanged}
-              onKeyPress={this.onKeyPressed}
-            />
-          </InputGroup>
-          <FormControl.Feedback />
-          {reEnteredPasswordHelpBlock}
-        </FormGroup>
-        <FormGroup>
-          <Button
-            bsStyle="primary"
-            onClick={this.onUpdatePasswordClicked}
-          >
+        <Form onSubmit={this.handleSubmit} horizontal>
+          <FormGroup validationState={this.state.newPasswordValidationResult}>
+            <InputGroup>
+              <InputGroup.Addon>
+                <Glyphicon glyph="lock" />
+              </InputGroup.Addon>
+              <FormControl
+                type="password"
+                placeholder="New password"
+                value={this.state.newPassword}
+                onChange={this.onNewPasswordChanged}
+              />
+            </InputGroup>
+            <FormControl.Feedback />
+            {newPasswordHelpBlock}
+          </FormGroup>
+          <FormGroup validationState={this.state.reEnteredPasswordValidationResult}>
+            <InputGroup>
+              <InputGroup.Addon>
+                <Glyphicon glyph="lock" />
+              </InputGroup.Addon>
+              <FormControl
+                type="password"
+                placeholder="Confirm new password"
+                value={this.state.reEnteredPassword}
+                onChange={this.onReEnteredPasswordChanged}
+              />
+            </InputGroup>
+            <FormControl.Feedback />
+            {reEnteredPasswordHelpBlock}
+          </FormGroup>
+          <FormGroup>
+            <Button
+              bsStyle="primary"
+              type="submit"
+            >
             Update password
           </Button>
-        </FormGroup>
+          </FormGroup>
+        </Form>
       </Col>
     );
   }

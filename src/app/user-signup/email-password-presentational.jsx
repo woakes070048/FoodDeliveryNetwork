@@ -5,6 +5,7 @@ import React, {
 import {
   Button,
   HelpBlock,
+  Form,
   FormControl,
   FormGroup,
   Glyphicon,
@@ -31,18 +32,11 @@ class EmailPasswordPresentational extends Component {
       signUpClicked: false,
     };
 
-    this.onKeyPressed = this.onKeyPressed.bind(this);
     this.onEmailAddressChanged = this.onEmailAddressChanged.bind(this);
     this.onPasswordChanged = this.onPasswordChanged.bind(this);
     this.onReEnteredPasswordChanged = this.onReEnteredPasswordChanged.bind(this);
     this.validateState = this.validateState.bind(this);
-    this.onSignUpClicked = this.onSignUpClicked.bind(this);
-  }
-
-  onKeyPressed(e) {
-    if (e.charCode === 13) {
-      this.onSignUpClicked();
-    }
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   onEmailAddressChanged(e) {
@@ -72,7 +66,9 @@ class EmailPasswordPresentational extends Component {
     this.validateState();
   }
 
-  onSignUpClicked() {
+  handleSubmit(e) {
+    e.preventDefault();
+
     this.setState(Object.assign(this.state, {
       signUpClicked: true,
     }));
@@ -122,63 +118,62 @@ class EmailPasswordPresentational extends Component {
 
     return (
       <div>
-        <FormGroup validationState={this.state.emailAddressValidationResult}>
-          <InputGroup>
-            <InputGroup.Addon>
-              <Glyphicon glyph="user" />
-            </InputGroup.Addon>
-            <FormControl
-              type="email"
-              placeholder="Email address"
-              value={this.state.emailAddress}
-              onChange={this.onEmailAddressChanged}
-              onKeyPress={this.onKeyPressed}
-            />
-          </InputGroup>
-          <FormControl.Feedback />
-          {emailAddressHelpBlock}
-        </FormGroup>
-        <FormGroup validationState={this.state.passwordValidationResult}>
-          <InputGroup>
-            <InputGroup.Addon>
-              <Glyphicon glyph="lock" />
-            </InputGroup.Addon>
-            <FormControl
-              type="password"
-              placeholder="Password"
-              value={this.state.password}
-              onChange={this.onPasswordChanged}
-              onKeyPress={this.onKeyPressed}
-            />
-          </InputGroup>
-          <FormControl.Feedback />
-          {passwordHelpBlock}
-        </FormGroup>
-        <FormGroup validationState={this.state.reEnteredPasswordValidationResult}>
-          <InputGroup>
-            <InputGroup.Addon>
-              <Glyphicon glyph="lock" />
-            </InputGroup.Addon>
-            <FormControl
-              type="password"
-              placeholder="Confirm password"
-              value={this.state.reEnteredPassword}
-              onChange={this.onReEnteredPasswordChanged}
-              onKeyPress={this.onKeyPressed}
-            />
-          </InputGroup>
-          <FormControl.Feedback />
-          {reEnteredPasswordHelpBlock}
-        </FormGroup>
-        <FormGroup>
-          <Button
-            bsStyle="primary"
-            block
-            onClick={this.onSignUpClicked}
-          >
+        <Form onSubmit={this.handleSubmit} horizontal>
+          <FormGroup validationState={this.state.emailAddressValidationResult}>
+            <InputGroup>
+              <InputGroup.Addon>
+                <Glyphicon glyph="user" />
+              </InputGroup.Addon>
+              <FormControl
+                type="email"
+                placeholder="Email address"
+                value={this.state.emailAddress}
+                onChange={this.onEmailAddressChanged}
+              />
+            </InputGroup>
+            <FormControl.Feedback />
+            {emailAddressHelpBlock}
+          </FormGroup>
+          <FormGroup validationState={this.state.passwordValidationResult}>
+            <InputGroup>
+              <InputGroup.Addon>
+                <Glyphicon glyph="lock" />
+              </InputGroup.Addon>
+              <FormControl
+                type="password"
+                placeholder="Password"
+                value={this.state.password}
+                onChange={this.onPasswordChanged}
+              />
+            </InputGroup>
+            <FormControl.Feedback />
+            {passwordHelpBlock}
+          </FormGroup>
+          <FormGroup validationState={this.state.reEnteredPasswordValidationResult}>
+            <InputGroup>
+              <InputGroup.Addon>
+                <Glyphicon glyph="lock" />
+              </InputGroup.Addon>
+              <FormControl
+                type="password"
+                placeholder="Confirm password"
+                value={this.state.reEnteredPassword}
+                onChange={this.onReEnteredPasswordChanged}
+              />
+            </InputGroup>
+            <FormControl.Feedback />
+            {reEnteredPasswordHelpBlock}
+          </FormGroup>
+          <FormGroup>
+            <Button
+              bsStyle="primary"
+              block
+              type="submit"
+            >
             Sign up
           </Button>
-        </FormGroup>
+          </FormGroup>
+        </Form>
       </div>
     );
   }

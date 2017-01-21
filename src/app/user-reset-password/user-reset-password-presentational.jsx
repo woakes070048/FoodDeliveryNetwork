@@ -5,6 +5,7 @@ import React, {
 import {
   Button,
   Col,
+  Form,
   FormControl,
   FormGroup,
   Glyphicon,
@@ -26,19 +27,12 @@ class UserResetPasswordPresentational extends Component {
       resetPasswordClicked: false,
     };
 
-    this.onKeyPressed = this.onKeyPressed.bind(this);
     this.onEmailAddressChanged = this.onEmailAddressChanged.bind(this);
     this.validateState = this.validateState.bind(this);
-    this.onResetPasswordClicked = this.onResetPasswordClicked.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.onReturnToSignInClicked = this.onReturnToSignInClicked.bind(this);
     this.getResetPasswordUI = this.getResetPasswordUI.bind(this);
     this.getResetPasswordEmailSentUI = this.getResetPasswordEmailSentUI.bind(this);
-  }
-
-  onKeyPressed(e) {
-    if (e.charCode === 13) {
-      this.onResetPasswordClicked();
-    }
   }
 
   onEmailAddressChanged(e) {
@@ -48,18 +42,6 @@ class UserResetPasswordPresentational extends Component {
     }));
 
     this.validateState();
-  }
-
-  onResetPasswordClicked() {
-    this.setState(Object.assign(this.state, {
-      resetPasswordClicked: true,
-    }));
-
-    this.validateState();
-
-    if (!this.state.emailAddressValidationResult && !this.state.passwordValidationResult) {
-      this.props.onResetPasswordClicked(this.state.emailAddress, this.state.password);
-    }
   }
 
   onReturnToSignInClicked() {
@@ -73,31 +55,32 @@ class UserResetPasswordPresentational extends Component {
 
     return (
       <div>
-        <FormGroup validationState={this.state.emailAddressValidationResult}>
-          <InputGroup>
-            <InputGroup.Addon>
-              <Glyphicon glyph="user" />
-            </InputGroup.Addon>
-            <FormControl
-              type="email"
-              placeholder="Email address"
-              value={this.state.emailAddress}
-              onChange={this.onEmailAddressChanged}
-              onKeyPress={this.onKeyPressed}
-            />
-          </InputGroup>
-          <FormControl.Feedback />
-          {emailAddressHelpBlock}
-        </FormGroup>
-        <FormGroup>
-          <Button
-            bsStyle="primary"
-            block
-            onClick={this.onResetPasswordClicked}
-          >
+        <Form onSubmit={this.handleSubmit} horizontal>
+          <FormGroup validationState={this.state.emailAddressValidationResult}>
+            <InputGroup>
+              <InputGroup.Addon>
+                <Glyphicon glyph="user" />
+              </InputGroup.Addon>
+              <FormControl
+                type="email"
+                placeholder="Email address"
+                value={this.state.emailAddress}
+                onChange={this.onEmailAddressChanged}
+              />
+            </InputGroup>
+            <FormControl.Feedback />
+            {emailAddressHelpBlock}
+          </FormGroup>
+          <FormGroup>
+            <Button
+              bsStyle="primary"
+              block
+              type="submit"
+            >
             Send password reset email
           </Button>
-        </FormGroup>
+          </FormGroup>
+        </Form>
       </div>
     );
   }
@@ -120,6 +103,20 @@ class UserResetPasswordPresentational extends Component {
           </Button>
       </Panel>
     );
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    this.setState(Object.assign(this.state, {
+      resetPasswordClicked: true,
+    }));
+
+    this.validateState();
+
+    if (!this.state.emailAddressValidationResult && !this.state.passwordValidationResult) {
+      this.props.onResetPasswordClicked(this.state.emailAddress, this.state.password);
+    }
   }
 
   validateState() {

@@ -5,6 +5,7 @@ import React, {
 import {
   Button,
   HelpBlock,
+  Form,
   FormControl,
   FormGroup,
   Glyphicon,
@@ -30,17 +31,10 @@ class EmailPasswordPresentational extends Component {
       signInClicked: false,
     };
 
-    this.onKeyPressed = this.onKeyPressed.bind(this);
     this.onEmailAddressChanged = this.onEmailAddressChanged.bind(this);
     this.onPasswordChanged = this.onPasswordChanged.bind(this);
     this.validateState = this.validateState.bind(this);
-    this.onSignInClicked = this.onSignInClicked.bind(this);
-  }
-
-  onKeyPressed(e) {
-    if (e.charCode === 13) {
-      this.onSignInClicked();
-    }
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   onEmailAddressChanged(e) {
@@ -61,7 +55,9 @@ class EmailPasswordPresentational extends Component {
     this.validateState();
   }
 
-  onSignInClicked() {
+  handleSubmit(e) {
+    e.preventDefault();
+
     this.setState(Object.assign(this.state, {
       signInClicked: true,
     }));
@@ -101,58 +97,58 @@ class EmailPasswordPresentational extends Component {
 
     return (
       <div>
-        <FormGroup validationState={this.state.emailAddressValidationResult}>
-          <InputGroup>
-            <InputGroup.Addon>
-              <Glyphicon glyph="user" />
-            </InputGroup.Addon>
-            <FormControl
-              type="email"
-              placeholder="Email address"
-              value={this.state.emailAddress}
-              onChange={this.onEmailAddressChanged}
-              onKeyPress={this.onKeyPressed}
-            />
-          </InputGroup>
-          <FormControl.Feedback />
-          {emailAddressHelpBlock}
-        </FormGroup>
-        <FormGroup validationState={this.state.passwordValidationResult}>
-          <InputGroup>
-            <InputGroup.Addon>
-              <Glyphicon glyph="lock" />
-            </InputGroup.Addon>
-            <FormControl
-              type="password"
-              placeholder="Password"
-              value={this.state.password}
-              onChange={this.onPasswordChanged}
-              onKeyPress={this.onKeyPressed}
-            />
-          </InputGroup>
-          <FormControl.Feedback />
-          {passwordHelpBlock}
-        </FormGroup>
-        <FormGroup>
-          <LinkContainer to="/resetPassword">
-            <a> Forgot password? </a>
-          </LinkContainer>
-        </FormGroup>
-        <FormGroup>
-          <Button
-            bsStyle="primary"
-            block
-            onClick={this.onSignInClicked}
-          >
+        <Form onSubmit={this.handleSubmit} horizontal>
+          <FormGroup validationState={this.state.emailAddressValidationResult}>
+            <InputGroup>
+              <InputGroup.Addon>
+                <Glyphicon glyph="user" />
+              </InputGroup.Addon>
+              <FormControl
+                type="email"
+                placeholder="Email address"
+                value={this.state.emailAddress}
+                onChange={this.onEmailAddressChanged}
+              />
+            </InputGroup>
+            <FormControl.Feedback />
+            {emailAddressHelpBlock}
+          </FormGroup>
+          <FormGroup validationState={this.state.passwordValidationResult}>
+            <InputGroup>
+              <InputGroup.Addon>
+                <Glyphicon glyph="lock" />
+              </InputGroup.Addon>
+              <FormControl
+                type="password"
+                placeholder="Password"
+                value={this.state.password}
+                onChange={this.onPasswordChanged}
+              />
+            </InputGroup>
+            <FormControl.Feedback />
+            {passwordHelpBlock}
+          </FormGroup>
+          <FormGroup>
+            <LinkContainer to="/resetPassword">
+              <a> Forgot password? </a>
+            </LinkContainer>
+          </FormGroup>
+          <FormGroup>
+            <Button
+              bsStyle="primary"
+              block
+              type="submit"
+            >
             Sign in
           </Button>
-        </FormGroup>
-        <FormGroup>
+          </FormGroup>
+          <FormGroup>
         New?
         <LinkContainer to="/signup">
           <a> Create an account. </a>
         </LinkContainer>
-        </FormGroup>
+          </FormGroup>
+        </Form>
       </div>
     );
   }
