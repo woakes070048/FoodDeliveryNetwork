@@ -1,6 +1,6 @@
 /* jshint esversion: 6 */
 
-import helper from '../firebase/helper';
+import helper from '../parse-server/helper';
 
 function redirectToSignInPage(nextState, replace) {
   replace({
@@ -14,7 +14,7 @@ function redirectToSignInPage(nextState, replace) {
 export default function requireAuth(nextState, replace, callback) {
   helper.fetchUser()
     .then((userInfo) => {
-      if (!userInfo || !userInfo.uid) {
+      if (!userInfo || !userInfo.id) {
         redirectToSignInPage(nextState, replace);
       }
 
