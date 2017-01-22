@@ -35,26 +35,34 @@ import {
 } from '../user-access/actions';
 import helper from './helper';
 
-function getUserInfo(response) {
-  const person = response.get('person');
-  const personName = person.get('personName');
-  const contactDetails = person.get('contactDetails');
+function getPublicProfileDetails(person) {
+  const personName = person.getPersonName();
+  const contactDetails = person.getContactDetails();
 
   return {
-    userExists: true,
-    userId: response.id,
-    emailAddress: response.getEmail(),
-    emailAddressVerified: response.get('emailVerified'),
-    publicProfileDetails: {
-      salutation: personName.get('salutation'),
-      firstName: personName.get('firstName'),
-      middleName: personName.get('middleName'),
-      lastName: personName.get('lastName'),
-      preferredName: personName.get('preferredName'),
-      phone: contactDetails.get('phone'),
-      mobile: contactDetails.get('mobile'),
-    },
+    salutation: personName.getSalutation(),
+    firstName: personName.getFirstName(),
+    middleName: personName.getMiddleName(),
+    lastName: personName.getLastName(),
+    preferredName: personName.getPreferredName(),
+    phone: contactDetails.getPhone(),
+    mobile: contactDetails.getMobile(),
   };
+}
+
+function getUserInfo(user) {
+  return {
+    userExists: true,
+    userId: user.id,
+    emailAddress: user.getEmail(),
+    emailAddressVerified: user.get('emailVerified'),
+  };
+}
+
+function mergeUserInfoAndPublicProfileDetails(userInfo, publicProfileDetails) {
+  return Object.assign(userInfo, {
+    publicProfileDetails,
+  });
 }
 
 function getEmptyUserInfo() {
@@ -65,11 +73,17 @@ function getEmptyUserInfo() {
 
 function* fetchUserAsync(action) {
   try {
-    const response = yield call(helper.fetchUser);
-    const userExists = response && response.id;
-    const userInfo = userExists ? getUserInfo(response) : getEmptyUserInfo();
+    const currentUser = yield call(helper.fetchUser);
 
-    yield put(fetchUserSucceeded(action.operationId, userInfo));
+    if (currentUser && currentUser.id) {
+      const personName = yield call(helper.getLoggedInPersonName);
+      const result = mergeUserInfoAndPublicProfileDetails(getUserInfo(currentUser), getPublicProfileDetails(
+        personName));
+
+      yield put(fetchUserSucceeded(action.operationId, result));
+    } else {
+      yield put(fetchUserSucceeded(action.operationId, getEmptyUserInfo()));
+    }
   } catch (exception) {
     yield put(fetchUserFailed(action.operationId, exception.message));
   }
@@ -107,11 +121,17 @@ export function* watchSendEmailVerification() {
 
 function* signInWithEmailAndPasswordAsync(action) {
   try {
-    const response = yield call(helper.signInWithEmailAndPassword, action.emailAddress, action.password);
-    const userExists = response && response.id;
-    const userInfo = userExists ? getUserInfo(response) : getEmptyUserInfo();
+    const currentUser = yield call(helper.signInWithEmailAndPassword, action.emailAddress, action.password);
 
-    yield put(signInWithEmailAndPasswordSucceeded(action.operationId, userInfo));
+    if (currentUser && currentUser.id) {
+      const personName = yield call(helper.getLoggedInPersonName);
+      const result = mergeUserInfoAndPublicProfileDetails(getUserInfo(currentUser), getPublicProfileDetails(
+        personName));
+
+      yield put(signInWithEmailAndPasswordSucceeded(action.operationId, result));
+    } else {
+      yield put(signInWithEmailAndPasswordSucceeded(action.operationId, getEmptyUserInfo()));
+    }
   } catch (exception) {
     yield put(signInWithEmailAndPasswordFailed(action.operationId, exception.message));
   }
@@ -136,11 +156,17 @@ export function* watchSignOut() {
 
 function* signUpWithEmailAndPasswordAsync(action) {
   try {
-    const response = yield call(helper.signUpWithEmailAndPassword, action.emailAddress, action.password);
-    const userExists = response && response.id;
-    const userInfo = userExists ? getUserInfo(response) : getEmptyUserInfo();
+    const currentUser = yield call(helper.signUpWithEmailAndPassword, action.emailAddress, action.password);
 
-    yield put(signUpWithEmailAndPasswordSucceeded(action.operationId, userInfo));
+    if (currentUser && currentUser.id) {
+      const personName = yield call(helper.getLoggedInPersonName);
+      const result = mergeUserInfoAndPublicProfileDetails(getUserInfo(currentUser), getPublicProfileDetails(
+        personName));
+
+      yield put(signUpWithEmailAndPasswordSucceeded(action.operationId, result));
+    } else {
+      yield put(signUpWithEmailAndPasswordSucceeded(action.operationId, getEmptyUserInfo()));
+    }
   } catch (exception) {
     yield put(signUpWithEmailAndPasswordFailed(action.operationId, exception.message));
   }

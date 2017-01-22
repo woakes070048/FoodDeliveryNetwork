@@ -2,22 +2,29 @@
 
 import parse from 'parse';
 import config from './config';
+import Person from './schema/person';
 import User from './schema/user';
 
 parse.initialize(config.applicationId, config.javascriptKey);
 parse.serverURL = config.serverUrl;
 
-const parseServerHelper = {
-  fetchUser: () => new Promise((resolve, reject) => {
-    const currentUser = parse.User.current();
+function getCurrentUser() {
+  return new User(parse.User.current());
+}
 
-    if (currentUser) {
-      currentUser.fetch()
-        .then(response => resolve(response))
-        .catch(error => reject(error));
-    } else {
-      resolve(currentUser);
-    }
+function getCurrentPerson() {
+  return getCurrentUser()
+    .getPerson();
+}
+
+function getCurrentPersonId() {
+  return getCurrentPerson()
+    .getId();
+}
+
+const parseServerHelper = {
+  fetchUser: () => new Promise((resolve) => {
+    resolve(parse.User.current());
   }),
 
   signUpWithEmailAndPassword: (emailAddress, password) => {
@@ -50,8 +57,7 @@ const parseServerHelper = {
       phone,
       mobile,
     }) =>
-    new User(parse.User.current())
-    .saveUser({
+    User.saveUser({
       personName: {
         salutation,
         firstName,
@@ -63,7 +69,7 @@ const parseServerHelper = {
         phone,
         mobile,
       },
-    }),
+    }, parse.User.current()),
 
   sendEmailVerification: () => {
     const user = parse.User.current();
@@ -89,6 +95,19 @@ const parseServerHelper = {
 
     return user.save();
   },
+
+  getLoggedInPersonName: () => Person.loadPerson(getCurrentPersonId(), {
+    loadName: true,
+  }),
+
+  getLoggedInPersonContactDetails: () => Person.loadPerson(getCurrentPersonId(), {
+    loadContactDetails: true,
+  }),
+
+  getLoggedInPersonPublicProfileDetails: () => Person.loadPerson(getCurrentPersonId(), {
+    loadName: true,
+    loadContactDetails: true,
+  }),
 
 };
 

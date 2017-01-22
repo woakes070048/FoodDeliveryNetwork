@@ -1,20 +1,45 @@
 /* jshint esversion: 6 */
 
 import parse from 'parse';
-import ContactDetails from './contact-details';
 import Name from './name';
+import ContactDetails from './contact-details';
 
 class Person extends parse.Object {
   constructor(person) {
     super('Person');
 
     this.person = person;
+    this.getPersonName = this.getPersonName.bind(this);
+    this.getContactDetails = this.getContactDetails.bind(this);
   }
 
-  savePerson({
+  static loadPerson(personId, {
+    loadName,
+    loadContactDetails,
+  }) {
+    const query = new parse.Query(Person);
+
+    if (loadName) {
+      query.include('personName');
+    }
+
+    if (loadContactDetails) {
+      query.include('contactDetails');
+    }
+
+    return new Promise((resolve, reject) => {
+      query.get(personId)
+        .then((person) => {
+          resolve(new Person(person));
+        })
+        .catch(error => reject(error));
+    });
+  }
+
+  static savePerson({
     personName,
     contactDetails,
-  }) {
+  }, existingPerson = null) {
     let promises = [];
     let personNameIdx = -1;
     let contactDetailsIdx = -1;
@@ -33,13 +58,11 @@ class Person extends parse.Object {
       ];
     }
 
-    const self = this;
-
     return new Promise((resolve, reject) => {
       if (promises.length > 0) {
         Promise.all(promises)
           .then((values) => {
-            const person = self.person || new Person();
+            const person = existingPerson || new Person();
 
             if (personNameIdx !== -1) {
               person.set('personName', Name.createWithoutData(values[personNameIdx].id));
@@ -58,6 +81,18 @@ class Person extends parse.Object {
         resolve();
       }
     });
+  }
+
+  getId() {
+    return this.person.id;
+  }
+
+  getPersonName() {
+    return new Name(this.person.get('personName'));
+  }
+
+  getContactDetails() {
+    return new ContactDetails(this.person.get('contactDetails'));
   }
 }
 

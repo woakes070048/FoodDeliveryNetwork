@@ -7,35 +7,43 @@ class User extends parse.Object {
   constructor(user) {
     super('User');
 
-    this.user = user || parse.User.current();
+    this.user = user;
+    this.getPerson = this.getPerson.bind(this);
   }
 
-  saveUser({
+  static saveUser({
     personName,
     contactDetails,
-  }) {
-    const self = this;
-
+  }, existingUser) {
     return new Promise((resolve, reject) => {
-      const existingPerson = self.user.get('person');
-      const person = new Person(existingPerson);
+      const existingPerson = existingUser.get('person');
 
-      person.savePerson({
+      Person.savePerson({
         personName,
         contactDetails,
-      })
-        .then((savedPerson) => {
+      }, existingPerson)
+        .then((person) => {
           if (existingPerson) {
             resolve();
           } else {
-            self.user.set('person', Person.createWithoutData(savedPerson.id));
-            self.user.save()
+            existingUser.set('person', Person.createWithoutData(person.id));
+            existingUser.save()
               .then(result => resolve(result))
               .catch(error => reject(error));
           }
         })
         .catch(error => reject(error));
     });
+  }
+
+  getId() {
+    return this.user.id;
+  }
+
+  getPerson() {
+    const obj = this.user || this;
+
+    return new Person(obj.get('person'));
   }
 }
 
