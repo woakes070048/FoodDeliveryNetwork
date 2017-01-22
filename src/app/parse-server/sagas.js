@@ -36,19 +36,23 @@ import {
 import helper from './helper';
 
 function getUserInfo(response) {
+  const person = response.get('person');
+  const personName = person.get('personName');
+  const contactDetails = person.get('contactDetails');
+
   return {
     userExists: true,
     userId: response.id,
     emailAddress: response.getEmail(),
     emailAddressVerified: response.get('emailVerified'),
     publicProfileDetails: {
-      salutation: response.get('salutation'),
-      firstName: response.get('firstName'),
-      middleName: response.get('middleName'),
-      lastName: response.get('lastName'),
-      preferredName: response.get('preferredName'),
-      phone: response.get('phone'),
-      mobile: response.get('mobile'),
+      salutation: personName.get('salutation'),
+      firstName: personName.get('firstName'),
+      middleName: personName.get('middleName'),
+      lastName: personName.get('lastName'),
+      preferredName: personName.get('preferredName'),
+      phone: contactDetails.get('phone'),
+      mobile: contactDetails.get('mobile'),
     },
   };
 }

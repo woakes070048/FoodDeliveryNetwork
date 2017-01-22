@@ -97,8 +97,12 @@ function getDisplayName(publicProfileDetails) {
     return publicProfileDetails.preferredName;
   }
 
+  const firstName = publicProfileDetails.firstName || '';
+  const middleName = publicProfileDetails.middleName || '';
+  const lastName = publicProfileDetails.lastName || '';
+
   const displayName = (
-      `${publicProfileDetails.firstName} ${publicProfileDetails.middleName} ${publicProfileDetails.lastName}`)
+      `${firstName} ${middleName} ${lastName}`)
     .trim();
 
   return displayName || 'Unknown';

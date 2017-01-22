@@ -2,6 +2,7 @@
 
 import parse from 'parse';
 import config from './config';
+import User from './schema/user';
 
 parse.initialize(config.applicationId, config.javascriptKey);
 parse.serverURL = config.serverUrl;
@@ -25,6 +26,7 @@ const parseServerHelper = {
     user.set('username', emailAddress);
     user.set('password', password);
     user.set('email', emailAddress);
+
     return user.signUp();
   },
 
@@ -40,26 +42,28 @@ const parseServerHelper = {
   }),
 
   updateUserPublicProfile: ({
-    salutation,
-    firstName,
-    middleName,
-    lastName,
-    preferredName,
-    phone,
-    mobile,
-  }) => {
-    const user = parse.User.current();
-
-    user.set('salutation', salutation);
-    user.set('firstName', firstName);
-    user.set('middleName', middleName);
-    user.set('lastName', lastName);
-    user.set('preferredName', preferredName);
-    user.set('phone', phone);
-    user.set('mobile', mobile);
-
-    return user.save();
-  },
+      salutation,
+      firstName,
+      middleName,
+      lastName,
+      preferredName,
+      phone,
+      mobile,
+    }) =>
+    new User(parse.User.current())
+    .saveUser({
+      personName: {
+        salutation,
+        firstName,
+        middleName,
+        lastName,
+        preferredName,
+      },
+      contactDetails: {
+        phone,
+        mobile,
+      },
+    }),
 
   sendEmailVerification: () => {
     const user = parse.User.current();
