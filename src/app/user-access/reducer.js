@@ -18,6 +18,8 @@ import {
   USER_ACCESS_RESET_PASSWORD_FAILED,
   USER_ACCESS_UPDATE_PASSWORD_SUCCEEDED,
   USER_ACCESS_UPDATE_PASSWORD_FAILED,
+  USER_ACCESS_GET_USER_PUBLIC_PROFILE_SUCCEEDED,
+  USER_ACCESS_GET_USER_PUBLIC_PROFILE_FAILED,
   USER_ACCESS_UPDATE_USER_PUBLIC_PROFILE_SUCCEEDED,
   USER_ACCESS_UPDATE_USER_PUBLIC_PROFILE_FAILED,
   USER_ACCESS_SEND_EMAIL_VERIFICATION_SUCCEEDED,
@@ -61,6 +63,16 @@ function createStateWithoutUserInfo(state) {
     userInfo: {
       userExists: false,
     },
+  });
+}
+
+function mergePublicUserProfileDetailsIntoState(state, userPublicProfileDetails) {
+  const userInfoWithUserPublicProfileDetails = Object.assign({}, state.userInfo, {
+    userPublicProfileDetails,
+  });
+
+  return Object.assign({}, state, {
+    userInfo: userInfoWithUserPublicProfileDetails,
   });
 }
 
@@ -161,6 +173,16 @@ function handleUpdatePasswordFailed(state, action) {
   return addFailedOperationToState(state, action.operationId, action.error);
 }
 
+function handleGetUserPublicProfileSucceeded(state, action) {
+  const stateWithOperationInfo = addSucceededOperationToState(state, action.operationId);
+
+  return mergePublicUserProfileDetailsIntoState(stateWithOperationInfo, action.userPublicProfileDetails);
+}
+
+function handleGetUserPublicProfileFailed(state, action) {
+  return addFailedOperationToState(state, action.operationId, action.error);
+}
+
 function handleUpdateUserPublicProfileSucceeded(state, action) {
   return addSucceededOperationToState(state, action.operationId);
 }
@@ -229,6 +251,12 @@ export default function (state = initialState.userAccessContext, action) {
 
   case USER_ACCESS_UPDATE_PASSWORD_FAILED:
     return handleUpdatePasswordFailed(state, action);
+
+  case USER_ACCESS_GET_USER_PUBLIC_PROFILE_SUCCEEDED:
+    return handleGetUserPublicProfileSucceeded(state, action);
+
+  case USER_ACCESS_GET_USER_PUBLIC_PROFILE_FAILED:
+    return handleGetUserPublicProfileFailed(state, action);
 
   case USER_ACCESS_UPDATE_USER_PUBLIC_PROFILE_SUCCEEDED:
     return handleUpdateUserPublicProfileSucceeded(state, action);

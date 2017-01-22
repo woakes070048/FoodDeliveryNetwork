@@ -47,7 +47,7 @@ function getUserInfo(response) {
     userId: response.uid,
     emailAddress: response.email,
     emailAddressVerified: response.emailVerified,
-    publicProfileDetails: {
+    userPublicProfileDetails: {
       preferredName: response.displayName,
       photoUrl: response.photoURL,
     },

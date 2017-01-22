@@ -18,17 +18,29 @@ class PublicContainer extends Component {
     super(props);
 
     this.onUpdateClicked = this.onUpdateClicked.bind(this);
+    this.handleGetUserPublicProfileOperation = this.handleGetUserPublicProfileOperation.bind(this);
     this.handleUpdateOperation = this.handleUpdateOperation.bind(this);
     this.handleFetchUserOperation = this.handleFetchUserOperation.bind(this);
     this.fetchUser = this.fetchUser.bind(this);
 
     this.state = {
+      lastGetUserPublicProfileOperationId: '',
       lastUpdateOperationId: '',
       lastFetchUserOperationId: '',
     };
   }
 
+  componentWillMount() {
+    this.setState(Object.assign(this.state, {
+      lastGetUserPublicProfileOperationId: this.props.userAccessActions.getUserPublicProfile()
+        .operationId,
+    }));
+
+    this.props.loadingActions.startMain();
+  }
+
   componentWillReceiveProps(nextProps) {
+    this.handleGetUserPublicProfileOperation(nextProps);
     this.handleUpdateOperation(nextProps);
     this.handleFetchUserOperation(nextProps);
   }
@@ -40,6 +52,23 @@ class PublicContainer extends Component {
     }));
 
     this.props.loadingActions.startTransparent();
+  }
+
+  handleGetUserPublicProfileOperation(nextProps) {
+    if (this.state.lastGetUserPublicProfileOperationId) {
+      const lastOperation =
+        nextProps
+        .operations.find(operation => operation.operationId === this.state.lastGetUserPublicProfileOperationId);
+
+      if (lastOperation) {
+        if (lastOperation.failed) {
+          this.props.notificationActions.addError(lastOperation.errorMessage);
+        }
+
+        this.props.userAccessActions.acknowledgeOperation(lastOperation.operationId);
+        this.props.loadingActions.stop();
+      }
+    }
   }
 
   handleUpdateOperation(nextProps) {
@@ -90,7 +119,7 @@ class PublicContainer extends Component {
     return (
       <PublicPresentational
         onUpdateClicked={this.onUpdateClicked}
-        publicProfileDetails={this.props.publicProfileDetails}
+        userPublicProfileDetails={this.props.userPublicProfileDetails}
       />
     );
   }
@@ -100,7 +129,7 @@ PublicContainer.propTypes = {
   userAccessActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   loadingActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   notificationActions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  publicProfileDetails: React.PropTypes.shape({
+  userPublicProfileDetails: React.PropTypes.shape({
     salutation: PropTypes.string,
     firstName: PropTypes.string,
     middleName: PropTypes.string,
@@ -112,7 +141,7 @@ PublicContainer.propTypes = {
 };
 
 PublicContainer.defaultProps = {
-  publicProfileDetails: {
+  userPublicProfileDetails: {
     salutation: '',
     firstName: '',
     middleName: '',
@@ -126,7 +155,7 @@ PublicContainer.defaultProps = {
 function mapStateToProps(state) {
   return {
     operations: state.userAccess.operations,
-    publicProfileDetails: state.userAccess.userInfo.publicProfileDetails || {},
+    userPublicProfileDetails: state.userAccess.userInfo.userPublicProfileDetails || {},
   };
 }
 

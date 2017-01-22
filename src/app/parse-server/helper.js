@@ -104,7 +104,7 @@ const parseServerHelper = {
     loadContactDetails: true,
   }),
 
-  getLoggedInPersonPublicProfileDetails: () => Person.loadPerson(getCurrentPersonId(), {
+  getLoggedInPersonUserPublicProfileDetails: () => Person.loadPerson(getCurrentPersonId(), {
     loadName: true,
     loadContactDetails: true,
   }),

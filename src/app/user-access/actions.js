@@ -27,6 +27,9 @@ import {
   USER_ACCESS_UPDATE_PASSWORD,
   USER_ACCESS_UPDATE_PASSWORD_SUCCEEDED,
   USER_ACCESS_UPDATE_PASSWORD_FAILED,
+  USER_ACCESS_GET_USER_PUBLIC_PROFILE,
+  USER_ACCESS_GET_USER_PUBLIC_PROFILE_SUCCEEDED,
+  USER_ACCESS_GET_USER_PUBLIC_PROFILE_FAILED,
   USER_ACCESS_UPDATE_USER_PUBLIC_PROFILE,
   USER_ACCESS_UPDATE_USER_PUBLIC_PROFILE_SUCCEEDED,
   USER_ACCESS_UPDATE_USER_PUBLIC_PROFILE_FAILED,
@@ -195,11 +198,30 @@ export function updatePasswordFailed(operationId, error) {
   return createGenericError(USER_ACCESS_UPDATE_PASSWORD_FAILED, operationId, error);
 }
 
-export function updateUserPublicProfile(publicProfileDetails) {
+export function getUserPublicProfile() {
+  return {
+    type: USER_ACCESS_GET_USER_PUBLIC_PROFILE,
+    operationId: shortid.generate(),
+  };
+}
+
+export function getUserPublicProfileSucceeded(operationId, userPublicProfileDetails) {
+  return {
+    type: USER_ACCESS_GET_USER_PUBLIC_PROFILE_SUCCEEDED,
+    operationId,
+    userPublicProfileDetails,
+  };
+}
+
+export function getUserPublicProfileFailed(operationId, error) {
+  return createGenericError(USER_ACCESS_GET_USER_PUBLIC_PROFILE_FAILED, operationId, error);
+}
+
+export function updateUserPublicProfile(userPublicProfileDetails) {
   return {
     type: USER_ACCESS_UPDATE_USER_PUBLIC_PROFILE,
     operationId: shortid.generate(),
-    publicProfileDetails,
+    userPublicProfileDetails,
   };
 }
 

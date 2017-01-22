@@ -12,6 +12,7 @@ import {
   USER_ACCESS_SIGNOUT,
   USER_ACCESS_RESET_PASSWORD,
   USER_ACCESS_UPDATE_PASSWORD,
+  USER_ACCESS_GET_USER_PUBLIC_PROFILE,
   USER_ACCESS_UPDATE_USER_PUBLIC_PROFILE,
   USER_ACCESS_SEND_EMAIL_VERIFICATION,
 } from '../user-access/action-types';
@@ -30,12 +31,14 @@ import {
   signUpWithEmailAndPasswordFailed,
   updatePasswordSucceeded,
   updatePasswordFailed,
+  getUserPublicProfileSucceeded,
+  getUserPublicProfileFailed,
   updateUserPublicProfileSucceeded,
   updateUserPublicProfileFailed,
 } from '../user-access/actions';
 import helper from './helper';
 
-function getPublicProfileDetails(person) {
+function getUserPublicProfileDetails(person) {
   const personName = person.getPersonName();
   const contactDetails = person.getContactDetails();
 
@@ -59,9 +62,9 @@ function getUserInfo(user) {
   };
 }
 
-function mergeUserInfoAndPublicProfileDetails(userInfo, publicProfileDetails) {
+function mergeUserInfoAndUserPublicProfileDetails(userInfo, userPublicProfileDetails) {
   return Object.assign(userInfo, {
-    publicProfileDetails,
+    userPublicProfileDetails,
   });
 }
 
@@ -77,7 +80,7 @@ function* fetchUserAsync(action) {
 
     if (currentUser && currentUser.id) {
       const personName = yield call(helper.getLoggedInPersonName);
-      const result = mergeUserInfoAndPublicProfileDetails(getUserInfo(currentUser), getPublicProfileDetails(
+      const result = mergeUserInfoAndUserPublicProfileDetails(getUserInfo(currentUser), getUserPublicProfileDetails(
         personName));
 
       yield put(fetchUserSucceeded(action.operationId, result));
@@ -125,7 +128,7 @@ function* signInWithEmailAndPasswordAsync(action) {
 
     if (currentUser && currentUser.id) {
       const personName = yield call(helper.getLoggedInPersonName);
-      const result = mergeUserInfoAndPublicProfileDetails(getUserInfo(currentUser), getPublicProfileDetails(
+      const result = mergeUserInfoAndUserPublicProfileDetails(getUserInfo(currentUser), getUserPublicProfileDetails(
         personName));
 
       yield put(signInWithEmailAndPasswordSucceeded(action.operationId, result));
@@ -160,7 +163,7 @@ function* signUpWithEmailAndPasswordAsync(action) {
 
     if (currentUser && currentUser.id) {
       const personName = yield call(helper.getLoggedInPersonName);
-      const result = mergeUserInfoAndPublicProfileDetails(getUserInfo(currentUser), getPublicProfileDetails(
+      const result = mergeUserInfoAndUserPublicProfileDetails(getUserInfo(currentUser), getUserPublicProfileDetails(
         personName));
 
       yield put(signUpWithEmailAndPasswordSucceeded(action.operationId, result));
@@ -189,9 +192,24 @@ export function* watchUpdatePassword() {
   yield takeLatest(USER_ACCESS_UPDATE_PASSWORD, updatePasswordAsync);
 }
 
+function* getUserPublicProfileAsync(action) {
+  try {
+    const userPublicProfileDetails = yield call(helper.getLoggedInPersonUserPublicProfileDetails);
+    const result = getUserPublicProfileDetails(userPublicProfileDetails);
+
+    yield put(getUserPublicProfileSucceeded(action.operationId, result));
+  } catch (exception) {
+    yield put(getUserPublicProfileFailed(action.operationId, exception.message));
+  }
+}
+
+export function* watchGetUserPublicProfile() {
+  yield takeLatest(USER_ACCESS_GET_USER_PUBLIC_PROFILE, getUserPublicProfileAsync);
+}
+
 function* updateUserPublicProfileAsync(action) {
   try {
-    yield call(helper.updateUserPublicProfile, action.publicProfileDetails);
+    yield call(helper.updateUserPublicProfile, action.userPublicProfileDetails);
     yield put(updateUserPublicProfileSucceeded(action.operationId));
   } catch (exception) {
     yield put(updateUserPublicProfileFailed(action.operationId, exception.message));

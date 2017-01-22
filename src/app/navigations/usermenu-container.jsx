@@ -88,18 +88,18 @@ UserMenuContainer.defaultProps = {
   userPhotoUrl: '',
 };
 
-function getDisplayName(publicProfileDetails) {
-  if (!publicProfileDetails) {
+function getDisplayName(userPublicProfileDetails) {
+  if (!userPublicProfileDetails) {
     return 'Unknown';
   }
 
-  if (publicProfileDetails.preferredName) {
-    return publicProfileDetails.preferredName;
+  if (userPublicProfileDetails.preferredName) {
+    return userPublicProfileDetails.preferredName;
   }
 
-  const firstName = publicProfileDetails.firstName || '';
-  const middleName = publicProfileDetails.middleName || '';
-  const lastName = publicProfileDetails.lastName || '';
+  const firstName = userPublicProfileDetails.firstName || '';
+  const middleName = userPublicProfileDetails.middleName || '';
+  const lastName = userPublicProfileDetails.lastName || '';
 
   const displayName = (
       `${firstName} ${middleName} ${lastName}`)
@@ -111,14 +111,14 @@ function getDisplayName(publicProfileDetails) {
 function mapStateToProps(state) {
   const operations = state.userAccess.operations;
   const userInfo = state.userAccess.userInfo;
-  const publicProfileDetails = state.userAccess.userInfo.publicProfileDetails;
+  const userPublicProfileDetails = state.userAccess.userInfo.userPublicProfileDetails;
 
   return userInfo.userExists ? {
     userExists: true,
     userEmailAddress: userInfo.emailAddress,
     userEmailAddressVerified: userInfo.emailAddressVerified,
-    userDisplayName: getDisplayName(publicProfileDetails),
-    userPhotoUrl: publicProfileDetails ? publicProfileDetails.photoUrl : '',
+    userDisplayName: getDisplayName(userPublicProfileDetails),
+    userPhotoUrl: userPublicProfileDetails ? userPublicProfileDetails.photoUrl : '',
     operations,
   } : {
     userExists: false,

@@ -5,6 +5,7 @@ import {
   watchSignUpWithEmailAndPassword,
   watchSignInWithEmailAndPassword,
   watchSignOut,
+  watchGetUserPublicProfile,
   watchUpdateUserPublicProfile,
   watchSendEmailVerification,
   watchResetPassword,
@@ -18,6 +19,7 @@ export default function* sagas() {
     watchSignUpWithEmailAndPassword(),
     watchSignInWithEmailAndPassword(),
     watchSignOut(),
+    watchGetUserPublicProfile(),
     watchUpdateUserPublicProfile(),
     watchUpdatePassword(),
   ];

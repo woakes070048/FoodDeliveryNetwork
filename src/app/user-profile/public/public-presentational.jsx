@@ -17,19 +17,19 @@ class PublicPresentational extends Component {
     super(props);
 
     this.state = {
-      salutation: this.props.publicProfileDetails.salutation,
+      salutation: this.props.userPublicProfileDetails.salutation,
       salutationChanged: false,
-      firstName: this.props.publicProfileDetails.firstName,
+      firstName: this.props.userPublicProfileDetails.firstName,
       firstNameChanged: false,
-      middleName: this.props.publicProfileDetails.middleName,
+      middleName: this.props.userPublicProfileDetails.middleName,
       middleNameChanged: false,
-      lastName: this.props.publicProfileDetails.lastName,
+      lastName: this.props.userPublicProfileDetails.lastName,
       lastNameChanged: false,
-      preferredName: this.props.publicProfileDetails.preferredName,
+      preferredName: this.props.userPublicProfileDetails.preferredName,
       preferredNameChanged: false,
-      phone: this.props.publicProfileDetails.phone,
+      phone: this.props.userPublicProfileDetails.phone,
       phoneChanged: false,
-      mobile: this.props.publicProfileDetails.mobile,
+      mobile: this.props.userPublicProfileDetails.mobile,
       mobileChanged: false,
     };
 
@@ -222,7 +222,7 @@ class PublicPresentational extends Component {
 }
 
 PublicPresentational.propTypes = {
-  publicProfileDetails: React.PropTypes.shape({
+  userPublicProfileDetails: React.PropTypes.shape({
     salutation: PropTypes.string,
     firstName: PropTypes.string,
     middleName: PropTypes.string,
@@ -235,7 +235,7 @@ PublicPresentational.propTypes = {
 };
 
 PublicPresentational.defaultProps = {
-  publicProfileDetails: {
+  userPublicProfileDetails: {
     salutation: '',
     firstName: '',
     middleName: '',
