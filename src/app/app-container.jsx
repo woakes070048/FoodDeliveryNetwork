@@ -18,9 +18,15 @@ class AppContainer extends Component {
     super(props);
 
     this.state = {
+      lastOperationId: '',
+    };
+  }
+
+  componentWillMount() {
+    this.setState(Object.assign(this.state, {
       lastOperationId: this.props.userAccessActions.fetchUser()
         .operationId,
-    };
+    }));
 
     this.props.loadingActions.startMain();
   }

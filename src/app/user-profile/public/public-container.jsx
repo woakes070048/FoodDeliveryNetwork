@@ -1,3 +1,4 @@
+import Loader from 'react-loader';
 import React, {
   Component,
   PropTypes,
@@ -35,8 +36,6 @@ class PublicContainer extends Component {
       lastGetUserPublicProfileOperationId: this.props.userAccessActions.getUserPublicProfile()
         .operationId,
     }));
-
-    this.props.loadingActions.startMain();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -66,7 +65,10 @@ class PublicContainer extends Component {
         }
 
         this.props.userAccessActions.acknowledgeOperation(lastOperation.operationId);
-        this.props.loadingActions.stop();
+
+        this.setState(Object.assign(this.state, {
+          lastGetUserPublicProfileOperationId: '',
+        }));
       }
     }
   }
@@ -117,10 +119,12 @@ class PublicContainer extends Component {
 
   render() {
     return (
-      <PublicPresentational
-        onUpdateClicked={this.onUpdateClicked}
-        userPublicProfileDetails={this.props.userPublicProfileDetails}
-      />
+      <Loader loaded={this.state.lastGetUserPublicProfileOperationId === ''}>
+        <PublicPresentational
+          onUpdateClicked={this.onUpdateClicked}
+          userPublicProfileDetails={this.props.userPublicProfileDetails}
+        />
+      </Loader>
     );
   }
 }
